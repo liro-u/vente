@@ -34,7 +34,8 @@ code {
 }
 
 html, body, #root, .app {
-  height:100%;
+  /* pour tester la bar nav */
+  height:1000%;
   display: flex;
   flex-direction: column;
   font-family: 'Fira Mono';
@@ -43,20 +44,6 @@ body {
   background: var(--background-color);
   margin: 0;
   font-family: "Poppins";
-}
-
-/* Navbar */
-header .container {
-  margin: 0 auto;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-header a {
-  color: var(--text-color);
-  text-decoration: none;
 }
 
 /* Pages */
@@ -71,34 +58,54 @@ footer{
   text-align: center;
 }
 
+/* select all */
+*{
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+}
 
 /* NavBar */
 .navbar{
+  position: fixed;
   display: flex;
-  justify-content: space-around;
-  padding-top: 2%;
-  padding-bottom: 2%;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.navbar .liens li{
-  list-style-type: none;
-  margin-left: 20%;
-  width: max-content;
-
+.navbar .liens{
+  display: flex;
+  align-items: center;
 }
 
 .navbar .liens ul{
   display: flex;
-  margin : 0;
-  padding: 0;
-
 }
-.navbar .icon{
-  margin-right: 20%;
+
+.navbar .liens ul li{
+  margin : 0 25px;
+}
+
+.navbar .containerIcon .icon{
+  margin: 0 25px;
+
 }
 
 .navbar .containerIcon{
   display: flex;
+  align-items: center;
 }
 
+.navbar a{
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.navbar .logo{
+  width: 4.5%;
+  height: auto;
+  margin-left: 3%;
+}
 

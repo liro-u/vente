@@ -4,14 +4,14 @@ const NavBar = () => {
 
     return (
         <header className="navbar primaryColor">
-            <div className="logo">
-                logo a faire
-            </div>
+            <img src="/logo/png/logo-no-background.png" alt="erreur" className="logo"/>
+
 
             <div className="liens">
                 <ul>
-                    <li>Les Univers</li>
-                    <li>lien2</li>
+                    <li><a href="#">Les Univers</a></li>
+                    <li><a href="#">Lien2</a></li>
+                    <li><a href="#">Lien3</a></li>
                 </ul>
             </div>
 
@@ -21,8 +21,24 @@ const NavBar = () => {
                 <span className="material-symbols-outlined icon">bookmark</span>
             </div>
 
+            <script type="text/javascript">
+
+
+            </script>
         </header>
+
     )
+}
+var posBar = window.pageYOffset;
+window.onscroll = function () {
+    var posBarAtm = window.pageYOffset
+    if (posBar > posBarAtm) {
+        document.getElementsByClassName("navbar").top= "0";
+    }else{
+        document.getElementsByClassName("navbar").top = "-50px" ;
+    }
+    posBar = posBarAtm;
+
 }
 
 export default NavBar;

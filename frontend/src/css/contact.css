@@ -1,0 +1,29 @@
+.contact{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    flex-direction: row;
+    color: var(--negative-text-color);
+}
+
+.contact .container {
+    padding: 40px;
+}
+
+.contact .phoneInfo {
+    display: flex;
+    align-items: center;
+}
+
+.contact .material-symbols-outlined{
+    margin-right: 5px;
+}
+
+.contact h4, .contact p {
+    margin: 0;
+}
+
+.contact .info {
+    margin-top: 30px;
+}

@@ -24,3 +24,9 @@ code {
 .footer {
   
 }
+
+/* NavBar */
+.navbar .liens {
+  list-style-type: none;
+  background-color: yellow;
+}

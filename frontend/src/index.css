@@ -58,6 +58,11 @@ code {
   color: var(--dark-secondary);
 }
 
+/* Default Font Color */
+.defaultFontColor {
+  color: var(--text-color);
+}
+
 /* layout */
 html, body, #root, .app {
   /* pour tester la bar nav */
@@ -65,12 +70,15 @@ html, body, #root, .app {
   display: flex;
   flex-direction: column;
   font-family: 'Fira Mono';
-  color: var(--text-color);
 }
 body {
   background: var(--background-color);
   margin: 0;
   font-family: "Poppins";
+}
+.cancelLinkCss {
+  text-decoration: none;
+  color: none;
 }
 
 /* Pages */
@@ -85,15 +93,15 @@ footer{
   text-align: center;
 }
 
-/* select all */
-*{
+
+/* NavBar */
+#navbar ul, #navbar a{
   margin: 0;
   padding: 0;
   text-decoration: none;
   list-style: none;
 }
 
-/* NavBar */
 #navbar{
   position: fixed;
   display: flex;

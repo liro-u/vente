@@ -1,8 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
-const ButtonUnderline = ({ children, className, underlineClassName, textColorOut, textColorOver, time = 1}) => {
+const ButtonUnderline = ({ children, className , underlineClassName = "lightPrimaryColor", textColorOut = "defaultFontColor", textColorOver = "defaultFontColor", time = 1, borderHeight = 3}) => {
     const [progress, setProgress] = useState(0);
     const [textColor, setTextColor] = useState(textColorOut);
 
@@ -29,8 +28,10 @@ const ButtonUnderline = ({ children, className, underlineClassName, textColorOut
                 }}
             >{children}</p>
             <div
-                className={"underline " + underlineClassName}
+                className={underlineClassName}
                 style={{
+                    height: borderHeight + "px",
+                    marginBottom: "-" + borderHeight + "px",
                     transition: "width " + time + "s ease-in-out",
                     width: progress + "%",
                 }}

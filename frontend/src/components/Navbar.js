@@ -3,7 +3,7 @@ import React from "react";
 const NavBar = () => {
 
     return (
-        <header className="navbar primaryColor">
+        <header className="primaryColor" id="navbar">
             <img src="/logo/png/logo-no-background.png" alt="erreur" className="logo"/>
 
 
@@ -33,9 +33,9 @@ var posBar = window.pageYOffset;
 window.onscroll = function () {
     var posBarAtm = window.pageYOffset
     if (posBar > posBarAtm) {
-        document.getElementsByClassName("navbar").top= "0";
+        document.getElementById("navbar").style.top= "0";
     }else{
-        document.getElementsByClassName("navbar").top = "-50px" ;
+        document.getElementById("navbar").style.top = "-80px" ;
     }
     posBar = posBarAtm;
 

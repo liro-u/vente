@@ -94,43 +94,44 @@ footer{
 }
 
 /* NavBar */
-.navbar{
+#navbar{
   position: fixed;
   display: flex;
   justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
+  transition: 0.5s;
 }
 
-.navbar .liens{
+#navbar .liens{
   display: flex;
   align-items: center;
 }
 
-.navbar .liens ul{
+#navbar .liens ul{
   display: flex;
 }
 
-.navbar .liens ul li{
+#navbar .liens ul li{
   margin : 0 25px;
 }
 
-.navbar .containerIcon .icon{
+#navbar .containerIcon .icon{
   margin: 0 25px;
 
 }
 
-.navbar .containerIcon{
+#navbar .containerIcon{
   display: flex;
   align-items: center;
 }
 
-.navbar a{
+#navbar a{
   color: var(--text-color);
   text-decoration: none;
 }
 
-.navbar .logo{
+#navbar .logo{
   width: 4.5%;
   height: auto;
   margin-left: 3%;

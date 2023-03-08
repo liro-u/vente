@@ -11,7 +11,7 @@ const Home = () => {
                     backgroundImage: `url("/home/homeWallpaper.jpg")` 
                 }}>
                 <div className="content">
-                    <h1>MadeInome</h1>
+                    <h1 className="primaryFont">MadeInome</h1>
                     <h2>Your favorite wallpaper on your wall</h2>
                 </div>
             </div>

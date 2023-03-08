@@ -61,7 +61,7 @@ code {
 /* layout */
 html, body, #root, .app {
   /* pour tester la bar nav */
-  height:1000%;
+  height:100%;
   display: flex;
   flex-direction: column;
   font-family: 'Fira Mono';
@@ -81,7 +81,7 @@ body {
 
 /* Footer */
 footer{
-  padding: 20px;
+  padding: 10px;
   text-align: center;
 }
 
@@ -136,4 +136,3 @@ footer{
   height: auto;
   margin-left: 3%;
 }
-

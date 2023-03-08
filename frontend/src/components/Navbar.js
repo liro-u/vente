@@ -37,8 +37,14 @@ window.onscroll = function () {
     }else{
         document.getElementById("navbar").style.top = "-80px" ;
     }
+    if (posBarAtm === 0) {
+        document.getElementById("navbar").style.backgroundColor= "transparent";
+    }else {
+        document.getElementById("navbar").style.backgroundColor= "var(--primary)";
+    }
     posBar = posBarAtm;
 
 }
+
 
 export default NavBar;

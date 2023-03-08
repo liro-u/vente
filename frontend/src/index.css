@@ -58,18 +58,26 @@ code {
   color: var(--dark-secondary);
 }
 
+/* Default Font Color */
+.defaultFontColor {
+  color: var(--text-color);
+}
+
 /* layout */
 html, body, #root, .app {
   height:100%;
   display: flex;
   flex-direction: column;
   font-family: 'Fira Mono';
-  color: var(--text-color);
 }
 body {
   background: var(--background-color);
   margin: 0;
   font-family: "Poppins";
+}
+.cancelLinkCss {
+  text-decoration: none;
+  color: none;
 }
 
 /* Navbar */

@@ -19,7 +19,10 @@ const Home = () => {
                 <div className="content">
                     <h1 className="title secondaryFont">MadeInome</h1>
                     <h2>Your favorite wallpaper on your wall</h2>
-                    <ButtonUnderline className="secondaryColor" underlineClassName="lightPrimaryColor">See Galery ➡</ButtonUnderline>
+                    <div style={{display: "flex"}}>
+                        <ButtonUnderline className="secondaryColor" underlineClassName="lightPrimaryColor" textColorOver="lightPrimaryFont">View Gallery ➡</ButtonUnderline>
+                        <ButtonUnderline underlineClassName="lightPrimaryColor" time="0.2">Contact us ➡</ButtonUnderline>
+                    </div>
                 </div>
             </div>
         </div>

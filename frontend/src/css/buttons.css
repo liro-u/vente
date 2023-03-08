@@ -6,11 +6,9 @@
 }
 
 .buttonUnderline p{
-    transition: color 1s ease-in-out;
     margin: 0;
 }
 
 .buttonUnderline .underline{
     height: 3px;
-    transition: width 1s ease-in-out;
 }

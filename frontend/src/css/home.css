@@ -1,0 +1,6 @@
+.home .preview{
+    height: 60vh;
+    padding: 150px;
+    display: flex;
+    align-items: center;
+}

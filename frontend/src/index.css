@@ -38,9 +38,6 @@ body {
 
 
 /* Navbar */
-header {
-  background: var(--accent-color);
-}
 header .container {
   margin: 0 auto;
   padding: 10px 20px;
@@ -49,7 +46,7 @@ header .container {
   justify-content: space-between;
 }
 header a {
-  color: var(--colorPolice);
+  color: var(--text-color);
   text-decoration: none;
 }
 

@@ -4,7 +4,7 @@ const Footer = () => {
 
     return (
         <footer className="footer primaryColor">
-            Copyright © Home. All Rights Reserved.
+            Copyright © MadeInome. All Rights Reserved.
         </footer>
     )
 }

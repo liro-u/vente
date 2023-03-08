@@ -18,26 +18,53 @@ code {
 /* MAIN CSS */
 /*---------*/
 
-/* layout */
+/* Color */
 
+/* Primary */
+/* Background */
 .primaryColor{
   background-color: var(--primary);
+}
+.lightPrimaryColor{
+  background-color: var(--light-primary);
 }
 .darkPrimaryColor{
   background-color: var(--dark-primary);
 }
+/* Font */
 .primaryFont{
   color: var(--primary);
+}
+.lightPrimaryFont{
+  color: var(--light-primary);
 }
 .darkPrimaryFont{
   color: var(--dark-primary);
 }
 
+/* Secondary */
+/* Background */
+.secondaryColor{
+  background-color: var(--secondary);
+}
+.darkSecondaryColor{
+  background-color: var(--dark-secondary);
+}
+/* Font */
+.secondaryFont{
+  color: var(--secondary);
+}
+.darkSecondaryFont{
+  color: var(--dark-secondary);
+}
+
+/* layout */
 html, body, #root, .app {
   height:100%;
   display: flex;
   flex-direction: column;
   font-family: 'Fira Mono';
+  color: var(--text-color);
 }
 body {
   background: var(--background-color);

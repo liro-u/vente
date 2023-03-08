@@ -3,6 +3,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 
 // css
 import './themes/default.css';
+import './css/buttons.css';
 
 // pages
 import Home from './pages/Home';

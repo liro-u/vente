@@ -3,4 +3,9 @@
     padding: 150px;
     display: flex;
     align-items: center;
+    background-size: cover;
+}
+
+.home .preview h1{
+    font-size: 3em;
 }

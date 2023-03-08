@@ -66,7 +66,7 @@ code {
 /* layout */
 html, body, #root, .app {
   /* pour tester la bar nav */
-  height:1000%;
+  height:100%;
   display: flex;
   flex-direction: column;
   font-family: 'Fira Mono';
@@ -93,15 +93,15 @@ footer{
   text-align: center;
 }
 
-/* select all */
-*{
+
+/* NavBar */
+#navbar ul, #navbar a{
   margin: 0;
   padding: 0;
   text-decoration: none;
   list-style: none;
 }
 
-/* NavBar */
 #navbar{
   position: fixed;
   display: flex;

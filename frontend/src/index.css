@@ -16,13 +16,20 @@ code {
 /* MAIN CSS */
 /*---------*/
 
+/* Basis */
+body{
+  background-color: var(--background-color);
+  color: var(--accent-color);
+}
+
+
 /* Navbar */
 
 
 
 /* Footer */
 .footer {
-  
+
 }
 
 /* NavBar */

@@ -3,7 +3,7 @@ import React from "react";
 const NavBar = () => {
 
     return (
-        <header className="navbar">
+        <header className="navbar primaryColor">
             <div className="logo">
                 logo a faire
             </div>

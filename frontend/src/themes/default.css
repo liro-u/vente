@@ -1,5 +1,10 @@
 :root {
-    --accent-color: #A7D2CB;
-    --text-color: #fff;
-    --background-color: #333
+    --primary: #1aac83;
+    --dark-primary: #0d8240;
+
+    --text-color: #333;
+    
+    --background-color: #fff;
+    
+    --error: #e7195a;
 }

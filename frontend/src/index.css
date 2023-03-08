@@ -23,9 +23,6 @@ body{
 }
 
 
-/* Navbar */
-
-
 
 /* Footer */
 .footer {
@@ -33,7 +30,13 @@ body{
 }
 
 /* NavBar */
-.navbar .liens {
+.navbar{
+  display: inline;
+}
+.navbar .liens li{
   list-style-type: none;
-  background-color: yellow;
+}
+
+.navbar .liens ul{
+  display: inline;
 }

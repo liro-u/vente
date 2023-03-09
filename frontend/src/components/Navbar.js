@@ -43,18 +43,18 @@ const Navbar = () => {
 
             <div className="liens">
                 <ul>
-                    <li><Link to="" className ="btn-1 cancelLinkCss">
+                    <li><Link to="" className ="bouton cancelLinkCss">
                         <svg>
                             <rect x="0" y="0" width="100%" height="100%" />
                         </svg>
                         Les Univers </Link></li>
 
-                    <li><Link to="" className ="btn-1 cancelLinkCss" >
+                    <li><Link to="" className ="bouton cancelLinkCss" >
                         <svg>
                             <rect x="0" y="0" width="100%" height="100%" />
                         </svg>
                         Lien2</Link></li>
-                    <li><Link to="" className ="btn-1 cancelLinkCss" >
+                    <li><Link to="" className ="bouton cancelLinkCss" >
                         <svg>
                             <rect x="0" y="0" width="100%" height="100%" />
                         </svg>

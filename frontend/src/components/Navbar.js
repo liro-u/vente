@@ -9,9 +9,22 @@ const NavBar = () => {
 
             <div className="liens">
                 <ul>
-                    <li><a href="#">Les Univers</a></li>
-                    <li><a href="#">Lien2</a></li>
-                    <li><a href="#">Lien3</a></li>
+                    <li><a href="#" className ="btn-1">
+                        <svg>
+                            <rect x="0" y="0" width="100%" height="100%" />
+                        </svg>
+                        Les Univers </a></li>
+
+                    <li><a href="#" className ="btn-1" >
+                        <svg>
+                            <rect x="0" y="0" width="100%" height="100%" />
+                        </svg>
+                        Lien2</a></li>
+                    <li><a href="#" className ="btn-1"  >
+                        <svg>
+                            <rect x="0" y="0" width="100%" height="100%" />
+                        </svg>
+                        Lien3</a></li>
                 </ul>
             </div>
 

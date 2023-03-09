@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from 'react-router-dom';
+import ButtonBorderAnimated from "./buttons/ButtonBorderAnimated";
 
 const Navbar = () => {
     const [offset, setOffset] = useState(0);
@@ -12,9 +13,9 @@ const Navbar = () => {
         setHeight(ref.current.offsetHeight)
     }, [])
 
-    var posBar = window.pageYOffset;
+    var posBar = window.scrollY;
     window.onscroll = function () {
-        var posBarAtm = window.pageYOffset
+        var posBarAtm = window.scrollY
         // position transition
         if (posBar > posBarAtm) {
             setOffset(0);
@@ -43,22 +44,10 @@ const Navbar = () => {
 
             <div className="liens">
                 <ul>
-                    <li><Link to="" className ="bouton cancelLinkCss">
-                        <svg>
-                            <rect x="0" y="0" width="100%" height="100%" />
-                        </svg>
-                        Les Univers </Link></li>
+                    <li><Link to="" className ="bouton cancelLinkCss"> <ButtonBorderAnimated> Les Univers</ButtonBorderAnimated>  </Link></li>
 
-                    <li><Link to="" className ="bouton cancelLinkCss" >
-                        <svg>
-                            <rect x="0" y="0" width="100%" height="100%" />
-                        </svg>
-                        Lien2</Link></li>
-                    <li><Link to="" className ="bouton cancelLinkCss" >
-                        <svg>
-                            <rect x="0" y="0" width="100%" height="100%" />
-                        </svg>
-                        Lien3</Link></li>
+                    <li><Link to="" className ="bouton cancelLinkCss" > <ButtonBorderAnimated> Les Univers</ButtonBorderAnimated> </Link></li>
+                    <li><Link to="" className ="bouton cancelLinkCss" > <ButtonBorderAnimated> Les Univers</ButtonBorderAnimated> </Link></li>
                 </ul>
             </div>
 

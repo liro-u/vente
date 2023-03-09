@@ -63,16 +63,28 @@ code {
   color: var(--text-color);
 }
 
-/* Visible state */
-.visible {
+/* Animation state */
+.showByRight {
   filter: blur(0);
   transform: translateX(0);
   opacity: 1;
 }
 
-.hidden {
+.showByRightBefore {
   filter: blur(5px);
   transform: translateX(-100%);
+  opacity: 0;
+}
+
+.showByLeft {
+  filter: blur(0);
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.showByLeftBefore {
+  filter: blur(5px);
+  transform: translateX(100%);
   opacity: 0;
 }
 
@@ -102,7 +114,14 @@ body {
 /* Footer */
 footer{
   padding: 10px;
-  text-align: center;
+  font-size: x-small;
+  
+  position: fixed;
+  top: 50%;
+
+  right: 0;
+  transform-origin: 100% 50%;
+  transform: rotate(90deg) translate(50%, 50%);
 }
 
 

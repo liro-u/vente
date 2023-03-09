@@ -63,6 +63,19 @@ code {
   color: var(--text-color);
 }
 
+/* Visible state */
+.visible {
+  filter: blur(0);
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.hidden {
+  filter: blur(5px);
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
 /* layout */
 html, body, #root, .app {
   /* pour tester la bar nav */
@@ -95,14 +108,15 @@ footer{
 
 
 /* NavBar */
-#navbar ul, #navbar a{
+.navbar ul, .navbar p{
   margin: 0;
   padding: 0;
   text-decoration: none;
   list-style: none;
 }
 
-#navbar{
+.navbar{
+  z-index: 100;
   position: fixed;
   display: flex;
   justify-content: space-between;
@@ -111,36 +125,39 @@ footer{
   transition: 0.5s;
 }
 
-#navbar .liens{
+.navbar .liens{
   display: flex;
   align-items: center;
 }
 
-#navbar .liens ul{
+.navbar .liens ul{
   display: flex;
 }
 
-#navbar .liens ul li{
+.navbar .liens ul li{
   margin : 0 25px;
 }
 
-#navbar .containerIcon .icon{
+.navbar .containerIcon .icon{
   margin: 0 25px;
-
+  cursor: pointer;
 }
 
-#navbar .containerIcon{
+.navbar .containerIcon{
   display: flex;
   align-items: center;
 }
 
-#navbar a{
+.navbar a{
   color: var(--text-color);
-  text-decoration: none;
 }
 
-#navbar .logo{
-  width: 4.5%;
+.navbar .logoContainer{
+  width: 50px;
+  margin: 5px 10px;
+}
+
+.navbar .logo{
+  width: 100%;
   height: auto;
-  margin-left: 3%;
 }

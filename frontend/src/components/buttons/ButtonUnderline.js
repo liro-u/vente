@@ -21,12 +21,12 @@ const ButtonUnderline = ({ children, className , underlineClassName = "lightPrim
             onMouseOver={onMouseOver}
             onMouseOut={onMouseOut}
         >
-            <p 
+            <div 
                 className={textColor}
                 style={{
                     transition: "color " + time + "s ease-in-out"
                 }}
-            >{children}</p>
+            >{children}</div>
             <div
                 className={underlineClassName}
                 style={{

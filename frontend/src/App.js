@@ -11,14 +11,14 @@ import Contact from './pages/Contact';
 
 // component
 import Footer from './components/Footer';
-import NavBar from './components/Navbar';
+import Navbar from './components/Navbar';
 
 
 function App() {
   return (
     <div className="app defaultFontColor">
       <HashRouter>
-        <NavBar />
+        <Navbar />
         <div className='pages'>
           <Routes>
             <Route

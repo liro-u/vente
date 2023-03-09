@@ -9,6 +9,7 @@
 
 .contact .container {
     padding: 40px;
+    padding-top: 0;
 }
 
 .contact .phoneInfo {

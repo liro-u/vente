@@ -21,46 +21,12 @@ const Home = () => {
             >
                 <DelayAnimation className="content">
                     <TextApparition><h1 className="title secondaryFont">MadeInome</h1></TextApparition>
-                    <TextApparition><h2>Your favorite wallpaper on your wall</h2></TextApparition>
+                    <TextApparition hiddenClass="showByLeftBefore" visibleClass="showByLeft"    ><h2>Your favorite wallpaper on your wall</h2></TextApparition>
                     <TextApparition style={{display: "flex"}}>
                         <ButtonUnderline className="secondaryColor" underlineClassName="lightPrimaryColor" textColorOver="lightPrimaryFont" borderHeight="1">View Gallery</ButtonUnderline>
                         <Link to="/contact" className="cancelLinkCss"><ButtonUnderline underlineClassName="lightPrimaryColor" time="0.2">Contact us ➡</ButtonUnderline></Link>
                     </TextApparition>
                 </DelayAnimation>
-            </div>
-            <div 
-                className="preview"
-                style={{ 
-                    backgroundImage: `url("/home/homeWallpaper.jpg")` 
-                }}
-            >
-                <DelayAnimation className="content">
-                    <TextApparition><h1 className="title secondaryFont">MadeInome</h1></TextApparition>
-                    <TextApparition><h2>Your favorite wallpaper on your wall</h2></TextApparition>
-                    <TextApparition style={{display: "flex"}}>
-                        <ButtonUnderline className="secondaryColor" underlineClassName="lightPrimaryColor" textColorOver="lightPrimaryFont" borderHeight="1">View Gallery</ButtonUnderline>
-                        <Link to="/contact" className="cancelLinkCss"><ButtonUnderline underlineClassName="lightPrimaryColor" time="0.2">Contact us ➡</ButtonUnderline></Link>
-                    </TextApparition>
-                </DelayAnimation>
-            </div>
-            <div 
-                className="preview"
-                style={{ 
-                    backgroundImage: `url("/home/homeWallpaper.jpg")` 
-                }}
-            >
-                <div className="content">
-                    <h1 className="title secondaryFont">MadeInome</h1>
-                    <h2>Your favorite wallpaper on your wall</h2>
-                    <DelayAnimation style={{display: "flex"}} delay="400">
-                        <TextApparition>                            
-                            <ButtonUnderline className="secondaryColor" underlineClassName="lightPrimaryColor" textColorOver="lightPrimaryFont" borderHeight="1">View Gallery</ButtonUnderline>
-                        </TextApparition>
-                        <TextApparition>
-                            <Link to="/contact" className="cancelLinkCss"><ButtonUnderline underlineClassName="lightPrimaryColor" time="0.2">Contact us ➡</ButtonUnderline></Link>
-                        </TextApparition>
-                    </DelayAnimation>
-                </div>
             </div>
         </div>
     )

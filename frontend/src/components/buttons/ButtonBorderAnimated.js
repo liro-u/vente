@@ -1,8 +1,7 @@
 import React from "react";
-import {eventWrapper} from "@testing-library/user-event/dist/utils";
 
 const ButtonBorderAnimated = ({
-    children,
+                                  children,
                               }) => {
 
 

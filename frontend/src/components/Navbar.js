@@ -39,7 +39,7 @@ const Navbar = () => {
                 backgroundColor: backgroundColor
             }}
         >
-            <Link to="/" className="cancelLinkCss logoContainer"><img src="/logo/png/logo-no-background.png" alt="erreur" className="logo"/></Link>
+            <Link to="/" className="cancelLinkCss logoContainer"><img src="/logo/icon/madeinome-website-favicon-color.png" alt="erreur" className="logo"/></Link>
 
             <div className="liens">
                 <ul>

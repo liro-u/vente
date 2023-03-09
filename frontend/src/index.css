@@ -170,7 +170,7 @@ footer{
 .bouton svg {
   height: 45px;
   position: absolute;
-  width: 120%;
+  width: 125%;
   top: 50%; right: 50%;
   transform: translate(50%,-50%);
 }

@@ -1,17 +1,15 @@
 import React from "react";
-import {eventWrapper} from "@testing-library/user-event/dist/utils";
+import ButtonUnderline from "./ButtonUnderline";
+import "../../css/buttons.css"
 
-const ButtonBorderAnimated = ({
-    children,
-                              }) => {
-
+const ButtonBorderAnimated = ({children, time="0.3", className=""}) => {
 
     return (
-        <div>
-            <svg>
-                <rect x="0" y="0" width="100%" height="100%"/>
-            </svg>
-            {children}
+        <div className={"buttonBorderAnimated " + className} style={{transition: "all " + time + "s"}}>
+            <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time={time}>
+                {children}
+            </ButtonUnderline>
+            <svg style={{ pointerEvents: 'none'}}><rect x="0" y="0" width="100%" height="100%"/></svg>
         </div>
     )
 }

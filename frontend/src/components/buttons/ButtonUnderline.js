@@ -18,8 +18,8 @@ const ButtonUnderline = ({ children, className , underlineClassName = "lightPrim
     return(
         <div 
             className={"buttonUnderline " + className}
-            onMouseOver={onMouseOver}
-            onMouseOut={onMouseOut}
+            onMouseEnter={onMouseOver}
+            onMouseLeave={onMouseOut}
         >
             <div 
                 className={textColor}

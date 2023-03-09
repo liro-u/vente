@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from 'react-router-dom';
+import AnimatedLogo from "./animations/Logo";
 import ButtonBorderAnimated from "./buttons/ButtonBorderAnimated";
+import ButtonUnderline from "./buttons/ButtonUnderline";
 
 const Navbar = () => {
     const [offset, setOffset] = useState(0);
@@ -26,7 +28,7 @@ const Navbar = () => {
         if (posBarAtm === 0) {
             setBackgroundColor("transparent");
         } else {
-            setBackgroundColor("var(--primary)");
+            setBackgroundColor("var(--light-primary)");
         }
         posBar = posBarAtm;
     }
@@ -40,21 +42,20 @@ const Navbar = () => {
                 backgroundColor: backgroundColor
             }}
         >
-            <Link to="/" className="cancelLinkCss logoContainer"><img src="/logo/icon/madeinome-website-favicon-color.png" alt="erreur" className="logo"/></Link>
+            <Link to="/" className="cancelLinkCss logoContainer"><AnimatedLogo /></Link>
 
             <div className="liens">
                 <ul>
-                    <li><Link to="" className ="bouton cancelLinkCss"> <ButtonBorderAnimated> Les Univers</ButtonBorderAnimated>  </Link></li>
-
-                    <li><Link to="" className ="bouton cancelLinkCss" > <ButtonBorderAnimated> Les Univers</ButtonBorderAnimated> </Link></li>
-                    <li><Link to="" className ="bouton cancelLinkCss" > <ButtonBorderAnimated> Les Univers</ButtonBorderAnimated> </Link></li>
+                    <li><Link to="" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="bluredBackground"> Les Univers</ButtonBorderAnimated>  </Link></li>
+                    <li><Link to="" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="bluredBackground"> Les Univers</ButtonBorderAnimated> </Link></li>
+                    <li><Link to="" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="bluredBackground"> Les Univers</ButtonBorderAnimated> </Link></li>
                 </ul>
             </div>
 
             <div className="containerIcon">
-                <span className="material-symbols-outlined icon">person</span>
-                <span className="material-symbols-outlined icon">shopping_bag</span>
-                <span className="material-symbols-outlined icon">bookmark</span>
+                <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.3"><span className="material-symbols-outlined icon">person</span></ButtonUnderline>
+                <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.3"><span className="material-symbols-outlined icon">shopping_bag</span></ButtonUnderline>
+                <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.3"><span className="material-symbols-outlined icon">bookmark</span></ButtonUnderline>
             </div>
         </header>
 

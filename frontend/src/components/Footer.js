@@ -5,7 +5,7 @@ const Footer = () => {
 
     return (
         <footer className="footer">
-            <TextApparition hiddenClass="showByLeftBefore" visibleClass="showByLeft" >
+            <TextApparition className="negativedefaultFontColor" hiddenClass="showByLeftBefore" visibleClass="showByLeft" >
                 Copyright © MadeInome. All Rights Reserved.
             </TextApparition>
         </footer>

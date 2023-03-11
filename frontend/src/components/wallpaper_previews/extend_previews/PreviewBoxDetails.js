@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import TextApparition from "../../animations/TextApparition";
 
 const PreviewBoxDetails = ({wallpaper}) => {
     const [titleColor, setTitleColor] = useState("");
@@ -20,7 +21,9 @@ const PreviewBoxDetails = ({wallpaper}) => {
             backgroundImage: "url(" + wallpaper.src + ")",
         }}>
             <div className="details">
-                <h1 className={titleColor}>{wallpaper.name}</h1>
+                <TextApparition visibleClass="showByLeft" hiddenClass="showByLeftBefore">
+                    <h1 className={titleColor}>{wallpaper.name}</h1>
+                </TextApparition>
             </div>
         </div>
     )

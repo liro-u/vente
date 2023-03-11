@@ -25,8 +25,8 @@ const AnimatedLogo = ({showClass = "show", hideClass = "hide", time = 1.5}) => {
             />
             <img 
                 style={{
-                    width: ref.current.offsetWidth,
-                    height: ref.current.offsetHeight
+                    width: ref.current ? ref.current.offsetWidth : 0,
+                    height: ref.current ? ref.current.offsetHeight : 0
                 }}
                 className="fixedLogo"
                 alt="erreur"

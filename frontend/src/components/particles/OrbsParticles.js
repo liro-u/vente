@@ -32,7 +32,6 @@ const OrbsParticles = ({ ParticlesOnScreen = 30, size = {min: 5, max: 10}, speed
                 offset: random(-10, 10),
                 currentLifeTime: random(0, lifeTime),
             })
-            console.log(particles[i].y)
         }
     }
     
@@ -50,9 +49,6 @@ const OrbsParticles = ({ ParticlesOnScreen = 30, size = {min: 5, max: 10}, speed
             particle.y += particle.speedY
 
             particle.currentLifeTime += 0.05
-            if (lifeTime > 0){
-                console.log(particle.currentLifeTime)
-            }
 
             const mult = particle.growSpeed*Math.sin(frameCount*0.05 + particle.offset) + particle.growSpeed;
             particle.size.x = mult * particle.size.baseX + particle.size.baseX

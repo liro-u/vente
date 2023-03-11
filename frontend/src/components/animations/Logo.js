@@ -17,7 +17,7 @@ const AnimatedLogo = ({showClass = "show", hideClass = "hide", time = 1.5}) => {
             <img 
                 className="logoPicture"
                 alt="erreur"
-                src="/logo/icon/madeinome-website-favicon-color.png"
+                src="/logo/icon/circle.png"
                 onMouseEnter={showLogo}
                 onMouseLeave={hideLogo}
                 style={{transition: "all " + time + "s"}}

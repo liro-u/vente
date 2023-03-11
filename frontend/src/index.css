@@ -63,7 +63,7 @@ code {
   color: var(--text-color);
 }
 
-.negativedefaultFontColor {
+.negativeDefaultFontColor {
   color: var(--negative-text-color);
 }
 

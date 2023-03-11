@@ -16,7 +16,6 @@ const AnimatedLogo = ({showClass = "show", hideClass = "hide", time = 1.5}) => {
 
     useEffect(() => {
         ref.current.addEventListener('load', (event) => {
-            console.log(" -- " + ref.current.offsetHeight)
             setWidth(ref.current.offsetWidth);
             setHeight(ref.current.offsetHeight);
         });

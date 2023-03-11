@@ -3,7 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 const AnimatedLogo = ({showClass = "show", hideClass = "hide", time = 1.5}) => {
     const [logoTextClasse, setLogoTextClass] = useState("hide")
     const ref = useRef(null)
-    const letterIcon = useRef(null)
+    const [width, setWidth] = useState(0)
+    const [height, setHeight] = useState(0)
 
     const showLogo = () => {
         setLogoTextClass(showClass)
@@ -15,8 +16,9 @@ const AnimatedLogo = ({showClass = "show", hideClass = "hide", time = 1.5}) => {
 
     useEffect(() => {
         ref.current.addEventListener('load', (event) => {
-            letterIcon.current.width = ref.current.offsetWidth;
-            letterIcon.current.height = ref.current.offsetHeight;
+            console.log(" -- " + ref.current.offsetHeight)
+            setWidth(ref.current.offsetWidth);
+            setHeight(ref.current.offsetHeight);
         });
     }, []);
 
@@ -33,10 +35,9 @@ const AnimatedLogo = ({showClass = "show", hideClass = "hide", time = 1.5}) => {
             />
             <img 
                 style={{
-                    width: ref.current ? ref.current.offsetWidth : 0,
-                    height: ref.current ? ref.current.offsetHeight : 0
+                    width: width,
+                    height: height
                 }}
-                ref={letterIcon}
                 className="fixedLogo"
                 alt="erreur"
                 src="/logo/icon/M.png"

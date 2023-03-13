@@ -3,8 +3,7 @@ import React, { useState } from "react";
 const AnimatedLogo = ({showClass = "show", hideClass = "hide", time = 1.5}) => {
     const [logoTextClasse, setLogoTextClass] = useState("hide")
 
-    const showLogo = () => {
-        setLogoTextClass(showClass)
+    const showLogo = () => {setLogoTextClass(showClass)
     }
 
     const hideLogo = () => {

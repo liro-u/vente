@@ -63,7 +63,7 @@ code {
   color: var(--text-color);
 }
 
-.negativedefaultFontColor {
+.negativeDefaultFontColor {
   color: var(--negative-text-color);
 }
 
@@ -183,13 +183,19 @@ footer{
 .navbar .logo {
   display: flex;
   align-items: center;
+  margin-left: 3%;
+  position: relative;
 }
 
 .navbar .logoPicture{
   width: 100%;
   height: auto;
-  margin-left: 3%;
   transform: rotate(0);
+}
+
+.navbar .fixedLogo {
+  position: absolute;
+  pointer-events: none;
 }
 
 .navbar .logoPicture:hover {

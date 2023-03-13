@@ -8,11 +8,14 @@ import ButtonUnderline from "../components/buttons/ButtonUnderline";
 import { Link } from "react-router-dom";
 import TextApparition from "../components/animations/TextApparition";
 import DelayAnimation from "../components/animations/DelayAnimation";
+import OrbsParticles from "../components/particles/OrbsParticles";
 
 const Home = () => {
 
     return (
         <div className="home">
+            <OrbsParticles ParticlesOnScreen="30"/>
+            <OrbsParticles ParticlesOnScreen="3" size = {{min: 20, max: 50}} speedX = {{min: -5, max: 5}} speedY = {{min: -12, max: 0}} lifeTime="20"/>
             <div 
                 className="preview"
                 style={{ 

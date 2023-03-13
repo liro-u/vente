@@ -8,6 +8,7 @@ import './css/buttons.css';
 // pages
 import Home from './pages/Home';
 import Contact from './pages/Contact';
+import Anime from './pages/Anime';
 
 // component
 import Footer from './components/Footer';
@@ -30,6 +31,11 @@ function App() {
               exact
               path="/contact"
               element={<Contact />}
+            />
+            <Route
+              exact
+              path="/wallpaper/test"
+              element={<Anime />}
             />
           </Routes>
         </div>

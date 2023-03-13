@@ -46,9 +46,9 @@ const Navbar = () => {
 
             <div className="liens">
                 <ul>
-                    <li><Link to="" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="bluredBackground"> Les Univers</ButtonBorderAnimated>  </Link></li>
-                    <li><Link to="" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="bluredBackground"> Les Univers</ButtonBorderAnimated> </Link></li>
-                    <li><Link to="" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="bluredBackground"> Les Univers</ButtonBorderAnimated> </Link></li>
+                    <li><Link to="/wallpaper/test" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="">Test</ButtonBorderAnimated>  </Link></li>
+                    <li><Link to="" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className=""> Les Univers</ButtonBorderAnimated> </Link></li>
+                    <li><Link to="" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className=""> Les Univers</ButtonBorderAnimated> </Link></li>
                 </ul>
             </div>
 

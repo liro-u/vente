@@ -6,8 +6,7 @@ const AnimatedLogo = ({showClass = "show", hideClass = "hide", time = 1}) => {
     const [width, setWidth] = useState(0)
     const [height, setHeight] = useState(0)
 
-    const showLogo = () => {
-        setLogoTextClass(showClass)
+    const showLogo = () => {setLogoTextClass(showClass)
     }
 
     const hideLogo = () => {

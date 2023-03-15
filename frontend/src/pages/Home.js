@@ -26,7 +26,7 @@ const Home = () => {
                     <TextApparition><h1 className="title secondaryFont">MadeInome</h1></TextApparition>
                     <TextApparition hiddenClass="showByLeftBefore" visibleClass="showByLeft"><h2>Your favorite wallpaper on your wall</h2></TextApparition>
                     <TextApparition style={{display: "flex"}}>
-                        <ButtonUnderline className="secondaryColor" underlineClassName="lightPrimaryColor" textColorOver="lightPrimaryFont" borderHeight="2">View Gallery</ButtonUnderline>
+                        <ButtonUnderline className="secondaryColor" underlineClassName="lightPrimaryColor" textColorOver="lightPrimaryFont" time="0.2" borderHeight="2">View Gallery</ButtonUnderline>
                         <Link to="/contact" className="cancelLinkCss"><ButtonUnderline underlineClassName="lightPrimaryColor" time="0.2" borderHeight="2">Contact us ➡</ButtonUnderline></Link>
                     </TextApparition>
                 </DelayAnimation>

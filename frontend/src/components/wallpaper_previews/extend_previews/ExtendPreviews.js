@@ -2,6 +2,7 @@ import React from "react";
 import PreviewBoxDetails from "./PreviewBoxDetails";
 // css
 import "../../../css/previews.css";
+import ButtonLoadMore from "../../buttons/ButtonLoadMore";
 
 const ExtendPreviews = ({ wallpaperArray }) => {
 
@@ -10,12 +11,7 @@ const ExtendPreviews = ({ wallpaperArray }) => {
             {wallpaperArray && wallpaperArray.map((wallpaper, index) => (
                 <PreviewBoxDetails key={index} wallpaper={wallpaper} />
             ))}
-            <div className="loadMoreContainer">
-                <div className="loadMore primaryColor">
-                    <p>Load More</p>
-                    <span class="material-symbols-outlined">expand_more</span>
-                </div>
-            </div>
+            <ButtonLoadMore />
         </div>
     )
 }

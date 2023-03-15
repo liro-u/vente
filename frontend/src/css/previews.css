@@ -21,25 +21,3 @@
     font-size: large;
     margin: 0;
 }
-
-.extendPreviews .loadMoreContainer{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    pointer-events: none;
-}
-
-.extendPreviews .loadMore {
-    width: fit-content;
-    margin: 0 auto;
-    padding: 10px;
-    border-radius: 10px 10px 0 0;
-    text-align: center;
-    cursor: pointer;
-    pointer-events: all;
-}
-
-.extendPreviews p {
-    margin: 0;
-}

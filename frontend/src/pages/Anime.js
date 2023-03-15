@@ -7,14 +7,17 @@ const Anime = () => {
     const [wallpaperArray, setWallpaperArray] = useState([]);
 
     useEffect(() => {
-        setWallpaperArray([
-            {src: "/wallpaper/9s.jpg", name: "9s soldier", titleColor: "default"},
-            {src: "/wallpaper/anime-katana-girl.jpg", name: "anime katana girl", titleColor: "negative-default"},
-            {src: "/wallpaper/cloud.jpg", name: "cloud from final fantaisy", titleColor: "negative-default"},
-            {src: "/wallpaper/tifa-cloud.jpg", name: "tifa and cloud from final fantaisy", titleColor: "default"},
-            {src: "/wallpaper/rose-knight.jpg", name: "rose knight", titleColor: "negative-default"}
-        ])
+        const fetchExercises = async () => {
+            const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers');
+            const json = await response.json();
+
+            if (response.ok) {
+                setWallpaperArray(json);
+            }
+        }
+        fetchExercises()
     }, [])
+
 
     return (
         <div>

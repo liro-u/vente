@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const AnimatedLogo = ({showClass = "show", hideClass = "hide", time = 1.5}) => {
+const AnimatedLogo = ({showClass = "show", hideClass = "hide", time = 1}) => {
     const [logoTextClasse, setLogoTextClass] = useState("hide")
     const ref = useRef(null)
     const [width, setWidth] = useState(0)

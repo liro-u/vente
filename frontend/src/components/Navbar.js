@@ -12,26 +12,27 @@ const Navbar = () => {
     const ref = useRef(null);
 
     useEffect(() => {
-        setHeight(ref.current.offsetHeight)
-    }, [])
+        var posBar = window.scrollY;
+        window.addEventListener('scroll',  function () {
+            setHeight(ref.current.offsetHeight)
+            var posBarAtm = window.scrollY
+            // position transition
+            if (posBar > posBarAtm) {
+                setOffset(0);
+            } else {
+                setOffset(-height);
+            }
+            // color transition
+            if (posBarAtm === 0) {
+                setBackgroundColor("transparent");
+            } else {
+                setBackgroundColor("var(--light-primary)");
+            }
+            posBar = posBarAtm;
+        })
+    }, [height])
 
-    var posBar = window.scrollY;
-    window.onscroll = function () {
-        var posBarAtm = window.scrollY
-        // position transition
-        if (posBar > posBarAtm) {
-            setOffset(0);
-        } else {
-            setOffset(-height);
-        }
-        // color transition
-        if (posBarAtm === 0) {
-            setBackgroundColor("transparent");
-        } else {
-            setBackgroundColor("var(--light-primary)");
-        }
-        posBar = posBarAtm;
-    }
+    
 
     return (
         <header 
@@ -46,16 +47,16 @@ const Navbar = () => {
 
             <div className="liens">
                 <ul>
-                    <li><Link to="/wallpaper/test" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="">Test</ButtonBorderAnimated>  </Link></li>
-                    <li><Link to="" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className=""> Les Univers</ButtonBorderAnimated> </Link></li>
-                    <li><Link to="" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className=""> Les Univers</ButtonBorderAnimated> </Link></li>
+                    <li><Link to="/wallpaper/test" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="">Discovery</ButtonBorderAnimated>  </Link></li>
+                    <li><Link to="" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="">Univers</ButtonBorderAnimated> </Link></li>
+                    <li><Link to="" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="">Artists</ButtonBorderAnimated> </Link></li>
                 </ul>
             </div>
 
             <div className="containerIcon">
-                <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.3"><span className="material-symbols-outlined icon">person</span></ButtonUnderline>
-                <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.3"><span className="material-symbols-outlined icon">shopping_bag</span></ButtonUnderline>
-                <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.3"><span className="material-symbols-outlined icon">bookmark</span></ButtonUnderline>
+                <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">shopping_bag</span></ButtonUnderline>
+                <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">bookmark</span></ButtonUnderline>
+                <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">person</span></ButtonUnderline>
             </div>
         </header>
 

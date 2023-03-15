@@ -18,11 +18,11 @@ const PreviewBoxDetails = ({wallpaper}) => {
         <div 
         className="detail-box"
         style={{
-            backgroundImage: "url(" + wallpaper.src + ")",
+            backgroundImage: "url(" + wallpaper.imageLink + ")",
         }}>
             <div className="details">
                 <TextApparition visibleClass="showByLeft" hiddenClass="showByLeftBefore">
-                    <h1 className={titleColor}>{wallpaper.name}</h1>
+                    <h1 className={titleColor}>{wallpaper.title}</h1>
                 </TextApparition>
             </div>
         </div>

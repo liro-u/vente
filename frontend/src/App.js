@@ -9,6 +9,7 @@ import './css/buttons.css';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 import Anime from './pages/Anime';
+import ThemeLol from './pages/ThemeLol';
 
 // component
 import Footer from './components/Footer';
@@ -36,6 +37,11 @@ function App() {
               exact
               path="/wallpaper/test"
               element={<Anime />}
+            />
+            <Route
+                exact
+                path="/wallpaper/theme/lol"
+                element={<ThemeLol />}
             />
           </Routes>
         </div>

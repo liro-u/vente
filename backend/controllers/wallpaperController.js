@@ -8,6 +8,25 @@ const getWallpapers = async (req, res) => {
     res.status(200).json(wallpapers);
 };
 
+// Get X Wallpapers
+const getXWallpapers = async (req, res) => {
+
+    var idArray = [];
+    req.body.idArray.forEach(id => {
+        idArray.push( new mongoose.Types.ObjectId(id) )
+    });
+
+    var x = parseInt(req.body.x)
+
+    const wallpapers = await Wallpaper.aggregate([
+        { $match: { _id: { $nin : idArray } } },
+        { $sample: { size: x } },
+    ])
+    
+
+    res.status(200).json(wallpapers);
+};
+
 // POST a new Wallpaper
 const createWallpaper = async (req, res) => {
     const {imageLink, artistId, title, titleColor } = req.body;
@@ -43,6 +62,7 @@ const updateWallpaper = async (req, res) => {
 
 export default {
     getWallpapers,
+    getXWallpapers,
     createWallpaper,
     updateWallpaper
 };

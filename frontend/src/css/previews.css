@@ -21,3 +21,10 @@
     font-size: large;
     margin: 0;
 }
+
+.extendPreviews .noMoreContent {
+    text-align: center;
+    padding: 10px;
+    background-color: var(--dark-secondary);
+    color: var(--negative-text-color);
+}

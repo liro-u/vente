@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 // css
 import "../../css/buttons.css";
 
-const ButtonLoadMore = () => {
+const ButtonLoadMore = ({ loadMore, x }) => {
     const [offset, setOffset] = useState(0);
     const [height, setHeight] = useState(0);
     const [maxScrollValue, setMaxScrollValue] = useState(0);
@@ -31,6 +31,9 @@ const ButtonLoadMore = () => {
                 ref={ref}
                 style={{
                     bottom: offset + "px",
+                }}
+                onClick={() => {
+                    loadMore(x)
                 }}
             >
                 <p>Load More</p>

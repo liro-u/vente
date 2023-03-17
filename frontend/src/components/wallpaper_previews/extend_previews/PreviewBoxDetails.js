@@ -22,7 +22,7 @@ const PreviewBoxDetails = ({wallpaper}) => {
         }}>
             <div className="details">
                 <TextApparition visibleClass="showByLeft" hiddenClass="showByLeftBefore">
-                    <h1 className={titleColor}>{wallpaper.title}</h1>
+                    <h1 className={titleColor}>{wallpaper.title} - {wallpaper.artistId}</h1>
                 </TextApparition>
             </div>
         </div>

@@ -8,7 +8,7 @@ import './css/buttons.css';
 // pages
 import Home from './pages/Home';
 import Contact from './pages/Contact';
-import Anime from './pages/Anime';
+import Discovery from './pages/Discovery';
 
 // component
 import Footer from './components/Footer';
@@ -34,8 +34,8 @@ function App() {
             />
             <Route
               exact
-              path="/wallpaper/test"
-              element={<Anime />}
+              path="/wallpaper/discovery"
+              element={<Discovery />}
             />
           </Routes>
         </div>

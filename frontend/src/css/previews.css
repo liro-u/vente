@@ -28,3 +28,13 @@
     background-color: var(--dark-secondary);
     color: var(--negative-text-color);
 }
+
+.extendPreviews .title {
+    height: 400px;
+    background-color: var(--dark-secondary);
+    color: var(--negative-text-color);
+    font-size: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

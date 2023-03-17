@@ -4,7 +4,7 @@ import PreviewBoxDetails from "./PreviewBoxDetails";
 import "../../../css/previews.css";
 import ButtonLoadMore from "../../buttons/ButtonLoadMore";
 
-const ExtendPreviews = ({ x }) => {
+const ExtendPreviews = ({ x, title }) => {
 
     const [wallpaperArray, setWallpaperArray] = useState([]);
     const [hideLoadMore, setHideLoadMore] = useState(false);
@@ -35,10 +35,12 @@ const ExtendPreviews = ({ x }) => {
 
     useEffect(() => {
         fetchXWallpaper(x)
-    }, [])
+        // eslint-disable-next-line
+    }, [x])
 
     return (
         <div className="extendPreviews">
+            {title && <h1 className="title">{title}</h1>}
             {wallpaperArray && wallpaperArray.map((wallpaper, index) => (
                 <PreviewBoxDetails key={index} wallpaper={wallpaper} />
             ))}

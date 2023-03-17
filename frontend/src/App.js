@@ -9,6 +9,7 @@ import './css/buttons.css';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 import Discovery from './pages/Discovery';
+import ThemeLol from './pages/ThemeLol';
 
 // component
 import Footer from './components/Footer';
@@ -36,6 +37,11 @@ function App() {
               exact
               path="/wallpaper/discovery"
               element={<Discovery />}
+            />
+            <Route
+                exact
+                path="/wallpaper/theme/lol"
+                element={<ThemeLol />}
             />
           </Routes>
         </div>

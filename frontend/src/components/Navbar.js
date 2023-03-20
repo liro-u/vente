@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from 'react-router-dom';
+
+// components
 import AnimatedLogo from "./animations/Logo";
 import ButtonBorderAnimated from "./buttons/ButtonBorderAnimated";
 import ButtonUnderline from "./buttons/ButtonUnderline";

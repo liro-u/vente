@@ -47,13 +47,32 @@ const getXWallpapers = async (req, res) => {
 // POST a new Wallpaper
 const createWallpaper = async (req, res) => {
     const {imageLink, artistId, title, titleColor } = req.body;
+
+    let emptyFields = [];
+
+    if (!title) {
+        emptyFields.push('title');
+    }
+    if (!imageLink) {
+        emptyFields.push('src')
+    }
+    if (!artistId) {
+        emptyFields.push('artist');
+    }
+    if (!titleColor) {
+        emptyFields.push('titleColor')
+    }
+    if (emptyFields.length > 0) {
+        return res.status(400).json({ error: 'Please fill in all the fields', emptyFields })
+    }
+
     // add doc to db
     try {
         const wallpaper = await Wallpaper.create({ imageLink, artistId: "liro_u", title, titleColor });
         res.status(200).json(wallpaper);
     }
     catch (err) {
-        res.status(400).json({error: err.message});
+        res.status(400).json({error: err.message, emptyFields});
     }
 }
 
@@ -78,8 +97,10 @@ const deleteWallpaper = async (req, res) => {
 const updateWallpaper = async (req, res) => {
     const { id } = req.params;
 
+    let emptyFields = [];
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: "No such wallpaper" });
+        return res.status(404).json({ error: "No such wallpaper", emptyFields });
     }
 
     const wallpaper = await Wallpaper.findOneAndUpdate({ _id: id }, {
@@ -87,7 +108,7 @@ const updateWallpaper = async (req, res) => {
     })
 
     if (!wallpaper) {
-        return res.status(400).json({ error: "No such wallpaper" });
+        return res.status(400).json({ error: "No such wallpaper", emptyFields });
     }
 
     res.status(200).json(wallpaper);

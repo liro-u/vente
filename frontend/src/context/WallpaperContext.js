@@ -34,9 +34,7 @@ export const WallpaperContextProvider = ({ children }) => {
         wallpapers: [],
         noMoreLoad: false,
     })
-
-    console.log(state)
-    
+        
     return (
         <WallpaperContext.Provider value ={{ ...state, dispatch }}>
             { children }

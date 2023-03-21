@@ -6,10 +6,13 @@ import { useWallpaperContext } from "../../../hooks/context/useWallpaperContext"
 import "../../../css/previews.css";
 
 const ExtendPreviews = ({ x, title }) => {
+    const [isLoading, setIsLoading] = useState(false);
 
     const { wallpapers, noMoreLoad, dispatch } = useWallpaperContext();
 
     const fetchXWallpaper = async (x) => {
+        setIsLoading(true);
+
         let idArray = wallpapers.map(({ _id }) => _id)
         const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/getX', {
             method: "POST",
@@ -30,10 +33,11 @@ const ExtendPreviews = ({ x, title }) => {
             }
             dispatch({type: 'MERGE_WALLPAPER', payload: json});
         }
+        setIsLoading(false);
     }
 
     useEffect(() => {
-        if (wallpapers.length == 0){
+        if (wallpapers.length === 0){
             fetchXWallpaper(x)
         }
         // eslint-disable-next-line
@@ -47,9 +51,9 @@ const ExtendPreviews = ({ x, title }) => {
             ))}
             {
                 noMoreLoad ? 
-                <h1 className="noMoreContent">There is no more content to pull</h1>
+                    isLoading && <h1 className="noMoreContent">There is no more content to pull</h1>
                 :
-                <ButtonLoadMore loadMore={fetchXWallpaper} x={x} />
+                    <ButtonLoadMore loadMore={fetchXWallpaper} x={x} />
             }
         </div>
     )

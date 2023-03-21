@@ -30,7 +30,7 @@ form button {
 
 div.error {
     padding: 10px;
-    background: #ffefef;
+    background: #ffefef27;
     border: 1px solid var(--error);
     color: var(--error);
     border-radius: 4px;
@@ -39,4 +39,5 @@ div.error {
 
 input.error, select.error{
     border: 1px solid var(--error);
+    background: #ffbaba;
 }

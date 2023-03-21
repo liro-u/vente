@@ -6,6 +6,7 @@ import ButtonUnderline from "../../buttons/ButtonUnderline";
 
 const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
     const { dispatch } = useWallpaperContext();
+    const [isPending, setIsPending] = useState(false)
 
     const [titleColor, setTitleColor] = useState("");
     const [isSelect, setIsSelect] = useState(false);
@@ -15,13 +16,20 @@ const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
     }
 
     const handleDelete = async () => {
-        const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/' + wallpaper._id, {
-            method: 'DELETE'
-        })
-        const json = await response.json();
-
-        if (response.ok) {
-            dispatch({type: 'DELETE_WALLPAPER', payload: json});
+        if (!isPending) {
+            setIsPending(true)
+            const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/' + wallpaper._id, {
+                method: 'DELETE'
+            })
+            const json = await response.json();
+    
+            if (response.ok) {
+                dispatch({type: 'DELETE_WALLPAPER', payload: json});
+            }else{
+                // if not found on db, delete anyway because maybe was delete by someone else
+                dispatch({type: 'DELETE_WALLPAPER', payload: wallpaper});
+            }
+            setIsPending(false)
         }
     }
 

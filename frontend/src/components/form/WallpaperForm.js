@@ -8,6 +8,7 @@ import "../../css/form.css";
 
 const WallpaperForm = ({ defaultWallpaper }) => {
     const { dispatch } = useWallpaperContext();
+    const [isPending, setIsPending] = useState(false)
 
     const titleColors = ["default", "negative-default"];
     const defaultColor = titleColors[0];
@@ -33,6 +34,7 @@ const WallpaperForm = ({ defaultWallpaper }) => {
     }, [defaultWallpaper])
 
     const handleSubmit = async (e) => {
+        setIsPending(true)
         e.preventDefault();
 
         const wallpaper = {title, titleColor, artistId, imageLink : src};
@@ -49,6 +51,7 @@ const WallpaperForm = ({ defaultWallpaper }) => {
         if (!response.ok) {
             setError(json.error);
             setEmptyFields(json.emptyFields);
+            console.log(json)
         }
         else if (method === "POST") {
             dispatch({type: 'SET_NO_MORE_LOAD', payload: false});
@@ -61,6 +64,7 @@ const WallpaperForm = ({ defaultWallpaper }) => {
         }else{
             alert("Your wallpaper is patch !")
         }
+        setIsPending(false)
     }
 
     return (
@@ -94,7 +98,7 @@ const WallpaperForm = ({ defaultWallpaper }) => {
                     ))}
                 </select>
 
-                <button>{method === "POST" ? "Add Wallpaper" : "Patch Wallpaper"}</button>
+                <button disabled={isPending}>{method === "POST" ? "Add Wallpaper" : "Patch Wallpaper"}</button>
                 {error && <div className="error">{error}</div>}
                 
             </form>

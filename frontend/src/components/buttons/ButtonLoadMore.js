@@ -32,6 +32,7 @@ const ButtonLoadMore = ({ loadMore, x }) => {
                 style={{
                     bottom: offset + "px",
                 }}
+
                 onClick={() => {
                     loadMore(x)
                 }}

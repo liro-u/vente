@@ -67,7 +67,7 @@ const Navbar = () => {
                             <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">settings</span></ButtonUnderline>
                         </div>
                     }
-                />                
+                />
             </div>
         </header>
 

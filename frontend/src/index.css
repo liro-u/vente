@@ -108,11 +108,23 @@ body {
 .cancelLinkCss {
   text-decoration: none;
 }
-
+.material-symbols-outlined.iconFilled{
+  font-variation-settings: 'FILL' 1
+}
 /* Pages */
 .pages{
   flex-grow: 1;
   margin: 0 0;
+}
+
+.pageTitle {
+  height: 400px;
+  background-color: var(--dark-secondary);
+  color: var(--negative-text-color);
+  font-size: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Footer */

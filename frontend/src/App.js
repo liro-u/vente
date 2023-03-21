@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Contact from './pages/Contact';
 import Discovery from './pages/Discovery';
 import Collections from './pages/Collections';
+import PublishWallpaper from './pages/PublishWallpaper';
 
 // collections
 import ThemeLOL from './pages/collections/ThemeLOL';
@@ -31,7 +32,8 @@ function App() {
             <Route exact path="/wallpaper/discovery" element={<Discovery />} />
             <Route exact path="/wallpaper/collections" element={<Collections />} />
 
-            
+            <Route exact path="/wallpaper/publish" element={<PublishWallpaper />} />
+
             <Route exact path="/wallpaper/collections/lol" element={<ThemeLOL />} />
           </Routes>
         </div>

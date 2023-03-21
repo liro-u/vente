@@ -39,8 +39,8 @@ const ExtendPreviews = ({ x, title }) => {
     }, [x])
 
     return (
-        <div className="extendPreviews">
-            {title && <h1 className="title">{title}</h1>}
+        <div className="extendPreviews extendPreviewsCTN">
+            {title && <h1 className="pageTitle darkSecondaryColor negativeDefaultFontColor">{title}</h1>}
             {wallpaperArray && wallpaperArray.map((wallpaper, index) => (
                 <PreviewBoxDetails key={index} wallpaper={wallpaper} />
             ))}

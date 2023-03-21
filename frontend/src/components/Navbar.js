@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from 'react-router-dom';
+
+// components
 import AnimatedLogo from "./animations/Logo";
 import ButtonBorderAnimated from "./buttons/ButtonBorderAnimated";
 import ButtonUnderline from "./buttons/ButtonUnderline";
+import ButtonUnroll from "./buttons/ButtonUnroll";
 
 const Navbar = () => {
     const [offset, setOffset] = useState(0);
@@ -47,8 +50,8 @@ const Navbar = () => {
 
             <div className="liens">
                 <ul>
-                    <li><Link to="/wallpaper/test" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="">Discovery</ButtonBorderAnimated>  </Link></li>
-                    <li><Link to="/wallpaper/theme/lol" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="">Univers</ButtonBorderAnimated> </Link></li>
+                    <li><Link to="/wallpaper/discovery" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="">Discovery</ButtonBorderAnimated>  </Link></li>
+                    <li><Link to="/wallpaper/collections" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="">Collections</ButtonBorderAnimated> </Link></li>
                     <li><Link to="" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="">Artists</ButtonBorderAnimated> </Link></li>
                 </ul>
             </div>
@@ -56,7 +59,15 @@ const Navbar = () => {
             <div className="containerIcon">
                 <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">shopping_bag</span></ButtonUnderline>
                 <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">bookmark</span></ButtonUnderline>
-                <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">person</span></ButtonUnderline>
+                <ButtonUnroll
+                    button={<ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">person</span></ButtonUnderline>}
+                    content={
+                        <div>
+                            <Link to="/wallpaper/publish"><ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">add</span></ButtonUnderline></Link>
+                            <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">settings</span></ButtonUnderline>
+                        </div>
+                    }
+                />
             </div>
         </header>
 

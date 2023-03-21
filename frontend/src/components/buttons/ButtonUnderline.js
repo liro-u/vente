@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 const ButtonUnderline = ({ children, className , underlineClassName = "lightPrimaryColor", textColorOut = "defaultFontColor", textColorOver = "defaultFontColor", time = 1, borderHeight = 3}) => {
@@ -14,6 +14,10 @@ const ButtonUnderline = ({ children, className , underlineClassName = "lightPrim
         setProgress(0);
         setTextColor(textColorOut);
     }
+
+    useEffect(() => {
+        setTextColor(textColorOut);
+    }, [textColorOut]);
 
     return(
         <div 

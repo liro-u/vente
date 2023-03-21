@@ -8,8 +8,12 @@ import './css/buttons.css';
 // pages
 import Home from './pages/Home';
 import Contact from './pages/Contact';
-import Anime from './pages/Anime';
-import ThemeLol from './pages/ThemeLol';
+import Discovery from './pages/Discovery';
+import Collections from './pages/Collections';
+import PublishWallpaper from './pages/PublishWallpaper';
+
+// collections
+import ThemeLOL from './pages/collections/ThemeLOL';
 
 // component
 import Footer from './components/Footer';
@@ -23,26 +27,14 @@ function App() {
         <Navbar />
         <div className='pages'>
           <Routes>
-            <Route
-              exact
-              path="/"
-              element={<Home />}
-            />
-            <Route
-              exact
-              path="/contact"
-              element={<Contact />}
-            />
-            <Route
-              exact
-              path="/wallpaper/test"
-              element={<Anime />}
-            />
-            <Route
-                exact
-                path="/wallpaper/theme/lol"
-                element={<ThemeLol />}
-            />
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/contact" element={<Contact />} />
+            <Route exact path="/wallpaper/discovery" element={<Discovery />} />
+            <Route exact path="/wallpaper/collections" element={<Collections />} />
+
+            <Route exact path="/wallpaper/publish" element={<PublishWallpaper />} />
+
+            <Route exact path="/wallpaper/collections/lol" element={<ThemeLOL />} />
           </Routes>
         </div>
         <Footer />

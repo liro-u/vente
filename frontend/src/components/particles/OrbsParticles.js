@@ -54,7 +54,7 @@ const OrbsParticles = ({ ParticlesOnScreen = 30, size = {min: 5, max: 10}, speed
             particle.size.x = mult * particle.size.baseX + particle.size.baseX
             particle.size.y = mult * particle.size.baseY + particle.size.baseY
 
-            if ((lifeTime === -1 && (particle.y < -particle.size.y / 2 || particle.x < -particle.size.x / 2 || particle.x > w + particle.size.x / 2)) || (lifeTime > 0 && lifeTime < particle.currentLifeTime) ) {
+            if ((lifeTime === -1  || (lifeTime > 0 && lifeTime < particle.currentLifeTime)) && (particle.y < -particle.size.y / 2 || particle.x < -particle.size.x / 2 || particle.x > w + particle.size.x / 2)) {
                 particle.x = Math.random() * w * 1.5
                 particle.y = h + particle.size.y
                 particle.currentLifeTime = 0

@@ -8,6 +8,23 @@ const getWallpapers = async (req, res) => {
     res.status(200).json(wallpapers);
 };
 
+// Get wallpaper by id
+const getWallpaper = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such wallpaper'});
+    }
+    
+    const wallpaper = await Wallpaper.findById(id);
+    
+    if (!wallpaper) {
+        return res.status(400).json({ error: 'No such wallpaper'});
+    }
+    
+    res.status(200).json(wallpaper);
+};
+
 // Get X Wallpapers
 const getXWallpapers = async (req, res) => {
 
@@ -62,6 +79,7 @@ const updateWallpaper = async (req, res) => {
 
 export default {
     getWallpapers,
+    getWallpaper,
     getXWallpapers,
     createWallpaper,
     updateWallpaper

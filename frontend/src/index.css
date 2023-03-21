@@ -129,6 +129,7 @@ body {
 
 /* Footer */
 footer{
+  z-index: 100;
   padding: 10px;
   font-size: x-small;
   

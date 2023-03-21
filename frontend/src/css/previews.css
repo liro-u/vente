@@ -8,6 +8,7 @@
     width: 100%;
     height: 400px;
     position: relative;
+    z-index: 20;
 }
 
 .extendPreviewsCTN .details {
@@ -51,14 +52,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 0;
+    transition: all 1s;
+    overflow: hidden;
 }
 
+
 /* publish */
-.publishWallpaper{
+.publishWallpaper, .editWallpaper{
     height: 100%;
 }
 
-.publishWallpaper .previewContainer{
+.publishWallpaper .previewContainer, .editWallpaper .previewContainer{
     margin-top: 50px;
 }

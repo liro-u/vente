@@ -8,5 +8,6 @@ router.get('/:id', wallpaperController.getWallpaper);
 router.post('/', wallpaperController.createWallpaper);
 router.post('/getX', wallpaperController.getXWallpapers);
 router.patch('/:id', wallpaperController.updateWallpaper);
+router.delete('/:id', wallpaperController.deleteWallpaper);
 
 export default router;

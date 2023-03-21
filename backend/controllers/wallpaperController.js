@@ -57,6 +57,23 @@ const createWallpaper = async (req, res) => {
     }
 }
 
+// DELETE a workout
+const deleteWallpaper = async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "No such wallpaper" });
+    }
+
+    const wallpaper = await Wallpaper.findOneAndDelete({ _id: id });
+
+    if (!wallpaper) {
+        return res.status(400).json({ error: "No such wallpaper" });
+    }
+
+    res.status(200).json(wallpaper);
+};
+
 // UPDATE a Wallpaper
 const updateWallpaper = async (req, res) => {
     const { id } = req.params;
@@ -82,5 +99,6 @@ export default {
     getWallpaper,
     getXWallpapers,
     createWallpaper,
-    updateWallpaper
+    updateWallpaper,
+    deleteWallpaper
 };

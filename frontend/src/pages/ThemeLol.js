@@ -1,9 +1,17 @@
 import React from "react";
+import NavbarOffset from "../components/NavbarOffset";
+
+// css
+import '../css/ThemeLol.css';
 
 const ThemeLol = () => {
 
+
+
     return (
-        <div>dfsf</div>
+        <div className="ThemeLol">
+        <NavbarOffset />
+        </div>
     )
 }
 

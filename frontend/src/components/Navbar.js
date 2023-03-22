@@ -15,10 +15,10 @@ const Navbar = () => {
     const ref = useRef(null);
 
     useEffect(() => {
-        var posBar = window.scrollY;
+        let posBar = window.scrollY;
         window.addEventListener('scroll',  function () {
             setHeight(ref.current.offsetHeight)
-            var posBarAtm = window.scrollY
+            const posBarAtm = window.scrollY;
             // position transition
             if (posBar > posBarAtm) {
                 setOffset(0);

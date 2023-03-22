@@ -1,12 +1,11 @@
-html, body{
+.pages{
+    background: no-repeat;
+    background-size: cover;
     width: 100%;
     height: 100%;
     margin: 0;
 }
 
-
-body {
-}
 
 img{
     width: 100%;
@@ -16,7 +15,7 @@ img{
     width: 32%;
     height: 32%;
     perspective: 1000px;
-    margin: 2%;
+    margin: 1.5% 2.5% 1.5% 2.5%;
     display: inline-block;
 }
 
@@ -24,24 +23,69 @@ img{
     position: relative;
     width: 100%;
     height: 100%;
-    transition: transform 0.6s;
+    transition: transform 0.8s;
     transform-style: preserve-3d;
 }
 
 
 .flipImg, .flipContenu {
-    position: absolute;
     width: 100%;
-    height: 100%;
+    height: auto;
     backface-visibility: hidden;
 }
 
+.flipImg{
+    position: absolute;
+}
+
+.Content{
+    text-align: center  ;
+}
+
+
 .flipContenu {
-    background-color: black;
-    color: white;
-    transform: rotateY(180deg);
+    background: grey;
+    opacity: 60%;
+    color: black;
+    width: 100%;
+    height: 100%    ;
+    transform: rotateX(-180deg);
+    text-align: initial;
 }
 
 .flipCard{
-    transform: rotateY(180deg);
+    transform: rotateX(-180deg);
+}
+
+.Title, h1{
+    font-size: 3vw;
+    text-align: center;
+    margin-top: 0.5%;
+    margin-bottom: 1%;
+}
+
+.TitleCard{
+    text-align: center;
+    padding-top: 0.5%;
+}
+
+.reference{
+    font-size: small;
+}
+
+.referenceContainer{
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    bottom: 0;
+    width: 100%;
+}
+
+.iconBox2{
+    position: absolute;
+    top: 0;
+    margin-top: 1%;
+}
+
+.particules{
 }

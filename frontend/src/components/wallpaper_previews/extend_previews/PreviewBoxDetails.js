@@ -15,6 +15,29 @@ const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
         setIsSelect(!isSelect);
     }
 
+    const download = async () => {
+        const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/download', {
+            method: "POST",
+            body: JSON.stringify({
+                url: wallpaper.imageLink
+            }),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        });
+
+        const imageBlog = await response.blob()
+        const imageURL = URL.createObjectURL(imageBlog)
+
+        const link = document.createElement('a')
+        link.href = imageURL;
+        link.download = wallpaper.title + ".jpg";
+
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)  
+    }
+
     const handleDelete = async () => {
         if (!isPending) {
             setIsPending(true)
@@ -67,7 +90,7 @@ const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
             >
                 <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">shopping_cart</span></ButtonUnderline>
                 <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">favorite</span></ButtonUnderline>
-                <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">download</span></ButtonUnderline>
+                <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span onClick={download} className="material-symbols-outlined icon iconFilled">download</span></ButtonUnderline>
                 <Link to={"/wallpaper/edit/" + wallpaper._id} className ="bouton cancelLinkCss"><ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">edit</span></ButtonUnderline></Link>
                 <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span onClick={handleDelete} className="material-symbols-outlined icon iconFilled">delete</span></ButtonUnderline>
             </div>}

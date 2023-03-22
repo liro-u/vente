@@ -9,7 +9,7 @@ const ButtonLoadMore = ({ loadMore, x }) => {
     const ref = useRef(null);
 
     useEffect(() => {
-        window.addEventListener('scroll', function () {
+        const updateHeight = () => {
             var posBarAtm = window.scrollY
             setHeight(ref.current.offsetHeight)
             setMaxScrollValue(Math.max( document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight ));
@@ -19,7 +19,11 @@ const ButtonLoadMore = ({ loadMore, x }) => {
             } else {
                 setOffset(-height);
             }
-        })    
+        }
+        window.addEventListener('scroll', updateHeight)
+        return (() => {
+            window.removeEventListener('scroll', updateHeight)
+        })
     }, [height, maxScrollValue])
 
     

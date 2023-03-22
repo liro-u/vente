@@ -1,5 +1,6 @@
 import Wallpaper from '../models/wallpaperModel.js';
 import mongoose from 'mongoose';
+import request from 'request';
 
 // Get all Wallpapers
 const getWallpapers = async (req, res) => {
@@ -114,6 +115,15 @@ const updateWallpaper = async (req, res) => {
     res.status(200).json(wallpaper);
 };
 
+const downloadWallpaper = async (req, res) => {
+    const imagePath = req.body.url;
+    const imageStream = request(imagePath);
+
+    res.setHeader('Content-Type', 'image/jpeg');
+
+    imageStream.pipe(res);
+}
+
 
 export default {
     getWallpapers,
@@ -121,5 +131,6 @@ export default {
     getXWallpapers,
     createWallpaper,
     updateWallpaper,
-    deleteWallpaper
+    deleteWallpaper,
+    downloadWallpaper
 };

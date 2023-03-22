@@ -62,6 +62,8 @@ const WallpaperForm = ({ defaultWallpaper }) => {
             setTitleColor(defaultColor);
             alert("Your wallpaper is online !")
         }else{
+            dispatch({type: 'DELETE_WALLPAPER', payload: defaultWallpaper});
+            dispatch({type: 'MERGE_WALLPAPER', payload: [wallpaper]});
             alert("Your wallpaper is patch !")
         }
         setIsPending(false)

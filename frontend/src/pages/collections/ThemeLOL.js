@@ -2,50 +2,29 @@ import React, {useEffect, useRef, useState} from "react";
 
 // components
 import NavbarOffset from "../../components/NavbarOffset";
+import FlipCard from "../../components/animations/FlipCard";
 
 //css
-import "../../css/ThemeLol.css"
 
-const ThemeLOL = ({id}) => {
-    const [test, setTest] = useState(null)
-    const container = useRef(null);
-    const [height, setHeight] = useState(0);
-    const TailleImg = useRef(null);
 
-    const handleClick  = () => {
-        container.current.classList.toggle('flipCard');
-        setHeight(TailleImg.current.offsetHeight)
-        console.log(height)
-    };
-
-    useEffect(()=>{
-        const fecthImg = async (id) => {
-            console.log(process.env.REACT_APP_PROXY + '/api/wallpapers/' + id)
-            const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/' + id);
-            const img = await response.json()
-            setTest(img);
-        }
-        fecthImg("6410dd5ad26154414a108244")
-    }, [])
+const ThemeLOL = () => {
 
     return (
 
-        <div style={{
-            backgroundImage : `url("/wallpaper/FondImgThemeLol.png")`
+        <div className="pages" style={{
+            backgroundImage: `url("/wallpaper/FongImgThemeLol.png")`
         }}>
             <NavbarOffset />
 
-            <div className="cardContainer" onClick={handleClick}>
-                <div className="card" ref={container} style={{height : height}}>
-                    <div className="flipImg">
-                         {test && <img src={test.imageLink } alt="toto" ref={TailleImg}/>}
+            <div className="Title">
+                <h1> Convenant Broken</h1>
+            </div>
 
-                    </div>
-
-                    <div className="flipContenu">
-                        <p> test </p>
-                    </div>
-                </div>
+            <div className="Content">
+            <FlipCard id={"64199c49414876453dec9284"}/>
+            <FlipCard id={"64199ca3414876453dec928a"}/>
+            <FlipCard id={"64199c86414876453dec9288"}/>
+            <FlipCard id={"64199c69414876453dec9286"}/>
             </div>
         </div>
     )

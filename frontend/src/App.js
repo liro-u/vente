@@ -18,6 +18,7 @@ import ThemeLOL from './pages/collections/ThemeLOL';
 // component
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+import EditWallpaper from './pages/EditWallpaper';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
             <Route exact path="/wallpaper/collections" element={<Collections />} />
 
             <Route exact path="/wallpaper/publish" element={<PublishWallpaper />} />
+            <Route exact path="/wallpaper/edit/:id" element={<EditWallpaper />} />
 
             <Route exact path="/wallpaper/collections/lol" element={<ThemeLOL />} />
           </Routes>

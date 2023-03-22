@@ -1,13 +1,36 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useWallpaperContext } from '../../../hooks/context/useWallpaperContext';
 import TextApparition from "../../animations/TextApparition";
 import ButtonUnderline from "../../buttons/ButtonUnderline";
 
-const PreviewBoxDetails = ({wallpaper}) => {
+const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
+    const { dispatch } = useWallpaperContext();
+    const [isPending, setIsPending] = useState(false)
+
     const [titleColor, setTitleColor] = useState("");
     const [isSelect, setIsSelect] = useState(false);
 
     const toggleIsSelect = () => {
         setIsSelect(!isSelect);
+    }
+
+    const handleDelete = async () => {
+        if (!isPending) {
+            setIsPending(true)
+            const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/' + wallpaper._id, {
+                method: 'DELETE'
+            })
+            const json = await response.json();
+    
+            if (response.ok) {
+                dispatch({type: 'DELETE_WALLPAPER', payload: json});
+            }else{
+                // if not found on db, delete anyway because maybe was delete by someone else
+                dispatch({type: 'DELETE_WALLPAPER', payload: wallpaper});
+            }
+            setIsPending(false)
+        }
     }
 
     useEffect(() => {
@@ -35,13 +58,18 @@ const PreviewBoxDetails = ({wallpaper}) => {
                     </TextApparition>
                 </div>
             </div>
-            {isSelect &&
-            <div className="darkSecondaryColor iconBox">
+            {!disabled && 
+            <div className="darkSecondaryColor iconBox"
+                style={{
+                    height: isSelect ? "100px" : "0",
+                    paddingBottom: isLast && isSelect ? "50px" : "0"
+                }}
+            >
                 <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">shopping_cart</span></ButtonUnderline>
                 <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">favorite</span></ButtonUnderline>
-                <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><a href={wallpaper.imageLink} download={wallpaper.title} ><span className="material-symbols-outlined icon iconFilled">download</span></a></ButtonUnderline>
-                <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">edit</span></ButtonUnderline>
-                <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">delete</span></ButtonUnderline>
+                <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">download</span></ButtonUnderline>
+                <Link to={"/wallpaper/edit/" + wallpaper._id} className ="bouton cancelLinkCss"><ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">edit</span></ButtonUnderline></Link>
+                <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span onClick={handleDelete} className="material-symbols-outlined icon iconFilled">delete</span></ButtonUnderline>
             </div>}
         </div>
     )

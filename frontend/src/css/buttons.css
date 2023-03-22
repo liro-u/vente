@@ -50,6 +50,7 @@
 }
 
 .loadMoreContainer{
+    z-index: 21;
     position: absolute;
     left: 0;
     right: 0;

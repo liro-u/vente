@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import PreviewBoxDetails from "./PreviewBoxDetails";
+import ButtonLoadMore from "../../buttons/ButtonLoadMore";
+import { useWallpaperContext } from "../../../hooks/context/useWallpaperContext";
 // css
 import "../../../css/previews.css";
-import ButtonLoadMore from "../../buttons/ButtonLoadMore";
 
 const ExtendPreviews = ({ x, title }) => {
+    const [isLoading, setIsLoading] = useState(false);
 
-    const [wallpaperArray, setWallpaperArray] = useState([]);
-    const [hideLoadMore, setHideLoadMore] = useState(false);
+    const { wallpapers, noMoreLoad, dispatch } = useWallpaperContext();
 
     const fetchXWallpaper = async (x) => {
-        let idArray = wallpaperArray.map(({ _id }) => _id)
+        setIsLoading(true);
+
+        let idArray = wallpapers.map(({ _id }) => _id)
         const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/getX', {
             method: "POST",
             body: JSON.stringify({
@@ -25,30 +28,32 @@ const ExtendPreviews = ({ x, title }) => {
 
         if (response.ok) {
             if (json.length < x) {
-                console.log(json.length)
-                setHideLoadMore(true);
+                console.log(json.length);
+                dispatch({type: 'SET_NO_MORE_LOAD', payload: true});
             }
-            var newArray = [...wallpaperArray, ...json]
-            setWallpaperArray(newArray);
+            dispatch({type: 'MERGE_WALLPAPER', payload: json});
         }
+        setIsLoading(false);
     }
 
     useEffect(() => {
-        fetchXWallpaper(x)
+        if (wallpapers.length === 0){
+            fetchXWallpaper(x)
+        }
         // eslint-disable-next-line
     }, [x])
 
     return (
         <div className="extendPreviews extendPreviewsCTN">
             {title && <h1 className="pageTitle darkSecondaryColor negativeDefaultFontColor">{title}</h1>}
-            {wallpaperArray && wallpaperArray.map((wallpaper, index) => (
-                <PreviewBoxDetails key={index} wallpaper={wallpaper} />
+            {wallpapers && wallpapers.map((wallpaper, index) => (
+                <PreviewBoxDetails key={index} wallpaper={wallpaper} isLast={index === wallpapers.length - 1} />
             ))}
             {
-                hideLoadMore ? 
-                <h1 className="noMoreContent">There is no more content to pull</h1>
+                noMoreLoad ? 
+                    isLoading && <h1 className="noMoreContent">There is no more content to pull</h1>
                 :
-                <ButtonLoadMore loadMore={fetchXWallpaper} hideLoadMore={hideLoadMore} x={x} />
+                    <ButtonLoadMore loadMore={fetchXWallpaper} x={x} />
             }
         </div>
     )

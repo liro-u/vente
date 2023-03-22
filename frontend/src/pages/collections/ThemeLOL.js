@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React from "react";
 
 // components
 import NavbarOffset from "../../components/NavbarOffset";
@@ -15,12 +15,10 @@ const ThemeLOL = () => {
         <div className="pages" style={{
             backgroundImage: `url("/wallpaper/FongImgThemeLol.png")`
         }}>
+            <OrbsParticles ParticlesOnScreen="50" size = {{min: 3, max: 10}} speedX = {{min: -1.5, max: 1.5}} speedY = {{min: -1.5, max: 1.5}} lifeTime="20" zindex="0"/>
 
             <NavbarOffset />
 
-            <div className="particules">
-                <OrbsParticles ParticlesOnScreen="50" size = {{min: 3, max: 10}} speedX = {{min: -1.5, max: 1.5}} speedY = {{min: -1.5, max: 1.5}} lifeTime="20"/>
-            </div>
 
             <div className="Title">
                 <h1> Convenant Broken</h1>

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import AnimatedLogo from "./animations/Logo";
 import ButtonBorderAnimated from "./buttons/ButtonBorderAnimated";
 import ButtonUnderline from "./buttons/ButtonUnderline";
-import ButtonUnroll from "./buttons/ButtonUnroll";
 
 const Navbar = () => {
     const [offset, setOffset] = useState(0);
@@ -57,17 +56,10 @@ const Navbar = () => {
             </div>
 
             <div className="containerIcon">
+                <Link to="/wallpaper/publish"><ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">add</span></ButtonUnderline></Link>
                 <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">shopping_bag</span></ButtonUnderline>
                 <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">bookmark</span></ButtonUnderline>
-                <ButtonUnroll
-                    button={<ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">person</span></ButtonUnderline>}
-                    content={
-                        <div>
-                            <Link to="/wallpaper/publish"><ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">add</span></ButtonUnderline></Link>
-                            <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">settings</span></ButtonUnderline>
-                        </div>
-                    }
-                />
+                <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">person</span></ButtonUnderline>
             </div>
         </header>
 

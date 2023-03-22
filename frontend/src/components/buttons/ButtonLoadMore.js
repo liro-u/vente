@@ -14,7 +14,7 @@ const ButtonLoadMore = ({ loadMore, x }) => {
             setHeight(ref.current.offsetHeight)
             setMaxScrollValue(Math.max( document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight ));
             // position transition
-            if (posBarAtm + window.innerHeight >= maxScrollValue) {
+            if (posBarAtm + window.innerHeight >= maxScrollValue - 10) {
                 setOffset(0);
             } else {
                 setOffset(-height);

@@ -1,5 +1,4 @@
 .orbsParticles {
     position: fixed;
-    z-index: 50;
     pointer-events: none;
 }

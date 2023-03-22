@@ -3,7 +3,7 @@ import Canvas from "../utils/Canvas"
 // css
 import "../../css/particles.css"
 
-const OrbsParticles = ({ ParticlesOnScreen = 30, size = {min: 5, max: 10}, speedX = {min: -1.5, max: 1.5}, speedY = {min: -3, max: 0}, lifeTime = -1}) => {
+const OrbsParticles = ({ ParticlesOnScreen = 30, size = {min: 5, max: 10}, speedX = {min: -1.5, max: 1.5}, speedY = {min: -3, max: 0}, lifeTime = -1, zindex = 50}) => {
     const orbRef = useRef(null);
     var grow = {
         min: 0.1,
@@ -68,7 +68,12 @@ const OrbsParticles = ({ ParticlesOnScreen = 30, size = {min: 5, max: 10}, speed
     }
 
     return (
-        <div className="orbsParticles">
+        <div 
+            className="orbsParticles"
+            style={{
+                zIndex: zindex
+            }}
+        >
             <Canvas draw={drawAndUpdate} init={createParticles}/>
             <div style={{display: "none"}}>
                 <img src="https://media.discordapp.net/attachments/692145538774335552/1083901052790771852/Pngtreeblack_radial_gradient_5659208.png?width=670&height=670" ref={orbRef} alt="assetOrb"/>

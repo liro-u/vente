@@ -28,7 +28,12 @@ form button {
     cursor: pointer;
 }
 
-div.error {
+form button:disabled{
+    cursor: none;
+    opacity: 0.9;
+}
+
+form div.error {
     padding: 10px;
     background: #ffefef27;
     border: 1px solid var(--error);
@@ -37,7 +42,7 @@ div.error {
     margin: 20px 0;
 }
 
-input.error, select.error{
+form input.error, form select.error{
     border: 1px solid var(--error);
     background: #ffbaba;
 }

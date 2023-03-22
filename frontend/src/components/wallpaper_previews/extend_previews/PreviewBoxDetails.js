@@ -5,7 +5,7 @@ import TextApparition from "../../animations/TextApparition";
 import ButtonUnderline from "../../buttons/ButtonUnderline";
 
 const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
-    const { dispatch } = useWallpaperContext();
+    const { noMoreLoad, dispatch } = useWallpaperContext();
     const [isPending, setIsPending] = useState(false)
 
     const [titleColor, setTitleColor] = useState("");
@@ -16,41 +16,48 @@ const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
     }
 
     const download = async () => {
-        const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/download', {
-            method: "POST",
-            body: JSON.stringify({
-                url: wallpaper.imageLink
-            }),
-            headers: {
-                'Content-type': 'application/json'
-            }
-        });
+        if (!isPending) {
+            setIsPending(true)
+            const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/download', {
+                method: "POST",
+                body: JSON.stringify({
+                    url: wallpaper.imageLink
+                }),
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            });
 
-        const imageBlog = await response.blob()
-        const imageURL = URL.createObjectURL(imageBlog)
+            const imageBlog = await response.blob()
+            const imageURL = URL.createObjectURL(imageBlog)
 
-        const link = document.createElement('a')
-        link.href = imageURL;
-        link.download = wallpaper.title + ".jpg";
+            const link = document.createElement('a')
+            link.href = imageURL;
+            link.download = wallpaper.title + ".jpg";
 
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)  
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)  
+
+            setIsPending(false)
+        }
     }
 
     const handleDelete = async () => {
         if (!isPending) {
             setIsPending(true)
-            const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/' + wallpaper._id, {
-                method: 'DELETE'
-            })
-            const json = await response.json();
-    
-            if (response.ok) {
-                dispatch({type: 'DELETE_WALLPAPER', payload: json});
-            }else{
-                // if not found on db, delete anyway because maybe was delete by someone else
-                dispatch({type: 'DELETE_WALLPAPER', payload: wallpaper});
+            if (window.confirm("Do you really want to delete this wallpaper ?")) {
+                const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/' + wallpaper._id, {
+                    method: 'DELETE'
+                })
+                const json = await response.json();
+        
+                if (response.ok) {
+                    dispatch({type: 'DELETE_WALLPAPER', payload: json});
+                }else{
+                    // if not found on db, delete anyway because maybe was delete by someone else
+                    dispatch({type: 'DELETE_WALLPAPER', payload: wallpaper});
+                }
             }
             setIsPending(false)
         }
@@ -85,13 +92,19 @@ const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
             <div className="darkSecondaryColor iconBox"
                 style={{
                     height: isSelect ? "100px" : "0",
-                    paddingBottom: isLast && isSelect ? "50px" : "0"
+                    paddingBottom: isLast && isSelect && !noMoreLoad ? "50px" : "0"
                 }}
             >
                 <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">shopping_cart</span></ButtonUnderline>
                 <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">favorite</span></ButtonUnderline>
                 <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span onClick={download} className="material-symbols-outlined icon iconFilled">download</span></ButtonUnderline>
-                <Link to={"/wallpaper/edit/" + wallpaper._id} className ="bouton cancelLinkCss"><ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">edit</span></ButtonUnderline></Link>
+                {isPending ?
+                    <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">edit</span></ButtonUnderline>
+                    :
+                    <Link to={"/wallpaper/edit/" + wallpaper._id} className ="bouton cancelLinkCss">
+                        <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">edit</span></ButtonUnderline>
+                    </Link>
+                }
                 <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span onClick={handleDelete} className="material-symbols-outlined icon iconFilled">delete</span></ButtonUnderline>
             </div>}
         </div>

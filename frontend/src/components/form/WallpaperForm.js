@@ -33,6 +33,10 @@ const WallpaperForm = ({ defaultWallpaper }) => {
         }
     }, [defaultWallpaper])
 
+    const removeClassError = (err) => {
+        setEmptyFields(emptyFields.filter((error) => error !== err))
+    }
+
     const handleSubmit = async (e) => {
         setIsPending(true)
         e.preventDefault();
@@ -51,7 +55,6 @@ const WallpaperForm = ({ defaultWallpaper }) => {
         if (!response.ok) {
             setError(json.error);
             setEmptyFields(json.emptyFields);
-            console.log(json)
         }
         else if (method === "POST") {
             dispatch({type: 'SET_NO_MORE_LOAD', payload: false});
@@ -78,6 +81,7 @@ const WallpaperForm = ({ defaultWallpaper }) => {
                     onChange={(e) => setTitle(e.target.value)}
                     value={title}
                     className={emptyFields.includes('title') ? 'error' : ''}
+                    onClick={() => removeClassError("title")}
                 />
 
                 <label>Src :</label>
@@ -86,6 +90,7 @@ const WallpaperForm = ({ defaultWallpaper }) => {
                     onChange={(e) => setSrc(e.target.value)}
                     value={src}
                     className={emptyFields.includes('src') ? 'error' : ''}
+                    onClick={() => removeClassError("src")}
                 />
                 
                 <label>Title Color:</label>
@@ -93,6 +98,7 @@ const WallpaperForm = ({ defaultWallpaper }) => {
                     onChange={(e) => setTitleColor(e.target.value)}
                     value={titleColor}
                     className={emptyFields.includes('titleColor') ? 'error' : ''}
+                    onClick={() => removeClassError("titleColor")}
                 >
                     <option value='' hidden disabled>Select one Color</option>
                     {titleColors && titleColors.map((color) => (

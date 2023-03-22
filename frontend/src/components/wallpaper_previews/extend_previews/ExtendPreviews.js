@@ -28,7 +28,6 @@ const ExtendPreviews = ({ x, title }) => {
 
         if (response.ok) {
             if (json.length < x) {
-                console.log(json.length);
                 dispatch({type: 'SET_NO_MORE_LOAD', payload: true});
             }
             dispatch({type: 'MERGE_WALLPAPER', payload: json});
@@ -51,9 +50,9 @@ const ExtendPreviews = ({ x, title }) => {
             ))}
             {
                 noMoreLoad ? 
-                    isLoading && <h1 className="noMoreContent">There is no more content to pull</h1>
+                    <h1 className="noMoreContent">There is no more content to pull</h1>
                 :
-                    <ButtonLoadMore loadMore={fetchXWallpaper} x={x} />
+                    !isLoading && <ButtonLoadMore loadMore={fetchXWallpaper} x={x} />
             }
         </div>
     )

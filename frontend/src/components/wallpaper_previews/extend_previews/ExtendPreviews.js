@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PreviewBoxDetails from "./PreviewBoxDetails";
 import ButtonLoadMore from "../../buttons/ButtonLoadMore";
-import { useWallpaperContext } from "../../../hooks/context/useWallpaperContext";
+import { useWallpaperContext } from "../../../hooks/wallpaper/useWallpaperContext";
 // css
 import "../../../css/previews.css";
 

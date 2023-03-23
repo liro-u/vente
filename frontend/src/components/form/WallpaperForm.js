@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import PreviewBoxDetails from "../../components/wallpaper_previews/extend_previews/PreviewBoxDetails";
-import { useWallpaperContext } from "../../hooks/context/useWallpaperContext";
+import { useWallpaperContext } from "../../hooks/wallpaper/useWallpaperContext";
+import { useAuthContext } from "../../hooks/auth/useAuthContext";
 
 //css
 import "../../css/previews.css";
 import "../../css/form.css";
 
 const WallpaperForm = ({ defaultWallpaper }) => {
+    const {user} = useAuthContext();
     const { dispatch } = useWallpaperContext();
     const [isPending, setIsPending] = useState(false)
 
@@ -21,7 +23,6 @@ const WallpaperForm = ({ defaultWallpaper }) => {
     const [title, setTitle] = useState("");
     const [src, setSrc] = useState("");
     const [titleColor, setTitleColor] = useState("");
-    const [artistId, setArtistId] = useState("liro_u");
 
     useEffect(() => {
         if (defaultWallpaper) {
@@ -38,16 +39,22 @@ const WallpaperForm = ({ defaultWallpaper }) => {
     }
 
     const handleSubmit = async (e) => {
+        if (!user){
+            setError('You must be logged in')
+            return
+        }
+
         setIsPending(true)
         e.preventDefault();
 
-        const wallpaper = {title, titleColor, artistId, imageLink : src};
+        const wallpaper = {title, titleColor, imageLink : src};
 
         const response = await fetch(url, {
             method,
             body: JSON.stringify(wallpaper),
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Baerer ${user.token}`
             }
         })
         const json = await response.json();
@@ -111,9 +118,9 @@ const WallpaperForm = ({ defaultWallpaper }) => {
                 
             </form>
 
-            {src && 
+            {src && user &&
                 <div className="previewContainer">
-                    <PreviewBoxDetails disabled="true" wallpaper={{title, titleColor, artistId, imageLink : src}} />
+                    <PreviewBoxDetails disabled="true" wallpaper={{title, titleColor, pseudo: user.pseudo, imageLink : src}} />
                     <PreviewBoxDetails disabled="true" wallpaper={{title : "this is a preview, this way, you can see how your wallpaper will appear", titleColor : "negative-default", artistId : "the dev ;)", imageLink : "https://i.pinimg.com/originals/df/4b/d4/df4bd4aace0964217d5a660be614a247.jpg"}} />
                 </div>
             }

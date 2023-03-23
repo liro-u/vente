@@ -1,5 +1,5 @@
 // components
-import ExtendPreviews from "../components/wallpaper_previews/extend_previews/ExtendPreviews";
+import ExtendPreviews from "../../components/wallpaper_previews/extend_previews/ExtendPreviews";
 
 const Discovery = () => {
     return (

@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from 'react-router-dom';
+import { useAuthContext } from "../hooks/auth/useAuthContext";
+import { useLogout } from '../hooks/auth/useLogout';
 
 // components
 import AnimatedLogo from "./animations/Logo";
@@ -12,6 +14,10 @@ const Navbar = () => {
     const [height, setHeight] = useState(0);
     
     const ref = useRef(null);
+
+    const { user } = useAuthContext();
+    const { logout } = useLogout();
+
 
     useEffect(() => {
         let posBar = window.scrollY;
@@ -55,12 +61,19 @@ const Navbar = () => {
                 </ul>
             </div>
 
-            <div className="containerIcon">
-                <Link to="/wallpaper/publish"><ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">add</span></ButtonUnderline></Link>
-                <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">shopping_bag</span></ButtonUnderline>
-                <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">bookmark</span></ButtonUnderline>
-                <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">person</span></ButtonUnderline>
-            </div>
+            {user ?
+                <div className="containerIcon">
+                    <Link to="/wallpaper/publish"><ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">add</span></ButtonUnderline></Link>
+                    <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">shopping_bag</span></ButtonUnderline>
+                    <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">bookmark</span></ButtonUnderline>
+                    <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span onClick={logout} className="material-symbols-outlined icon">person</span></ButtonUnderline>
+                </div>
+                :
+                <div className="auth" >
+                    <Link to="/login" className="cancelLinkCss" ><ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2">Login</ButtonUnderline></Link>
+                    <Link to="/signup"className="cancelLinkCss" ><ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2">Signup</ButtonUnderline></Link>
+                </div>
+            }
         </header>
 
     )

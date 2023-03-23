@@ -1,41 +1,55 @@
 import React from 'react';
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { useAuthContext } from './hooks/auth/useAuthContext';
 
 // css
 import './themes/default.css';
 import './css/buttons.css';
 
-// pages
+// PAGES
+//auth
+import Signup from './pages/auth/Signup';
+import Login from './pages/auth/Login';
+//all
 import Home from './pages/Home';
 import Contact from './pages/Contact';
-import Discovery from './pages/Discovery';
-import Collections from './pages/Collections';
-import PublishWallpaper from './pages/PublishWallpaper';
-
-// collections
+//wallpapers
+import Discovery from './pages/wallpapers/Discovery';
+import Collections from './pages/wallpapers/Collections';
+import PublishWallpaper from './pages/wallpapers/PublishWallpaper';
+import EditWallpaper from './pages/wallpapers/EditWallpaper';
+//collections
 import ThemeLOL from './pages/collections/ThemeLOL';
 
 // component
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
-import EditWallpaper from './pages/EditWallpaper';
 
 
 function App() {
+  const { user } = useAuthContext();
+
   return (
     <div className="app defaultFontColor">
       <HashRouter>
         <Navbar />
         <div className='pages'>
           <Routes>
+            {/* AUTH */}
+            <Route exact path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+            <Route exact path="/signup" element={user ? <Navigate to="/" /> : <Signup />} />
+
+            {/* ALL */}
             <Route exact path="/" element={<Home />} />
             <Route exact path="/contact" element={<Contact />} />
+
+            {/* WALLPAPERS */}
             <Route exact path="/wallpaper/discovery" element={<Discovery />} />
             <Route exact path="/wallpaper/collections" element={<Collections />} />
+            <Route exact path="/wallpaper/publish" element={user ? <PublishWallpaper /> : <Navigate to="/" />} />
+            <Route exact path="/wallpaper/edit/:id" element={user ? <EditWallpaper /> : <Navigate to="/" />} />
 
-            <Route exact path="/wallpaper/publish" element={<PublishWallpaper />} />
-            <Route exact path="/wallpaper/edit/:id" element={<EditWallpaper />} />
-
+            {/* COLLECTIONS */}
             <Route exact path="/wallpaper/collections/lol" element={<ThemeLOL />} />
           </Routes>
         </div>

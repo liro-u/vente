@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import WallpaperForm from "../components/form/WallpaperForm";
+import WallpaperForm from "../../components/form/WallpaperForm";
 
 const EditWallpaper = () => {
     const params = useParams();

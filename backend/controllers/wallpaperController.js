@@ -47,7 +47,8 @@ const getXWallpapers = async (req, res) => {
 
 // POST a new Wallpaper
 const createWallpaper = async (req, res) => {
-    const {imageLink, artistId, title, titleColor } = req.body;
+    const user = req.user;
+    const {imageLink, title, titleColor } = req.body;
 
     let emptyFields = [];
 
@@ -56,9 +57,6 @@ const createWallpaper = async (req, res) => {
     }
     if (!imageLink) {
         emptyFields.push('src')
-    }
-    if (!artistId) {
-        emptyFields.push('artist');
     }
     if (!titleColor) {
         emptyFields.push('titleColor')
@@ -69,7 +67,7 @@ const createWallpaper = async (req, res) => {
 
     // add doc to db
     try {
-        const wallpaper = await Wallpaper.create({ imageLink, artistId: "liro_u", title, titleColor });
+        const wallpaper = await Wallpaper.create({ imageLink, artistId: user.pseudo, title, titleColor });
         res.status(200).json(wallpaper);
     }
     catch (err) {

@@ -49,19 +49,26 @@
 
 .extendPreviews .iconBox{
     width: 100%;
+    transition: all 1s;
+    overflow: hidden;
+}
+
+.extendPreviews .flexIconBox{
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 1s;
-    overflow: hidden;
 }
 
 
 /* publish */
 .publishWallpaper, .editWallpaper{
-    height: 100%;
+    min-height: 100%;
 }
 
 .publishWallpaper .previewContainer, .editWallpaper .previewContainer{
     margin-top: 50px;
+}
+
+.wallpaperForm{
+    padding-bottom: 20px;
 }

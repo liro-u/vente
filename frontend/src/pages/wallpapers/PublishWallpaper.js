@@ -1,5 +1,5 @@
 import React from "react";
-import WallpaperForm from "../components/form/WallpaperForm";
+import WallpaperForm from "../../components/form/WallpaperForm";
 
 const PublishWallpaper = () => {
     

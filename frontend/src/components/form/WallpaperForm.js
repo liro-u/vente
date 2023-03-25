@@ -49,6 +49,7 @@ const WallpaperForm = ({ defaultWallpaper }) => {
 
         const wallpaper = {title, titleColor, imageLink : src};
 
+        console.log(wallpaper)
         const response = await fetch(url, {
             method,
             body: JSON.stringify(wallpaper),

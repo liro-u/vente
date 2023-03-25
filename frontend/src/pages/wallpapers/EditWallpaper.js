@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import WallpaperForm from "../../components/form/WallpaperForm";
+import { useAuthContext } from "../../hooks/auth/useAuthContext";
 
 const EditWallpaper = () => {
+    const {user} = useAuthContext();
     const params = useParams();
     const [wallpaper, setWallpaper] = useState(null)
+    const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
         const fetchWallpaper = async (id) => {
@@ -13,12 +16,16 @@ const EditWallpaper = () => {
     
             if (response.ok) {
                 setWallpaper(json)
+                if (!(user.role === 'admin' || wallpaper.artistId === user._id)) {
+                    setRedirect(true)
+                }
             }
         }
         fetchWallpaper(params.id);
-    }, [params.id])
+    }, [params.id, user, wallpaper])
     return (
         <div className="editWallpaper extendPreviewsCTN darkSecondaryColor negativeDefaultFontColor">
+            {redirect && <Navigate to="/" />}
             <h1 className="pageTitle">Edit a Wallpaper</h1>
             <WallpaperForm defaultWallpaper = {wallpaper} />
         </div>

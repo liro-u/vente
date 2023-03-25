@@ -56,15 +56,20 @@ const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
             if (window.confirm("Do you really want to delete this wallpaper ?")) {
                 const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/' + wallpaper._id, {
                     method: 'DELETE',
-                    'Authorization': `Baerer ${user.token}`
+                    headers: {
+                        'Authorization': `Baerer ${user.token}`
+                    }
                 })
                 const json = await response.json();
         
                 if (response.ok) {
                     dispatch({type: 'DELETE_WALLPAPER', payload: json});
                 }else{
-                    // if not found on db, delete anyway because maybe was delete by someone else
-                    dispatch({type: 'DELETE_WALLPAPER', payload: wallpaper});
+                    console.log(json)
+                    if (json.error !== "request is not authorized") {
+                        // if not found on db, delete anyway because maybe was delete by someone else
+                        dispatch({type: 'DELETE_WALLPAPER', payload: wallpaper});
+                    }
                 }
             }
             setIsPending(false)
@@ -92,7 +97,7 @@ const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
             >
                 <div className="details bottom">
                     <TextApparition visibleClass="showByLeft" hiddenClass="showByLeftBefore">
-                        <h1 className={titleColor}>{wallpaper.title && wallpaper.title + " - "}{wallpaper.artistId}</h1>
+                        <h1 className={titleColor}>{wallpaper.title && wallpaper.title + " - "}{wallpaper.pseudo}</h1>
                     </TextApparition>
                 </div>
             </div>
@@ -108,7 +113,7 @@ const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
                     <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">favorite</span></ButtonUnderline>
                 </div>}
                 <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span onClick={download} className="material-symbols-outlined icon iconFilled">download</span></ButtonUnderline>
-                {user && <div className="flexIconBox">
+                {user && (user.role === 'admin' || (user.role === 'artist' && user._id === wallpaper.artistId)) && <div className="flexIconBox">
                     {isPending ?
                         <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">edit</span></ButtonUnderline>
                         :

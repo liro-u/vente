@@ -20,6 +20,8 @@ import PublishWallpaper from './pages/wallpapers/PublishWallpaper';
 import EditWallpaper from './pages/wallpapers/EditWallpaper';
 //collections
 import ThemeLOL from './pages/collections/ThemeLOL';
+//debug
+import DebugDb from './pages/debug/DebugDb';
 
 // component
 import Footer from './components/Footer';
@@ -46,11 +48,14 @@ function App() {
             {/* WALLPAPERS */}
             <Route exact path="/wallpaper/discovery" element={<Discovery />} />
             <Route exact path="/wallpaper/collections" element={<Collections />} />
-            <Route exact path="/wallpaper/publish" element={user ? <PublishWallpaper /> : <Navigate to="/" />} />
-            <Route exact path="/wallpaper/edit/:id" element={user ? <EditWallpaper /> : <Navigate to="/" />} />
+            <Route exact path="/wallpaper/publish" element={(user && (user.role === 'admin' || user.role === 'artist')) ? <PublishWallpaper /> : <Navigate to="/" />} />
+            <Route exact path="/wallpaper/edit/:id" element={(user && (user.role === 'admin' || user.role === 'artist')) ? <EditWallpaper /> : <Navigate to="/" />} />
 
             {/* COLLECTIONS */}
             <Route exact path="/wallpaper/collections/lol" element={<ThemeLOL />} />
+
+            {/* DEBUG */}
+            <Route exact path="/debug/db" element={(user && user.role === 'admin') ? <DebugDb /> : <Navigate to="/" />} />
           </Routes>
         </div>
         <Footer />

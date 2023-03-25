@@ -52,7 +52,7 @@ const FlipCard = ({id}) => {
                     </div>
 
                     <div className="referenceContainer">
-                        <p className="reference"> Author : {wallpaper.artistId}</p>
+                        <p className="reference"> Author : {wallpaper.pseudo}</p>
                         <p className="reference"> Published {formatDistanceToNow(new Date(wallpaper.createdAt), { addSuffix: true })}</p>
                     </div>
 

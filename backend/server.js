@@ -8,6 +8,7 @@ import cors from 'cors';
 // routes
 import wallpaperRoutes from './routes/wallpaperRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import debugRoutes from './routes/debugRoutes.js'
 
 // express app
 const app = express();
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
 // routes
 app.use('/api/wallpapers', wallpaperRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/debug', debugRoutes);
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true})

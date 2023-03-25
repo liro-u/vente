@@ -7,7 +7,7 @@ const wallpaperSchema = new mongoose.Schema({
         unique: true
     },
     artistId: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     },
     title: {

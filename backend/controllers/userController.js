@@ -41,6 +41,8 @@ const loginUser = async (req, res) => {
 
         res.status(200).json({
             pseudo: user.pseudo,
+            role: user.role,
+            _id: user._id,
             token
         })
     }
@@ -55,13 +57,15 @@ const signupUser = async (req, res) => {
     const { email, password } = req.body;
     
     try {
-        const user = await User.create({email, password, pseudo: "liro_u"});
+        const user = await User.create({email, password, pseudo: "liro_u", role: "user"});
 
         // create token
         const token = createToken(user._id);
         
         res.status(200).json({
             pseudo: user.pseudo,
+            role: user.role,
+            _id: user._id,
             token
         })
     }

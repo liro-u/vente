@@ -3,6 +3,12 @@ import validator from 'validator';
 const { isEmail, isStrongPassword } = validator;
 import bcrypt from 'bcrypt';
 
+const ROLES = ['admin', 'artist', 'user'];
+
+const isRole = (role) => {
+    return ROLES.includes(role);
+}
+
 const userSchema = new mongoose.Schema({
     email: {
         type: String,
@@ -18,6 +24,11 @@ const userSchema = new mongoose.Schema({
     pseudo: {
         type: String,
         required: [true, 'Please enter a pseudo'],
+    },
+    role: {
+        type: String,
+        required: [true, 'Please enter a role'],
+        validate: [isRole, 'Please choose a real role']
     }
 }, { timestamps: true });
 
@@ -42,6 +53,7 @@ userSchema.statics.login = async function(email, password) {
     throw Error('incorrect');
 }
 
+userSchema.statics.ROLES = ROLES;
 
 const User = mongoose.model('user', userSchema);
 

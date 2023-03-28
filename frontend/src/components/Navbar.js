@@ -19,60 +19,100 @@ const Navbar = () => {
     const { logout } = useLogout();
     const { height, visible, dispatch } = useNavbarContext();
 
+    const [isOver, setIsOver] = useState(false);
+
+    const onMouseOver = async() => {
+        setIsOver(true);
+    }
+
+    const onMouseOut = async() => {
+        setIsOver(false);
+    }
+
+
     useEffect(() => {
         let posBar = window.scrollY;
-        dispatch({type: 'SET_HEIGHT', payload: ref.current.offsetHeight});
-        window.addEventListener('scroll',  function () {
-            dispatch({type: 'SET_HEIGHT', payload: ref.current.offsetHeight});
+        const HoverBackground = () => {
             const posBarAtm = window.scrollY;
-            // position transition
-            if (posBar > posBarAtm) {
-                setOffset(0);
-            } else {
-                setOffset(-height);
-            }
-            // color transition
+
             if (posBarAtm === 0) {
-                setBackgroundColor("transparent");
+                if (isOver) {
+                    setBackgroundColor("var(--light-primary)");
+                } else {
+                    setBackgroundColor("transparent");
+                }
+
             } else {
                 setBackgroundColor("var(--light-primary)");
             }
-            posBar = posBarAtm;
-        })
-    }, [height])
+        }
+        const updatePos = () => {
+            const posBarAtm = window.scrollY;
+            // position transition
+            if (posBar >= posBarAtm && visible) {
+                setOffset(0);
 
-    
+            } else {
+                setOffset(-height);
+            }
+            posBar = posBarAtm;
+        }
+        window.addEventListener('scroll', function () {
+            updatePos();
+            HoverBackground();
+        })
+        dispatch({type: 'SET_HEIGHT', payload: ref.current.offsetHeight});
+        HoverBackground();
+        updatePos();
+
+    }, [height, isOver, visible])
+
 
     return (
-        <header 
-            className="primaryColor navbar"
+        <header
+            className="primaryColor navbar "
             ref={ref}
+            onMouseEnter={onMouseOver}
+            onMouseLeave={onMouseOut}
             style={{
                 top: offset + "px",
                 backgroundColor: backgroundColor
             }}
         >
-            <Link to="/" className="cancelLinkCss logoContainer"><AnimatedLogo /></Link>
+            <Link to="/" className="cancelLinkCss logoContainer"><AnimatedLogo/></Link>
 
             <div className="liens">
                 <ul>
-                    <li><Link to="/wallpaper/discovery" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="">Discovery</ButtonBorderAnimated>  </Link></li>
-                    <li><Link to="/wallpaper/collections" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="">Collections</ButtonBorderAnimated> </Link></li>
-                    <li><Link to="" className ="bouton cancelLinkCss"> <ButtonBorderAnimated className="">Artists</ButtonBorderAnimated> </Link></li>
+                    <li><Link to="/wallpaper/discovery" className="bouton cancelLinkCss"> <ButtonBorderAnimated
+                        className="">Discovery</ButtonBorderAnimated> </Link></li>
+                    <li><Link to="/wallpaper/collections" className="bouton cancelLinkCss"> <ButtonBorderAnimated
+                        className="">Collections</ButtonBorderAnimated> </Link></li>
+                    <li><Link to="" className="bouton cancelLinkCss"> <ButtonBorderAnimated
+                        className="">Artists</ButtonBorderAnimated> </Link></li>
                 </ul>
             </div>
 
             {user ?
                 <div className="containerIcon">
-                    {(user.role === 'admin' || user.role === 'artist') && <Link to="/wallpaper/publish"><ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">add</span></ButtonUnderline></Link>}
-                    <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">shopping_bag</span></ButtonUnderline>
-                    <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon">bookmark</span></ButtonUnderline>
-                    <ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2"><span onClick={logout} className="material-symbols-outlined icon">person</span></ButtonUnderline>
+                    {(user.role === 'admin' || user.role === 'artist') &&
+                        <Link to="/wallpaper/publish"><ButtonUnderline underlineClassName="" textColorOver="primaryFont"
+                                                                       time="0.2"><span
+                            className="material-symbols-outlined icon">add</span></ButtonUnderline></Link>}
+                    <ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span
+                        className="material-symbols-outlined icon">shopping_bag</span></ButtonUnderline>
+                    <ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span
+                        className="material-symbols-outlined icon">bookmark</span></ButtonUnderline>
+                    <ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span onClick={logout}
+                                                                                                        className="material-symbols-outlined icon">person</span></ButtonUnderline>
                 </div>
                 :
-                <div className="auth" >
-                    <Link to="/login" className="cancelLinkCss" ><ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2">Login</ButtonUnderline></Link>
-                    <Link to="/signup"className="cancelLinkCss" ><ButtonUnderline underlineClassName = "" textColorOver = "primaryFont" time="0.2">Signup</ButtonUnderline></Link>
+                <div className="auth">
+                    <Link to="/login" className="cancelLinkCss"><ButtonUnderline underlineClassName=""
+                                                                                 textColorOver="primaryFont"
+                                                                                 time="0.2">Login</ButtonUnderline></Link>
+                    <Link to="/signup" className="cancelLinkCss"><ButtonUnderline underlineClassName=""
+                                                                                  textColorOver="primaryFont"
+                                                                                  time="0.2">Signup</ButtonUnderline></Link>
                 </div>
             }
         </header>

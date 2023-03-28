@@ -7,11 +7,13 @@ label, input, select {
     display: block;
 }
 
-input, select {
+form input, form select, form textarea {
     padding: 10px;
     margin-top: 10px;
     margin-bottom: 20px;
     width: 100%;
+    min-width: 100%;
+    max-width: 100%;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-family: "Fira Mono";

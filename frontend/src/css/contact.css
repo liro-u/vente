@@ -1,10 +1,18 @@
 .contact{
+    position: absolute;
     height: 100%;
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 1fr;
     flex-direction: row;
     color: var(--negative-text-color);
+    background-size: cover;
+    z-index: 55;
+    transition: all 1s;
+}
+
+.contact .hideContact{
+    cursor: pointer;
 }
 
 .contact .container {
@@ -27,4 +35,8 @@
 
 .contact .info {
     margin-top: 30px;
+}
+
+.contact form{
+    pointer-events: all;
 }

@@ -12,7 +12,6 @@ import Signup from './pages/auth/Signup';
 import Login from './pages/auth/Login';
 //all
 import Home from './pages/Home';
-import Contact from './pages/Contact';
 //wallpapers
 import Discovery from './pages/wallpapers/Discovery';
 import Collections from './pages/wallpapers/Collections';
@@ -43,7 +42,6 @@ function App() {
 
             {/* ALL */}
             <Route exact path="/" element={<Home />} />
-            <Route exact path="/contact" element={<Contact />} />
 
             {/* WALLPAPERS */}
             <Route exact path="/wallpaper/discovery" element={<Discovery />} />

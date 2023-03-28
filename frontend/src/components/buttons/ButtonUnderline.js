@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-const ButtonUnderline = ({ children, className , underlineClassName = "lightPrimaryColor", textColorOut = "defaultFontColor", textColorOver = "defaultFontColor", time = 1, borderHeight = 3}) => {
+const ButtonUnderline = ({ children, onClick,  className , underlineClassName = "lightPrimaryColor", textColorOut = "defaultFontColor", textColorOver = "defaultFontColor", time = 1, borderHeight = 3}) => {
     const [progress, setProgress] = useState(0);
     const [textColor, setTextColor] = useState(textColorOut);
 
@@ -24,6 +24,7 @@ const ButtonUnderline = ({ children, className , underlineClassName = "lightPrim
             className={"buttonUnderline " + className}
             onMouseEnter={onMouseOver}
             onMouseLeave={onMouseOut}
+            onClick={onClick}
         >
             <div 
                 className={textColor}

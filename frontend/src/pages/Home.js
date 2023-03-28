@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // css
 import "../css/home.css";
@@ -9,8 +9,15 @@ import { Link } from "react-router-dom";
 import TextApparition from "../components/animations/TextApparition";
 import DelayAnimation from "../components/animations/DelayAnimation";
 import OrbsParticles from "../components/particles/OrbsParticles";
+import Contact from './../components/Contact';
 
 const Home = () => {
+
+    const [contactIsShow, setContactIsShow] = useState(false)
+
+    const toggleShowContact = () => {
+        setContactIsShow(!contactIsShow)
+    }
 
     return (
         <div className="home">
@@ -28,10 +35,11 @@ const Home = () => {
                     <TextApparition style={{display: "flex"}}>
 
                         <Link to="/wallpaper/discovery" className="cancelLinkCss"><ButtonUnderline className="secondaryColor" underlineClassName="lightPrimaryColor" textColorOver="lightPrimaryFont" time="0.2" borderHeight="2">View Gallery</ButtonUnderline></Link>
-                        <Link to="/contact" className="cancelLinkCss"><ButtonUnderline underlineClassName="lightPrimaryColor" time="0.2" borderHeight="2">Contact us ➡</ButtonUnderline></Link>
+                        <ButtonUnderline onClick={toggleShowContact} underlineClassName="lightPrimaryColor" time="0.2" borderHeight="2">Contact us ➡</ButtonUnderline>
                     </TextApparition>
                 </DelayAnimation>
             </div>
+            <Contact contactIsShow={contactIsShow} hide={toggleShowContact}/>
         </div>
     )
 }

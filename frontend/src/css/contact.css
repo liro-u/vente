@@ -7,7 +7,7 @@
     flex-direction: row;
     color: var(--negative-text-color);
     background-size: cover;
-    z-index: 55;
+    z-index: 155;
     transition: all 1s;
 }
 

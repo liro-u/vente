@@ -10,12 +10,14 @@ import TextApparition from "../components/animations/TextApparition";
 import DelayAnimation from "../components/animations/DelayAnimation";
 import OrbsParticles from "../components/particles/OrbsParticles";
 import Contact from './../components/Contact';
+import { useNavbarContext } from "../hooks/navbar/useNavbarContext";
 
 const Home = () => {
-
+    const {dispatch} = useNavbarContext();
     const [contactIsShow, setContactIsShow] = useState(false)
 
     const toggleShowContact = () => {
+        dispatch({type: 'SET_VISIBILITY', payload: contactIsShow});
         setContactIsShow(!contactIsShow)
     }
 

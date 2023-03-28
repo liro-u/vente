@@ -22,7 +22,7 @@ export const navbarReducer = (state, action) => {
 export const NavbarContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(navbarReducer, {
         height: 0,
-        visible: false,
+        visible: true,
     })
         
     return (

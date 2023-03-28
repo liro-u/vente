@@ -12,7 +12,7 @@ const ThemeLOL = () => {
 
     return (
 
-        <div className="pages" style={{
+        <div className="themeLol" style={{
             backgroundImage: `url("/wallpaper/FongImgThemeLol.png")`
         }}>
             <OrbsParticles ParticlesOnScreen="50" size = {{min: 3, max: 10}} speedX = {{min: -1.5, max: 1.5}} speedY = {{min: -1.5, max: 1.5}} lifeTime="20" zindex="0"/>

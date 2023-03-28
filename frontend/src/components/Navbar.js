@@ -95,24 +95,17 @@ const Navbar = () => {
             {user ?
                 <div className="containerIcon">
                     {(user.role === 'admin' || user.role === 'artist') &&
-                        <Link to="/wallpaper/publish"><ButtonUnderline underlineClassName="" textColorOver="primaryFont"
-                                                                       time="0.2"><span
-                            className="material-symbols-outlined icon">add</span></ButtonUnderline></Link>}
-                    <ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span
-                        className="material-symbols-outlined icon">shopping_bag</span></ButtonUnderline>
-                    <ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span
-                        className="material-symbols-outlined icon">bookmark</span></ButtonUnderline>
+                    
+                    <Link to="/wallpaper/publish"><ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span className="material-symbols-outlined icon">add</span></ButtonUnderline></Link>}
+                    <ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span className="material-symbols-outlined icon">shopping_bag</span></ButtonUnderline>
+                    <ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span className="material-symbols-outlined icon">bookmark</span></ButtonUnderline>
                     <ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span onClick={logout}
                                                                                                         className="material-symbols-outlined icon">person</span></ButtonUnderline>
                 </div>
                 :
                 <div className="auth">
-                    <Link to="/login" className="cancelLinkCss"><ButtonUnderline underlineClassName=""
-                                                                                 textColorOver="primaryFont"
-                                                                                 time="0.2">Login</ButtonUnderline></Link>
-                    <Link to="/signup" className="cancelLinkCss"><ButtonUnderline underlineClassName=""
-                                                                                  textColorOver="primaryFont"
-                                                                                  time="0.2">Signup</ButtonUnderline></Link>
+                    <Link to="/login" className="cancelLinkCss"><ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2">Login</ButtonUnderline></Link>
+                    <Link to="/signup" className="cancelLinkCss"><ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2">Signup</ButtonUnderline></Link>
                 </div>
             }
         </header>

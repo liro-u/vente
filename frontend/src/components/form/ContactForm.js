@@ -25,7 +25,7 @@ const ContactForm = () => {
     useEffect(() => {
         if (user){
             if (user.role === 'user'){
-                //objects.push('Become an official artist')
+                // objects.push('Become an official artist')
             }
         }else{
             // remove all things that we have add

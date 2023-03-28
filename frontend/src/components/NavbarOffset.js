@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useNavbarContext } from "../hooks/navbar/useNavbarContext";
 
 const NavbarOffset = () => {
-    const [offset, setOffset] = useState(0);
-
-    useEffect(() => {
-        setOffset(document.querySelector("header.navbar").offsetHeight)
-    }, []);
+    const {height} = useNavbarContext();
 
     return (
         <div
             className="navbarOffset"
             style={{
-                paddingBottom: offset
+                paddingBottom: height
             }}
         >
 

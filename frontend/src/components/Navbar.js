@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from 'react-router-dom';
 import { useAuthContext } from "../hooks/auth/useAuthContext";
+import { useNavbarContext } from "../hooks/navbar/useNavbarContext";
 import { useLogout } from '../hooks/auth/useLogout';
 
 // components
@@ -11,18 +12,18 @@ import ButtonUnderline from "./buttons/ButtonUnderline";
 const Navbar = () => {
     const [offset, setOffset] = useState(0);
     const [backgroundColor, setBackgroundColor] = useState("transparent");
-    const [height, setHeight] = useState(0);
     
     const ref = useRef(null);
 
     const { user } = useAuthContext();
     const { logout } = useLogout();
-
+    const { height, visible, dispatch } = useNavbarContext();
 
     useEffect(() => {
         let posBar = window.scrollY;
+        dispatch({type: 'SET_HEIGHT', payload: ref.current.offsetHeight});
         window.addEventListener('scroll',  function () {
-            setHeight(ref.current.offsetHeight)
+            dispatch({type: 'SET_HEIGHT', payload: ref.current.offsetHeight});
             const posBarAtm = window.scrollY;
             // position transition
             if (posBar > posBarAtm) {

@@ -6,6 +6,7 @@ import {useParams} from "react-router-dom";
 import {useNavbarContext} from "../hooks/navbar/useNavbarContext";
 //css
 import "../css/DetailsPurchase.css"
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 
 const DetailsPurchase = () => {
@@ -72,12 +73,14 @@ const DetailsPurchase = () => {
                 }}>
 
                     <NavbarOffset/>
-                        <span className="material-symbols-outlined iconVisi" onClick={handleClick}> {icon} </span>
+                    <span className="material-symbols-outlined iconVisi" onClick={handleClick}> {icon} </span>
 
 
                     <div className="details" style={{visibility: visibility}}>
 
-                        <h1>{wallpaper.title}</h1>
+                        <h1 className="Answer"> I see you, wretched creature ! </h1>
+                        <h2 className="Title">{wallpaper.title}</h2>
+
 
                         <select name="type" onChange={ChangeType}>
                             <option value="">--Please choose an option--</option>
@@ -100,8 +103,12 @@ const DetailsPurchase = () => {
                                 Ajouter aux panier
                             </button>
 
-                        </div>
 
+                        </div>
+                        <div className="reference">
+                            <p>Author : {wallpaper.pseudo}</p>
+                            <p>Published : {formatDistanceToNow(new Date(wallpaper.createdAt), {addSuffix: true})} </p>
+                        </div>
 
                     </div>
 

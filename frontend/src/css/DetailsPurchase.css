@@ -7,11 +7,11 @@
 
 .ContainerDetailsPurchase .iconVisi{
     position: absolute;
-    right: 20px;
-    z-index: 101;
+    right: 3%;
+    top: 10%;
     border: solid ;
-    border-radius: 5px;
-    padding : 5px
+    border-radius: 10px;
+    padding : 10px;
 }
 
 .ContainerDetailsPurchase, .ContainerDetailsPurchase .DetailsPurchase{
@@ -24,4 +24,24 @@
     background-position: center;
     
 
+}
+
+.ContainerDetailsPurchase .Title{
+    font-size: 2vw;
+}
+
+.ContainerDetailsPurchase .Answer{
+    font-size: 3vw;
+}
+
+.ContainerDetailsPurchase .details{
+    margin-left: 9%;
+    margin-top: 5%;
+    width: 20%;
+    height: 80%;
+}
+
+.ContainerDetailsPurchase .reference{
+    position: absolute;
+    bottom: 0;
 }

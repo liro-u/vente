@@ -21,6 +21,8 @@ import EditWallpaper from './pages/wallpapers/EditWallpaper';
 import ThemeLOL from './pages/collections/ThemeLOL';
 //debug
 import DebugDb from './pages/debug/DebugDb';
+//purchase
+import DetailsPurchase from "./components/DetailsPurchase";
 
 // component
 import Footer from './components/Footer';
@@ -51,6 +53,9 @@ function App() {
 
             {/* COLLECTIONS */}
             <Route exact path="/wallpaper/collections/lol" element={<ThemeLOL />} />
+
+            {/* PURCHASE */}
+            <Route exact path="/wallpaper/detailspurchase/:id" element={(user && (user.role === 'admin' || user.role === 'artist')) ? <DetailsPurchase /> : <Navigate to="/" />} />
 
             {/* DEBUG */}
             <Route exact path="/debug/db" element={(user && user.role === 'admin') ? <DebugDb /> : <Navigate to="/" />} />

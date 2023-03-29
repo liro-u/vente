@@ -3,28 +3,21 @@ import ButtonUnderline from "../buttons/ButtonUnderline";
 import {Link} from "react-router-dom";
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
-// css
-import "../../css/ThemeLol.css"
 
 const FlipCard = ({id}) => {
 
     const [wallpaper, setWallpaper] = useState(null)
     const container = useRef(null);
     const [height, setHeight] = useState(0);
-    /* const [width, setWidth] = useState(0); */
     const TailleImg = useRef(null);
-
 
 
     const handleClick = () => {
         container.current.classList.toggle('flipCard');
-
-        /* jE SAIS pas comment setheight et width des le debut pour l'instant faut cliquer une fois*/
-        /* setWidth(TailleImg.current.offsetWidth) */
     };
 
     const handleRes123 = () => {
-        if(TailleImg.current) {
+        if (TailleImg.current) {
             setHeight(TailleImg.current.offsetHeight)
         }
     }
@@ -48,9 +41,10 @@ const FlipCard = ({id}) => {
     return (
         <div className="cardContainer" onClick={handleClick}>
             {wallpaper &&
-                <div className="card" ref={container} style={{height: height /* width : width */}}>
+                <div className="card" ref={container} style={{height: height}}>
                     <div className="flipImg">
-                        <img onLoad={() => (handleRes123())} src={wallpaper.imageLink} alt={wallpaper.title} ref={TailleImg}/>
+                        <img onLoad={() => (handleRes123())} src={wallpaper.imageLink} alt={wallpaper.title}
+                             ref={TailleImg}/>
                     </div>
 
                     <div className="flipContenu">
@@ -59,21 +53,27 @@ const FlipCard = ({id}) => {
                         </div>
 
                         <div className="iconBox">
-                            <ButtonUnderline underlineClassName="" textColorOut="negativeDefaultFontColor"
-                                             textColorOver="primaryFont" time="0.2"><span
-                                className="material-symbols-outlined">shopping_cart</span></ButtonUnderline>
+                            <Link to={"/wallpaper/detailspurchase/" + wallpaper._id}
+                                  className="">
+                                <ButtonUnderline underlineClassName="" textColorOut="negativeDefaultFontColor"
+                                                 textColorOver="primaryFont" time="0.2"><span
+                                    className="material-symbols-outlined">shopping_cart</span></ButtonUnderline></Link>
+
                             <ButtonUnderline underlineClassName="" textColorOut="negativeDefaultFontColor"
                                              textColorOver="primaryFont" time="0.2"><span
                                 className="material-symbols-outlined">favorite</span></ButtonUnderline>
+
                             <ButtonUnderline underlineClassName="" textColorOut="negativeDefaultFontColor"
                                              textColorOver="primaryFont" time="0.2"><span
                                 className="material-symbols-outlined">download</span></ButtonUnderline>
+
                             <Link to={"/wallpaper/edit/" + wallpaper._id}
                                   className="bouton cancelLinkCss"><ButtonUnderline underlineClassName=""
                                                                                     textColorOut="negativeDefaultFontColor"
                                                                                     textColorOver="primaryFont"
                                                                                     time="0.2"><span
                                 className="material-symbols-outlined icon iconFilled">edit</span></ButtonUnderline></Link>
+
                             <ButtonUnderline underlineClassName="" textColorOut="negativeDefaultFontColor"
                                              textColorOver="primaryFont" time="0.2"><span
                                 className="material-symbols-outlined icon iconFilled">delete</span></ButtonUnderline>

@@ -6,7 +6,7 @@ import FlipCard from "../../components/animations/FlipCard";
 import OrbsParticles from "../../components/particles/OrbsParticles";
 
 //css
-
+import "../../css/ThemeLol.css"
 
 const ThemeLOL = () => {
 

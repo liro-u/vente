@@ -23,10 +23,12 @@ import ThemeLOL from './pages/collections/ThemeLOL';
 import DebugDb from './pages/debug/DebugDb';
 //purchase
 import DetailsPurchase from "./components/DetailsPurchase";
+import ShoppingCart from "./components/ShoppingCart";
 
 // component
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+
 
 
 function App() {
@@ -56,6 +58,7 @@ function App() {
 
             {/* PURCHASE */}
             <Route exact path="/wallpaper/detailspurchase/:id" element={<DetailsPurchase />} />
+            <Route exact path="/wallpaper/shoppingcart" element={<ShoppingCart />} />
 
             {/* DEBUG */}
             <Route exact path="/debug/db" element={(user && user.role === 'admin') ? <DebugDb /> : <Navigate to="/" />} />

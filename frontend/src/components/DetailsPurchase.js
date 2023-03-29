@@ -4,6 +4,8 @@ import React, {useEffect, useRef, useState} from "react";
 import NavbarOffset from "./NavbarOffset";
 import {useParams} from "react-router-dom";
 import {useNavbarContext} from "../hooks/navbar/useNavbarContext";
+
+
 //css
 import "../css/DetailsPurchase.css"
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
@@ -20,6 +22,7 @@ const DetailsPurchase = () => {
     const [icon, setIcon] = useState("visibility_off");
     const [displayP, setDisplayW] = useState("none");
     const [displayW, setDisplayP] = useState("none");
+    const [isPending, setIsPending] = useState(false)
 
 
     const handleClick = () => {
@@ -63,6 +66,35 @@ const DetailsPurchase = () => {
         fecthImg(params.id)
     }, [params.id])
 
+    const download = async () => {
+        if (!isPending) {
+            setIsPending(true)
+            const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/download', {
+                method: "POST",
+                body: JSON.stringify({
+                    url: wallpaper.imageLink
+                }),
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            });
+
+            const imageBlog = await response.blob()
+            const imageURL = URL.createObjectURL(imageBlog)
+
+            const link = document.createElement('a')
+            link.href = imageURL;
+            link.download = wallpaper.title + ".jpg";
+
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
+
+            setIsPending(false)
+        }
+    }
+
+
 
     return (
         <div className="ContainerDetailsPurchase">
@@ -90,7 +122,7 @@ const DetailsPurchase = () => {
 
                         <div style={{display: displayW}}>
                             <button className=""
-                                    type="button">
+                                    type="button" onClick={download}>
                                 Download
                             </button>
                         </div>
@@ -99,7 +131,7 @@ const DetailsPurchase = () => {
 
                             <p> 20 BALLESS</p>
                             <button className=" "
-                                    type="button">
+                                    type="button" >
                                 Ajouter aux panier
                             </button>
 

@@ -97,7 +97,7 @@ const Navbar = () => {
                     {(user.role === 'admin' || user.role === 'artist') &&
                     
                     <Link to="/wallpaper/publish"><ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span className="material-symbols-outlined icon">add</span></ButtonUnderline></Link>}
-                    <ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span className="material-symbols-outlined icon">shopping_bag</span></ButtonUnderline>
+                    <Link to="/wallpaper/shoppingcart"> <ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span className="material-symbols-outlined icon">shopping_bag</span></ButtonUnderline></Link>
                     <ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span className="material-symbols-outlined icon">bookmark</span></ButtonUnderline>
                     <ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span onClick={logout}
                                                                                                         className="material-symbols-outlined icon">person</span></ButtonUnderline>

@@ -1,7 +1,7 @@
 .ContainerDetailsPurchase .details{
     position: relative;
     z-index: 101;
-    color: green;
+    color: var(--primary);
 
 }
 

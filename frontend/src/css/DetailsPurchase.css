@@ -1,0 +1,22 @@
+.ContainerDetailsPurchase .details{
+    position: relative;
+    z-index: 101;
+    color: green;
+}
+
+.ContainerDetailsPurchase .iconVisi{
+    position: relative;
+    z-index: 101;
+}
+
+.ContainerDetailsPurchase, .ContainerDetailsPurchase .DetailsPurchase{
+    height: 100%;
+    width: 100%;
+}
+
+.ContainerDetailsPurchase .DetailsPurchase{
+    background-repeat: no-repeat;
+    background-position: center;
+    
+
+}

@@ -6,7 +6,7 @@ import NavbarOffset from "./NavbarOffset";
 import '../css/contact.css';
 
 const Contact = ({contactIsShow, hide}) => {
-    
+
     return (
         <div 
             className="contact"

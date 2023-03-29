@@ -3,10 +3,9 @@ import React, {useEffect, useRef, useState} from "react";
 //Components
 import NavbarOffset from "./NavbarOffset";
 import {useParams} from "react-router-dom";
-import { useNavbarContext } from "../hooks/navbar/useNavbarContext";
+import {useNavbarContext} from "../hooks/navbar/useNavbarContext";
 //css
 import "../css/DetailsPurchase.css"
-
 
 
 const DetailsPurchase = () => {
@@ -16,8 +15,10 @@ const DetailsPurchase = () => {
     const {dispatch} = useNavbarContext();
     const [visibility, setVisibility] = useState("visible");
     const [isVisible, setIsVisible] = useState(true);
-    const [backgroundSize,setBackgroundSize] = useState("cover");
-    const [icon,setIcon] = useState("visibility");
+    const [backgroundSize, setBackgroundSize] = useState("cover");
+    const [icon, setIcon] = useState("visibility_off");
+    const [displayP, setDisplayW] = useState("none");
+    const [displayW, setDisplayP] = useState("none");
 
 
     const handleClick = () => {
@@ -35,6 +36,21 @@ const DetailsPurchase = () => {
         }
     };
 
+    const ChangeType = (event) => {
+        let Type = event.target.children[event.target.selectedIndex].value
+        if (Type === "Wallpaper") {
+            setDisplayP("inherit")
+            setDisplayW("none")
+        } else if (Type === "Poster") {
+            setDisplayP("none")
+            setDisplayW("inherit")
+        } else {
+            setDisplayP("none")
+            setDisplayW("none")
+        }
+
+    }
+
     useEffect(() => {
         const fecthImg = async (id) => {
             const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/' + id);
@@ -48,28 +64,48 @@ const DetailsPurchase = () => {
 
 
     return (
-        <div className="ContainerDetailsPurchase" >
+        <div className="ContainerDetailsPurchase">
             {wallpaper &&
-            <div className="DetailsPurchase" style={{
-                backgroundImage : `url(${wallpaper.imageLink})`,
-                backgroundSize : backgroundSize
-            }}>
+                <div className="DetailsPurchase" style={{
+                    backgroundImage: `url(${wallpaper.imageLink})`,
+                    backgroundSize: backgroundSize
+                }}>
 
-                <NavbarOffset/>
-                <div className="iconVisi">
-                    <span className="material-symbols-outlined" onClick={handleClick}> {icon} </span>
-                </div>
+                    <NavbarOffset/>
+                        <span className="material-symbols-outlined iconVisi" onClick={handleClick}> {icon} </span>
 
 
                     <div className="details" style={{visibility: visibility}}>
 
-                        <h1>dssGQDG</h1>
-                        <p>dssGQDGdssGQDGdssGQDGdssGQDGdssGQDG</p>
+                        <h1>{wallpaper.title}</h1>
+
+                        <select name="type" onChange={ChangeType}>
+                            <option value="">--Please choose an option--</option>
+                            <option value="Poster">Poster</option>
+                            <option value="Wallpaper">Wallpaper</option>
+                        </select>
+
+                        <div style={{display: displayW}}>
+                            <button className=""
+                                    type="button">
+                                Download
+                            </button>
+                        </div>
+
+                        <div style={{display: displayP}}>
+
+                            <p> 20 BALLESS</p>
+                            <button className=" "
+                                    type="button">
+                                Ajouter aux panier
+                            </button>
+
+                        </div>
 
 
                     </div>
 
-            </div>}
+                </div>}
 
         </div>
     )

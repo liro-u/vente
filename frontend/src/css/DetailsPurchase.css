@@ -2,11 +2,16 @@
     position: relative;
     z-index: 101;
     color: green;
+
 }
 
 .ContainerDetailsPurchase .iconVisi{
-    position: relative;
+    position: absolute;
+    right: 20px;
     z-index: 101;
+    border: solid ;
+    border-radius: 5px;
+    padding : 5px
 }
 
 .ContainerDetailsPurchase, .ContainerDetailsPurchase .DetailsPurchase{

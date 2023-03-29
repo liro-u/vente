@@ -55,7 +55,7 @@ function App() {
             <Route exact path="/wallpaper/collections/lol" element={<ThemeLOL />} />
 
             {/* PURCHASE */}
-            <Route exact path="/wallpaper/detailspurchase/:id" element={(user && (user.role === 'admin' || user.role === 'artist')) ? <DetailsPurchase /> : <Navigate to="/" />} />
+            <Route exact path="/wallpaper/detailspurchase/:id" element={<DetailsPurchase />} />
 
             {/* DEBUG */}
             <Route exact path="/debug/db" element={(user && user.role === 'admin') ? <DebugDb /> : <Navigate to="/" />} />

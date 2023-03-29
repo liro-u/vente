@@ -5,6 +5,11 @@ import { useAuthContext } from "../../hooks/auth/useAuthContext";
 import "../../css/form.css";
 
 const ContactForm = () => {
+    const defaultObjects = [
+        {msg: 'problem with my command', value: "command"},
+        {msg: 'problem with the process of buying', value: "buying"},
+        {msg: "other", value: "other"}
+    ];
     const {user} = useAuthContext();
     const [isPending, setIsPending] = useState(false)
 
@@ -16,21 +21,20 @@ const ContactForm = () => {
     const [subject, setSubject] = useState('');
     const [content, setContent] = useState("");
 
-    const [objects, setObjects] = useState([
-        'I have a problem with my command',
-        'I have a problem with t',
-        'other'
-    ]);
+    const [objects, setObjects] = useState(defaultObjects);
 
     useEffect(() => {
         if (user){
+            setObjects(defaultObjects)
             if (user.role === 'user'){
-                // objects.push('Become an official artist')
+                objects.splice(objects.length - 1, 0, {msg: 'Become an official artist', value: "becomeArtist"})
+            }else if (user.role === 'artist'){
+                objects.splice(objects.length - 1, 0, {msg: 'problem with my art post', value: "artPost"})
             }
         }else{
-            // remove all things that we have add
+            setObjects(defaultObjects)
         }
-    }, [user])
+    }, [user, objects])
 
     const removeClassError = (err) => {
         setEmptyFields(emptyFields.filter((error) => error !== err))
@@ -40,14 +44,23 @@ const ContactForm = () => {
         setIsPending(true)
         e.preventDefault();
 
-        const contactData = {}
+        let headers = {
+            'Content-Type': 'application/json',
+        }
+        
+        if (user) {
+            headers.Authorization = `Baerer ${user.token}`
+        }
 
         const response = await fetch(process.env.REACT_APP_PROXY + '/api/contact', {
             method: "POST",
-            body: JSON.stringify(contactData),
-            headers: {
-                'Content-Type': 'application/json',
-            }
+            body: JSON.stringify({
+                email,
+                object,
+                subject,
+                content
+            }),
+            headers
         })
         const json = await response.json();
 
@@ -61,6 +74,7 @@ const ContactForm = () => {
 
             setEmail('');
             setObject('');
+            setSubject('')
             setContent('');
             alert("Your request is in charge of our team")
         }
@@ -90,8 +104,8 @@ const ContactForm = () => {
                     onClick={() => removeClassError("object")}
                 >
                     <option value='' hidden disabled>Select a subject</option>
-                    {objects && objects.map((obj) => (
-                        <option key={obj} value={obj}>{obj}</option>
+                    {objects && objects.map(({msg, value}) => (
+                        <option key={value} value={value}>{msg}</option>
                     ))}
                 </select>
 

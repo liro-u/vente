@@ -59,6 +59,10 @@
     justify-content: center;
 }
 
+.extendPreviews .liked{
+    color: red;
+}
+
 
 /* publish */
 .publishWallpaper, .editWallpaper{

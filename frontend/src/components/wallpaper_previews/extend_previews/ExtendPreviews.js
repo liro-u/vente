@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import PreviewBoxDetails from "./PreviewBoxDetails";
 import ButtonLoadMore from "../../buttons/ButtonLoadMore";
 import { useWallpaperContext } from "../../../hooks/wallpaper/useWallpaperContext";
+import { useAuthContext } from "../../../hooks/auth/useAuthContext";
+
 // css
 import "../../../css/previews.css";
 
 const ExtendPreviews = ({ x, title }) => {
+    const {user} = useAuthContext();
     const [isLoading, setIsLoading] = useState(false);
 
     const { wallpapers, noMoreLoad, dispatch } = useWallpaperContext();
@@ -14,15 +17,19 @@ const ExtendPreviews = ({ x, title }) => {
         setIsLoading(true);
 
         let idArray = wallpapers.map(({ _id }) => _id)
+        let headers = {
+            'Content-type': 'application/json',
+        }
+        if (user){
+            headers.Authorization = `Baerer ${user.token}`
+        }
         const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/getX', {
             method: "POST",
             body: JSON.stringify({
                 idArray,
                 x
             }),
-            headers: {
-                'Content-type': 'application/json'
-            }
+            headers
         });
         const json = await response.json();
 
@@ -36,11 +43,11 @@ const ExtendPreviews = ({ x, title }) => {
     }
 
     useEffect(() => {
+        console.log(wallpapers)
         if (wallpapers.length === 0){
             fetchXWallpaper(x)
         }
-        // eslint-disable-next-line
-    }, [x])
+    }, [x, user])
 
     return (
         <div className="extendPreviews extendPreviewsCTN">

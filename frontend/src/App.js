@@ -28,11 +28,11 @@ import Navbar from './components/Navbar';
 
 
 function App() {
-  const { user } = useAuthContext();
+  const { user, ready } = useAuthContext();
 
   return (
     <div className="app defaultFontColor">
-      <HashRouter>
+      {ready && <HashRouter>
         <Navbar />
         <div className='pages'>
           <Routes>
@@ -57,7 +57,7 @@ function App() {
           </Routes>
         </div>
         <Footer />
-      </HashRouter>
+      </HashRouter>}
     </div>
   );
 }

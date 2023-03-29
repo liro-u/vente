@@ -22,7 +22,7 @@ const EditWallpaper = () => {
             }
         }
         fetchWallpaper(params.id);
-    }, [params.id, user, wallpaper])
+    }, [params.id, user])
     return (
         <div className="editWallpaper extendPreviewsCTN darkSecondaryColor negativeDefaultFontColor">
             {redirect && <Navigate to="/" />}

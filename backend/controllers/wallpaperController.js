@@ -1,4 +1,6 @@
 import Wallpaper from '../models/wallpaperModel.js';
+import UserLikeWallpaper from '../models/userLikeWallpaperModel.js';
+
 import mongoose from 'mongoose';
 import request from 'request';
 
@@ -61,6 +63,8 @@ const getWallpaper = async (req, res) => {
 // Get X Wallpapers
 const getXWallpapers = async (req, res) => {
 
+    const user = req.user;
+
     var idArray = [];
     req.body.idArray.forEach(id => {
         idArray.push( new mongoose.Types.ObjectId(id) )
@@ -68,7 +72,7 @@ const getXWallpapers = async (req, res) => {
 
     var x = parseInt(req.body.x)
 
-    const wallpapers = await Wallpaper.aggregate([
+    let aggregateOptions = [
         { $match: { _id: { $nin : idArray } } },
         { $sample: { size: x } },
         { $lookup : {
@@ -79,11 +83,33 @@ const getXWallpapers = async (req, res) => {
         } },
         // Extraire la valeur de "pseudo" du tableau "user" avec $arrayElemAt
         { $addFields: { "pseudo": { $arrayElemAt: ["$user.pseudo", 0] } } },
-
         // Supprimer le champ "user" avec $project
-        { $project: { "user": 0 } }
+        { $project: { "user": 0 } },
+        
+    ]
 
-    ])
+    if (user){
+        aggregateOptions = [...aggregateOptions, ...[
+            //liked
+            { $lookup: {
+                from: 'userlikewallpapers',
+                localField: '_id',
+                foreignField: 'wallpaperId',
+                pipeline: [
+                    { $match: { userId: user._id } },
+                ],
+                as : "likeRelations"
+            } },
+            { $addFields: { "liked": { $cond: {
+                if: { $eq: [ { $size: "$likeRelations" }, 0 ] },
+                then: false,
+                else: true
+              } } } },
+            //{ $project: { "likeRelations": 0 } },
+        ]]
+    }
+
+    const wallpapers = await Wallpaper.aggregate(aggregateOptions)
 
     res.status(200).json(wallpapers);
 };
@@ -179,6 +205,29 @@ const downloadWallpaper = async (req, res) => {
     imageStream.pipe(res);
 }
 
+const toggleLikeWallpaper = async (req, res) =>{
+    const { id } = req.params;
+    const user = req.user;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "No such wallpaper" });
+    }
+
+    const wallpaper = await Wallpaper.findOne({ _id: id });
+
+    if (!wallpaper) {
+        return res.status(400).json({ error: "No such wallpaper" });
+    }else{
+        const currentUserLikeWallpaper = { wallpaperId: id, userId: user._id }
+        const userLikeWallpaper = await UserLikeWallpaper.findOne(currentUserLikeWallpaper)
+        if (!userLikeWallpaper){
+            await UserLikeWallpaper.create(currentUserLikeWallpaper);
+        }else{
+            await UserLikeWallpaper.findOneAndDelete(currentUserLikeWallpaper)
+        }
+        res.status(200).json({liked: !userLikeWallpaper});
+    }
+}
 
 export default {
     getWallpapers,
@@ -187,5 +236,6 @@ export default {
     createWallpaper,
     updateWallpaper,
     deleteWallpaper,
-    downloadWallpaper
+    downloadWallpaper,
+    toggleLikeWallpaper
 };

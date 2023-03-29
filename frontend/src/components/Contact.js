@@ -15,11 +15,9 @@ const Contact = ({contactIsShow, hide}) => {
                 left: contactIsShow ? 0 : "-50%"
             }}
         >
-            <div className="darkSecondaryColor">
+            <div className="darkSecondaryColor container">
                 <NavbarOffset />
-                <div className="container">
-                    <ContactForm />
-                </div>
+                <ContactForm />
             </div>
             <div 
                 className="hideContact"

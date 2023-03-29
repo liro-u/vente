@@ -44,7 +44,7 @@ form div.error {
     margin: 20px 0;
 }
 
-form input.error, form select.error{
+form input.error, form select.error, form textarea.error{
     border: 1px solid var(--error);
     background: #ffbaba;
 }

@@ -18,6 +18,31 @@ const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
         setIsSelect(!isSelect);
     }
 
+    const toggleLike = async() => {
+        if (!user){
+            alert('You must be logged in')
+            return
+        }
+        if (!isPending) {
+            setIsPending(true)
+            const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/like/' + wallpaper._id, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Baerer ${user.token}`
+                }
+            })
+            const json = await response.json();
+    
+            if (response.ok) {
+                wallpaper.liked = json.liked
+                console.log(json.liked)
+            }else{
+                console.log("error")
+            }
+            setIsPending(false)
+        }
+    }
+
     const download = async () => {
         if (!isPending) {
             setIsPending(true)
@@ -110,7 +135,7 @@ const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
             >
                 {user && <div className="flexIconBox">
                     <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">shopping_cart</span></ButtonUnderline>
-                    <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">favorite</span></ButtonUnderline>
+                    <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span onClick={toggleLike} className={"material-symbols-outlined icon iconFilled " + (wallpaper.liked ? "liked" : "")}>favorite</span></ButtonUnderline>
                 </div>}
                 <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span onClick={download} className="material-symbols-outlined icon iconFilled">download</span></ButtonUnderline>
                 {user && (user.role === 'admin' || (user.role === 'artist' && user._id === wallpaper.artistId)) && <div className="flexIconBox">

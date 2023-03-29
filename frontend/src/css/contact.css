@@ -15,26 +15,8 @@
     cursor: pointer;
 }
 
-.contact .container {
-    padding: 40px;
-    padding-top: 0;
-}
-
-.contact .phoneInfo {
-    display: flex;
-    align-items: center;
-}
-
-.contact .material-symbols-outlined{
-    margin-right: 5px;
-}
-
-.contact h4, .contact p {
-    margin: 0;
-}
-
-.contact .info {
-    margin-top: 30px;
+.container{
+    overflow-y: auto;
 }
 
 .contact form{

@@ -1,12 +1,17 @@
 .ContainerDetailsPurchase .details{
     position: relative;
     z-index: 101;
-    color: green;
+    color: var(--primary);
+
 }
 
 .ContainerDetailsPurchase .iconVisi{
-    position: relative;
-    z-index: 101;
+    position: absolute;
+    right: 3%;
+    top: 10%;
+    border: solid ;
+    border-radius: 10px;
+    padding : 10px;
 }
 
 .ContainerDetailsPurchase, .ContainerDetailsPurchase .DetailsPurchase{
@@ -19,4 +24,24 @@
     background-position: center;
     
 
+}
+
+.ContainerDetailsPurchase .Title{
+    font-size: 2vw;
+}
+
+.ContainerDetailsPurchase .Answer{
+    font-size: 3vw;
+}
+
+.ContainerDetailsPurchase .details{
+    margin-left: 9%;
+    margin-top: 5%;
+    width: 20%;
+    height: 80%;
+}
+
+.ContainerDetailsPurchase .reference{
+    position: absolute;
+    bottom: 0;
 }

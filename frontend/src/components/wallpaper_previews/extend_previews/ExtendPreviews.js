@@ -43,7 +43,6 @@ const ExtendPreviews = ({ x, title }) => {
     }
 
     useEffect(() => {
-        console.log(wallpapers)
         if (wallpapers.length === 0){
             fetchXWallpaper(x)
         }

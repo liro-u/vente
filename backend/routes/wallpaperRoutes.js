@@ -8,7 +8,7 @@ import requireRole from "../middleware/restriction/requireRole.js";
 
 const router = express.Router();
 
-router.post('/download', wallpaperController.downloadWallpaper);
+router.get('/download/:id', wallpaperController.downloadWallpaper);
 router.get('/', wallpaperController.getWallpapers);
 router.get('/:id', wallpaperController.getWallpaper);
 

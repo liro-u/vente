@@ -4,9 +4,15 @@ import { useWallpaperContext } from '../../../hooks/wallpaper/useWallpaperContex
 import { useAuthContext } from '../../../hooks/auth/useAuthContext';
 import TextApparition from "../../animations/TextApparition";
 import ButtonUnderline from "../../buttons/ButtonUnderline";
+import { useDownload } from "../../../hooks/wallpaper/useDownload";
+import { useDelete } from "../../../hooks/wallpaper/useDelete";
+import { useLike } from "../../../hooks/wallpaper/useLike";
 
 const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
-    const { noMoreLoad, dispatch } = useWallpaperContext();
+    const { noMoreLoad } = useWallpaperContext();
+    const { download } = useDownload();
+    const { handleDelete } = useDelete();
+    const {toggleLike } = useLike();
     const [isPending, setIsPending] = useState(false)
 
     const [titleColor, setTitleColor] = useState("");
@@ -18,88 +24,11 @@ const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
         setIsSelect(!isSelect);
     }
 
-    const toggleLike = async() => {
-        if (!user){
-            alert('You must be logged in')
-            return
-        }
-        if (!isPending) {
-            setIsPending(true)
-            const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/like/' + wallpaper._id, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Baerer ${user.token}`
-                }
-            })
-            const json = await response.json();
     
-            if (response.ok) {
-                wallpaper.liked = json.liked
-                console.log(json.liked)
-            }else{
-                console.log("error")
-            }
-            setIsPending(false)
-        }
-    }
 
-    const download = async () => {
-        if (!isPending) {
-            setIsPending(true)
-            const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/download', {
-                method: "POST",
-                body: JSON.stringify({
-                    url: wallpaper.imageLink
-                }),
-                headers: {
-                    'Content-type': 'application/json'
-                }
-            });
+    
 
-            const imageBlog = await response.blob()
-            const imageURL = URL.createObjectURL(imageBlog)
-
-            const link = document.createElement('a')
-            link.href = imageURL;
-            link.download = wallpaper.title + ".jpg";
-
-            document.body.appendChild(link)
-            link.click()
-            document.body.removeChild(link)  
-
-            setIsPending(false)
-        }
-    }
-
-    const handleDelete = async () => {
-        if (!user){
-            alert('You must be logged in')
-            return
-        }
-        if (!isPending) {
-            setIsPending(true)
-            if (window.confirm("Do you really want to delete this wallpaper ?")) {
-                const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/' + wallpaper._id, {
-                    method: 'DELETE',
-                    headers: {
-                        'Authorization': `Baerer ${user.token}`
-                    }
-                })
-                const json = await response.json();
-        
-                if (response.ok) {
-                    dispatch({type: 'DELETE_WALLPAPER', payload: json});
-                }else{
-                    console.log(json)
-                    if (json.error !== "request is not authorized") {
-                        // if not found on db, delete anyway because maybe was delete by someone else
-                        dispatch({type: 'DELETE_WALLPAPER', payload: wallpaper});
-                    }
-                }
-            }
-            setIsPending(false)
-        }
-    }
+    
 
     useEffect(() => {
         switch (wallpaper.titleColor) {
@@ -135,9 +64,9 @@ const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
             >
                 {user && <div className="flexIconBox">
                     <Link to={"/wallpaper/detailspurchase/" + wallpaper._id}><ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">shopping_cart</span></ButtonUnderline></Link>
-                    <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span onClick={toggleLike} className={"material-symbols-outlined icon iconFilled " + (wallpaper.liked ? "liked" : "")}>favorite</span></ButtonUnderline>
+                    <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span onClick={() => toggleLike(wallpaper, isPending, setIsPending)} className={"material-symbols-outlined icon iconFilled " + (wallpaper.liked ? "liked" : "")}>favorite</span></ButtonUnderline>
                 </div>}
-                <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span onClick={download} className="material-symbols-outlined icon iconFilled">download</span></ButtonUnderline>
+                <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span onClick={() => download(wallpaper, isPending, setIsPending)} className="material-symbols-outlined icon iconFilled">download</span></ButtonUnderline>
                 {user && (user.role === 'admin' || (user.role === 'artist' && user._id === wallpaper.artistId)) && <div className="flexIconBox">
                     {isPending ?
                         <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">edit</span></ButtonUnderline>
@@ -146,7 +75,7 @@ const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
                             <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">edit</span></ButtonUnderline>
                         </Link>
                     }
-                    <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span onClick={handleDelete} className="material-symbols-outlined icon iconFilled">delete</span></ButtonUnderline>
+                    <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span onClick={() => handleDelete(wallpaper, isPending, setIsPending)} className="material-symbols-outlined icon iconFilled">delete</span></ButtonUnderline>
                 </div>}
             </div>}
         </div>

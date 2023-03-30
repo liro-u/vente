@@ -49,7 +49,6 @@ const WallpaperForm = ({ defaultWallpaper }) => {
 
         const wallpaper = {title, titleColor, imageLink : src};
 
-        console.log(wallpaper)
         const response = await fetch(url, {
             method,
             body: JSON.stringify(wallpaper),
@@ -73,8 +72,10 @@ const WallpaperForm = ({ defaultWallpaper }) => {
             setTitleColor(defaultColor);
             alert("Your wallpaper is online !")
         }else{
-            dispatch({type: 'DELETE_WALLPAPER', payload: defaultWallpaper});
-            dispatch({type: 'MERGE_WALLPAPER', payload: [wallpaper]});
+            dispatch({type: 'REPLACE_WALLPAPER', payload: {
+                lastWallpaper: defaultWallpaper,
+                newWallpaper: json
+            }});
             alert("Your wallpaper is patch !")
         }
         setIsPending(false)

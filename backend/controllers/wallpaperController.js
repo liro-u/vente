@@ -27,17 +27,14 @@ const getWallpapers = async (req, res) => {
     res.status(200).json(wallpapers);
 };
 
-// Get wallpaper by id
-const getWallpaper = async (req, res) => {
-    const { id } = req.params;
-
+const getWallpaperById = async (id, user) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'No such wallpaper'});
+        throw new Error('No such wallpaper');
     }
     
     const objId = new mongoose.Types.ObjectId(id);
-    console.log(id)
-    const wallpapers = await Wallpaper.aggregate([
+    
+    let aggregateOptions = [
         { $match: { _id: objId } },
         { $lookup : {
             from: 'users',
@@ -47,17 +44,53 @@ const getWallpaper = async (req, res) => {
         } },
         // Extraire la valeur de "pseudo" du tableau "user" avec $arrayElemAt
         { $addFields: { "pseudo": { $arrayElemAt: ["$user.pseudo", 0] } } },
-
         // Supprimer le champ "user" avec $project
         { $project: { "user": 0 } }
+    ]
 
-    ])
+    if (user){
+        aggregateOptions = [...aggregateOptions, ...[
+            //liked
+            { $lookup: {
+                from: 'userlikewallpapers',
+                localField: '_id',
+                foreignField: 'wallpaperId',
+                pipeline: [
+                    { $match: { userId: user._id } },
+                ],
+                as : "likeRelations"
+            } },
+            { $addFields: { "liked": { $cond: {
+                if: { $eq: [ { $size: "$likeRelations" }, 0 ] },
+                then: false,
+                else: true
+              } } } },
+            { $project: { "likeRelations": 0 } },
+        ]]
+    }
 
-    if (wallpapers.length === 0){
+    const wallpapers = await Wallpaper.aggregate(aggregateOptions)
+
+    return wallpapers;
+}
+
+// Get wallpaper by id
+const getWallpaper = async (req, res) => {
+    const { id } = req.params;
+    const user = req.user;
+
+    try {
+        const wallpapers = await getWallpaperById(id, user)
+    
+        if (wallpapers.length === 0){
+            return res.status(404).json({ error: 'No such wallpaper'});
+        }
+        
+        res.status(200).json(wallpapers[0]);
+    }catch (err){
+        console.log(err)
         return res.status(404).json({ error: 'No such wallpaper'});
     }
-    
-    res.status(200).json(wallpapers[0]);
 };
 
 // Get X Wallpapers
@@ -105,7 +138,7 @@ const getXWallpapers = async (req, res) => {
                 then: false,
                 else: true
               } } } },
-            //{ $project: { "likeRelations": 0 } },
+            { $project: { "likeRelations": 0 } },
         ]]
     }
 
@@ -146,7 +179,7 @@ const createWallpaper = async (req, res) => {
     }
 }
 
-// DELETE a workout
+// DELETE a wallpaper
 const deleteWallpaper = async (req, res) => {
     const { id } = req.params;
     const user = req.user;
@@ -160,7 +193,7 @@ const deleteWallpaper = async (req, res) => {
     if (!wallpaper) {
         return res.status(400).json({ error: "No such wallpaper" });
     }else {
-        if (user._id === wallpaper.artistId || user.role === 'admin') {
+        if (user._id.toString() === wallpaper.artistId.toString() || user.role === 'admin') {
             await Wallpaper.findOneAndDelete({ _id: id });
             res.status(200).json(wallpaper);
         } else {
@@ -180,29 +213,44 @@ const updateWallpaper = async (req, res) => {
         return res.status(404).json({ error: "No such wallpaper", emptyFields });
     }
 
-    const wallpaper = await Wallpaper.findOne({ _id: id });
+    let wallpaper = await Wallpaper.findOne({ _id: id });
 
     if (!wallpaper) {
         return res.status(400).json({ error: "No such wallpaper", emptyFields });
     }else{
-        if (user._id === wallpaper.artistId || user.role === 'admin') {
+        if (user._id.toString() === wallpaper.artistId.toString() || user.role === 'admin') {
             await Wallpaper.findOneAndUpdate({ _id: id }, {
                 ...req.body
             })
-            res.status(200).json(wallpaper);
+            const wallpapers = await getWallpaperById(id, user)
+            if (wallpapers.length != 0) {
+                return res.status(200).json(wallpapers[0]);
+            }else{
+                return res.status(400).json({ error: "updated but problem with new value", emptyFields });
+            }
         }else{
-            res.status(401).json({ error: "request is not authorized" });
+            res.status(401).json({ error: "request is not authorized", emptyFields });
         }
     }
 };
 
 const downloadWallpaper = async (req, res) => {
-    const imagePath = req.body.url;
-    const imageStream = request(imagePath);
+    const { id } = req.params;
 
-    res.setHeader('Content-Type', 'image/jpeg');
-
-    imageStream.pipe(res);
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "No such wallpaper" });
+    }
+    const wallpaper = await Wallpaper.findOne({_id: id});
+    
+    if (wallpaper){
+        const imageStream = request(wallpaper.imageLink);
+    
+        res.setHeader('Content-Type', 'image/jpeg');
+    
+        imageStream.pipe(res);
+    }else{
+        return res.status(404).json({ error: "No such wallpaper" });
+    }
 }
 
 const toggleLikeWallpaper = async (req, res) =>{

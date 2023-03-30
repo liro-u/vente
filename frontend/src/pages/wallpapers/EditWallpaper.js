@@ -16,7 +16,7 @@ const EditWallpaper = () => {
     
             if (response.ok) {
                 setWallpaper(json)
-                if (!(user.role === 'admin' || wallpaper.artistId === user._id)) {
+                if (!(user.role === 'admin' || json.artistId === user._id)) {
                     setRedirect(true)
                 }
             }

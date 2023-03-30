@@ -19,6 +19,17 @@ export const wallpaperReducer = (state, action) => {
                 ...state,
                 wallpapers: state.wallpapers.filter((w) => w._id !== action.payload._id)
             }
+        case 'REPLACE_WALLPAPER':
+            const newWallpapers = state.wallpapers
+            for (let i = 0; i < newWallpapers.length; i++) {
+                if (newWallpapers[i]._id === action.payload.lastWallpaper._id) {
+                    newWallpapers[i] = action.payload.newWallpaper
+                }
+            }
+            return {
+                ...state,
+                wallpapers: newWallpapers
+            }
         case 'SET_NO_MORE_LOAD':
             return {
                 ...state,

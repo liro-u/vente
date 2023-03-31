@@ -14,6 +14,7 @@ router.get('/:id', wallpaperController.getWallpaper);
 
 router.use(tryAddAuth) // add data of user if data is passed
 router.post('/getX', wallpaperController.getXWallpapers);
+router.post("/reloadList", wallpaperController.reloadWallpapers);
 
 router.use(requireAuth) // be sure user is login to use this controller
 router.get('/like/:id', wallpaperController.toggleLikeWallpaper);

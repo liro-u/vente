@@ -147,6 +147,59 @@ const getXWallpapers = async (req, res) => {
     res.status(200).json(wallpapers);
 };
 
+const reloadWallpapers = async (req, res) => {
+    const user = req.user;
+
+    var idArray = [];
+    req.body.idArray.forEach(id => {
+        idArray.push( new mongoose.Types.ObjectId(id) )
+    });
+
+    let aggregateOptions = [
+        { $match: { _id: { $in : idArray } } },
+        { $lookup : {
+            from: 'users',
+            localField: 'artistId',
+            foreignField: '_id',
+            as : "user"
+        } },
+        // Extraire la valeur de "pseudo" du tableau "user" avec $arrayElemAt
+        { $addFields: { "pseudo": { $arrayElemAt: ["$user.pseudo", 0] } } },
+        // Supprimer le champ "user" avec $project
+        { $project: { "user": 0 } },
+        // add ordering field
+        { "$addFields" : { "__order" : { "$indexOfArray" : [ idArray, "$_id" ] } } },
+        // sort
+        { "$sort" : { "__order" : 1 } },
+        { $project: { "__order": 0 } },
+    ]
+
+    if (user){
+        aggregateOptions = [...aggregateOptions, ...[
+            //liked
+            { $lookup: {
+                from: 'userlikewallpapers',
+                localField: '_id',
+                foreignField: 'wallpaperId',
+                pipeline: [
+                    { $match: { userId: user._id } },
+                ],
+                as : "likeRelations"
+            } },
+            { $addFields: { "liked": { $cond: {
+                if: { $eq: [ { $size: "$likeRelations" }, 0 ] },
+                then: false,
+                else: true
+              } } } },
+            { $project: { "likeRelations": 0 } },
+        ]]
+    }
+
+    const wallpapers = await Wallpaper.aggregate(aggregateOptions)
+
+    res.status(200).json({wallpapers});
+}
+
 // POST a new Wallpaper
 const createWallpaper = async (req, res) => {
     const user = req.user;
@@ -281,6 +334,7 @@ export default {
     getWallpapers,
     getWallpaper,
     getXWallpapers,
+    reloadWallpapers,
     createWallpaper,
     updateWallpaper,
     deleteWallpaper,

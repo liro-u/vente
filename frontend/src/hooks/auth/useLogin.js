@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
+import { useReload } from "../wallpaper/useReload";
 
 export const useLogin = () => {
     const [emailError, setEmailError] = useState('');
@@ -7,6 +8,7 @@ export const useLogin = () => {
     const [globalError, setGlobalError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const { dispatch } = useAuthContext();
+    const { reloadWallpapers } = useReload();
 
     const login = async (email, password) => {
         setIsLoading(true);
@@ -33,6 +35,9 @@ export const useLogin = () => {
         if (response.ok) {
             // save the user to the local storage
             localStorage.setItem('user', JSON.stringify(json));
+            
+            // reload wallpapers
+            await reloadWallpapers(json);
 
             // update the auth context
             dispatch({type: 'LOGIN', payload: json})

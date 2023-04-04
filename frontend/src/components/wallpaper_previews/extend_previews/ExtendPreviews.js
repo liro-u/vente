@@ -6,10 +6,12 @@ import { useAuthContext } from "../../../hooks/auth/useAuthContext";
 
 // css
 import "../../../css/previews.css";
+import { useVerifyAuth } from "../../../hooks/auth/useVerifyAuth";
 
 const ExtendPreviews = ({ x, title }) => {
     const {user} = useAuthContext();
     const [isLoading, setIsLoading] = useState(false);
+    const {verifyAuth} = useVerifyAuth();
 
     const { wallpapers, noMoreLoad, dispatch } = useWallpaperContext();
 
@@ -38,6 +40,10 @@ const ExtendPreviews = ({ x, title }) => {
                 dispatch({type: 'SET_NO_MORE_LOAD', payload: true});
             }
             dispatch({type: 'MERGE_WALLPAPER', payload: json});
+        }else{
+            if (user){
+                verifyAuth(json);
+            }
         }
         setIsLoading(false);
     }

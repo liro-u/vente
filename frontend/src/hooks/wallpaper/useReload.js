@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useWallpaperContext } from '../wallpaper/useWallpaperContext';
+import { useVerifyAuth } from '../auth/useVerifyAuth';
 
 
 export const useReload = () => {
     const { wallpapers, dispatch } = useWallpaperContext();
     const [isLoading, setIsLoading] = useState();
-
+    const {verifyAuth} = useVerifyAuth();
+    
     const reloadWallpapers = async (user) => {
         setIsLoading(true);
 
@@ -30,6 +32,8 @@ export const useReload = () => {
             if (json.error){
                 alert(json.error);
             }
+        }else{
+            verifyAuth(json);
         }
         setIsLoading(false);
     }

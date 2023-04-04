@@ -3,6 +3,7 @@ import { useAuthContext } from "../../hooks/auth/useAuthContext";
 
 //css
 import "../../css/form.css";
+import { useVerifyAuth } from "../../hooks/auth/useVerifyAuth";
 
 const ContactForm = () => {
     const defaultObjects = [
@@ -12,6 +13,7 @@ const ContactForm = () => {
     ];
     const {user} = useAuthContext();
     const [isPending, setIsPending] = useState(false)
+    const {verifyAuth} = useVerifyAuth();
 
     const [error, setError] = useState('');
     const [emptyFields, setEmptyFields] = useState([]);
@@ -65,6 +67,9 @@ const ContactForm = () => {
         const json = await response.json();
 
         if (!response.ok) {
+            if (user){
+                verifyAuth(json);
+            }
             setError(json.error);
             setEmptyFields(json.emptyFields);
         }

@@ -13,10 +13,22 @@ const requireAuth = async (req, res, next) => {
     const token = authorization.split(' ')[1];
 
     try {
-        const { _id } = jwt.verify(token, process.env.SECRET);
-
-        req.user = await User.findOne({ _id }).select('_id role pseudo email');
-        next();
+        try{
+            const { _id } = jwt.verify(token, process.env.SECRET);
+            req.user = await User.findOne({ _id }).select('_id role pseudo email');
+            next();
+        }catch (err){
+            if (err.message === 'jwt expired'){
+                req.user = null;
+                return res.status(401).json({error: 'session expired'});
+            }else if (err.name === 'TokenExpiredError'){
+                req.user = null;
+                return res.status(401).json({error: 'session expired'});
+            }
+            else{
+                throw err;
+            }
+        }
     }
     catch (err) {
         console.log(err);

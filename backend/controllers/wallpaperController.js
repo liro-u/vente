@@ -102,12 +102,25 @@ const getXWallpapers = async (req, res) => {
     req.body.idArray.forEach(id => {
         idArray.push( new mongoose.Types.ObjectId(id) )
     });
+    const filters = req.body.filters
 
     var x = parseInt(req.body.x)
 
-    let aggregateOptions = [
-        { $match: { _id: { $nin : idArray } } },
-        { $sample: { size: x } },
+    let aggregateOptions = [{ $match: { _id: { $nin : idArray } } }]
+
+    if (filters.new) {
+        if (!filters.liked) {
+            let newAggregate = [
+                { $sort : { createdAt : -1 } },
+                { $limit : x }
+            ]
+            aggregateOptions = [...aggregateOptions, ...newAggregate]
+        }
+    }else{
+        aggregateOptions = [...aggregateOptions, ...[{ $sample: { size: x } }]]
+    }
+
+    aggregateOptions = [...aggregateOptions, ...[
         { $lookup : {
             from: 'users',
             localField: 'artistId',
@@ -119,10 +132,10 @@ const getXWallpapers = async (req, res) => {
         // Supprimer le champ "user" avec $project
         { $project: { "user": 0 } },
         
-    ]
-
+    ]]
+        
     if (user){
-        aggregateOptions = [...aggregateOptions, ...[
+        let userAggregate = [
             //liked
             { $lookup: {
                 from: 'userlikewallpapers',
@@ -137,9 +150,22 @@ const getXWallpapers = async (req, res) => {
                 if: { $eq: [ { $size: "$likeRelations" }, 0 ] },
                 then: false,
                 else: true
-              } } } },
+            } } } },
+            { $addFields: { "likedAt": { $arrayElemAt: ["$likeRelations.createdAt", 0] } } },
             { $project: { "likeRelations": 0 } },
-        ]]
+        ]
+        if (filters.liked) {
+            let likedAggregate = [{ $match: { liked: { $eq : filters.liked } } }]
+            userAggregate = [...userAggregate, ...likedAggregate]
+            if (filters.new){
+                let newAggregate = [
+                    { $sort : { likedAt : -1 } },
+                    { $limit : x }
+                ]
+                aggregateOptions = [...aggregateOptions, ...newAggregate]
+            }
+        }
+        aggregateOptions = [...userAggregate, ...aggregateOptions]
     }
 
     const wallpapers = await Wallpaper.aggregate(aggregateOptions)

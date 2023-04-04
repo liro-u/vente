@@ -94,3 +94,49 @@
 .unroll .unrolled{
     position: absolute;
 }
+
+/* bubble search bar */
+.searchContainer{
+    padding: 30px;
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 60px);
+    display: flex;
+}
+
+
+.filterContainer{
+    display: flex;
+    margin-right: 20px;
+}
+
+.sortContainer{
+    display: flex;
+}
+
+.bubbleSearchBar + .bubbleSearchBar{
+    margin-left: 20px;
+}
+
+.bubbleSearchBar{
+    border: solid 1px #fff;
+    border-radius: 30px;
+    display: flex;
+    padding: 10px 20px;
+}
+
+.bubbleSearchBar .searchBarLabel{
+    margin: 0;
+}
+
+.bubbleSearchBar .searchBar{
+    background-color: #ffffff00;
+    border: none;
+    width: 85px;
+    font-size: 16px ;
+    font-family: 'Fira Mono'
+}
+
+.bubbleSearchBar .searchBar:focus{
+    outline: none;
+}

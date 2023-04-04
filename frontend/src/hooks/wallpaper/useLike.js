@@ -30,7 +30,6 @@ export const useLike = () => {
                     lastWallpaper: wallpaper,
                     newWallpaper: newWallpaper
                 }});
-                console.log(json.liked)
             }else{
                 verifyAuth()
                 console.log("error")

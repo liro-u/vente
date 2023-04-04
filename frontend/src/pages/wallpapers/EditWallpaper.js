@@ -26,7 +26,7 @@ const EditWallpaper = () => {
     return (
         <div className="editWallpaper extendPreviewsCTN darkSecondaryColor negativeDefaultFontColor">
             {redirect && <Navigate to="/" />}
-            <h1 className="pageTitle">Edit a Wallpaper</h1>
+            <h1 className="pageTitle pageTitleContainer">Edit a Wallpaper</h1>
             <WallpaperForm defaultWallpaper = {wallpaper} />
         </div>
     )

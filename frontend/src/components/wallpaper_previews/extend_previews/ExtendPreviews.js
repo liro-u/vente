@@ -6,13 +6,17 @@ import { useAuthContext } from "../../../hooks/auth/useAuthContext";
 
 // css
 import "../../../css/previews.css";
+import { useVerifyAuth } from "../../../hooks/auth/useVerifyAuth";
+import BubbleSearchBar from "../../searchBar/bubbleSearchBar";
+import { useFilterContext } from "../../../hooks/wallpaper/useFilterContext";
 
 const ExtendPreviews = ({ x, title }) => {
     const {user} = useAuthContext();
     const [isLoading, setIsLoading] = useState(false);
+    const {verifyAuth} = useVerifyAuth();
+    const { likedFilter, newFilter, artistFilter, titleFilter, tagsFilter } = useFilterContext();
 
     const { wallpapers, noMoreLoad, dispatch } = useWallpaperContext();
-
     const fetchXWallpaper = async (x) => {
         setIsLoading(true);
 
@@ -27,7 +31,14 @@ const ExtendPreviews = ({ x, title }) => {
             method: "POST",
             body: JSON.stringify({
                 idArray,
-                x
+                x,
+                filters: {
+                    liked: likedFilter,
+                    new: newFilter,
+                    artist: artistFilter,
+                    title: titleFilter,
+                    tags: tagsFilter,
+                }
             }),
             headers
         });
@@ -38,6 +49,10 @@ const ExtendPreviews = ({ x, title }) => {
                 dispatch({type: 'SET_NO_MORE_LOAD', payload: true});
             }
             dispatch({type: 'MERGE_WALLPAPER', payload: json});
+        }else{
+            if (user){
+                verifyAuth(json);
+            }
         }
         setIsLoading(false);
     }
@@ -48,9 +63,30 @@ const ExtendPreviews = ({ x, title }) => {
         }
     }, [x, user])
 
+    useEffect(() => {
+        dispatch({type: 'SET_NO_MORE_LOAD', payload: false});
+        dispatch({type: 'SET_WALLPAPER', payload: []});
+        fetchXWallpaper(x)
+    }, [likedFilter, newFilter])
+
     return (
         <div className="extendPreviews extendPreviewsCTN">
-            {title && <h1 className="pageTitle darkSecondaryColor negativeDefaultFontColor">{title}</h1>}
+            {title && 
+                <div className="pageTitleContainer darkSecondaryColor">
+                    <h1 className="pageTitle negativeDefaultFontColor">{title}</h1>
+                    <div className="searchContainer" >
+                        <div className="filterContainer">
+                            <BubbleSearchBar className="negativeDefaultFontColor" content="Artist" dispatch_type="" value={artistFilter}/>
+                            <BubbleSearchBar className="negativeDefaultFontColor" content="Tags" dispatch_type="" value={tagsFilter}/>
+                            <BubbleSearchBar className="negativeDefaultFontColor" content="Title" dispatch_type="" value={titleFilter}/>
+                        </div>
+                        <div className="sortContainer">
+                            <BubbleSearchBar className="negativeDefaultFontColor" color="#FD8A8A99" content="Like" searchBar={false} dispatch_type="SET_LIKED" value={likedFilter}/>
+                            <BubbleSearchBar className="negativeDefaultFontColor" color="#B5D5C599" content="New" searchBar={false} dispatch_type="SET_NEW" value={newFilter}/>
+                        </div>
+                    </div>
+                </div>
+            }
             {wallpapers && wallpapers.map((wallpaper, index) => (
                 <PreviewBoxDetails key={index} wallpaper={wallpaper} isLast={index === wallpapers.length - 1} />
             ))}

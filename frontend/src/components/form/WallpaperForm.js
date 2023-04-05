@@ -6,11 +6,13 @@ import { useAuthContext } from "../../hooks/auth/useAuthContext";
 //css
 import "../../css/previews.css";
 import "../../css/form.css";
+import { useVerifyAuth } from "../../hooks/auth/useVerifyAuth";
 
 const WallpaperForm = ({ defaultWallpaper }) => {
     const {user} = useAuthContext();
     const { dispatch } = useWallpaperContext();
     const [isPending, setIsPending] = useState(false)
+    const {verifyAuth} = useVerifyAuth;
 
     const titleColors = ["default", "negative-default"];
     const defaultColor = titleColors[0];
@@ -60,6 +62,7 @@ const WallpaperForm = ({ defaultWallpaper }) => {
         const json = await response.json();
 
         if (!response.ok) {
+            verifyAuth(json);
             setError(json.error);
             setEmptyFields(json.emptyFields);
         }

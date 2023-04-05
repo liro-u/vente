@@ -1,10 +1,12 @@
 import { useAuthContext } from '../auth/useAuthContext';
+import { useVerifyAuth } from '../auth/useVerifyAuth';
 import { useWallpaperContext } from '../wallpaper/useWallpaperContext';
 
 
 export const useDelete = () => {
     const {user} = useAuthContext();
     const { dispatch } = useWallpaperContext();
+    const { verifyAuth } = useVerifyAuth();
 
 
     const handleDelete = async (wallpaper, isPending, setIsPending) => {
@@ -26,6 +28,7 @@ export const useDelete = () => {
                 if (response.ok) {
                     dispatch({type: 'DELETE_WALLPAPER', payload: json});
                 }else{
+                    verifyAuth(json);
                     console.log(json)
                     if (json.error !== "request is not authorized") {
                         // if not found on db, delete anyway because maybe was delete by someone else

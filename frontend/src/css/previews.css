@@ -39,12 +39,16 @@
     color: var(--negative-text-color);
 }
 
-.extendPreviewsCTN .pageTitle {
+.extendPreviewsCTN .pageTitleContainer {
     height: 400px;
-    font-size: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+}
+
+.extendPreviewsCTN .pageTitle {
+    font-size: 50px;
 }
 
 .extendPreviews .iconBox{

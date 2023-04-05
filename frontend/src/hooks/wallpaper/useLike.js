@@ -1,11 +1,12 @@
 import { useAuthContext } from '../auth/useAuthContext';
 import { useWallpaperContext } from '../wallpaper/useWallpaperContext';
+import { useVerifyAuth } from '../auth/useVerifyAuth';
 
 
 export const useLike = () => {
     const {user} = useAuthContext();
     const { dispatch } = useWallpaperContext();
-
+    const { verifyAuth } = useVerifyAuth();
 
     const toggleLike = async(wallpaper, isPending, setIsPending) => {
         if (!user){
@@ -29,8 +30,8 @@ export const useLike = () => {
                     lastWallpaper: wallpaper,
                     newWallpaper: newWallpaper
                 }});
-                console.log(json.liked)
             }else{
+                verifyAuth()
                 console.log("error")
             }
             setIsPending(false)

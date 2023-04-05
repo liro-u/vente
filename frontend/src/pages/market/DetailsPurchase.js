@@ -6,6 +6,9 @@ import {useParams} from "react-router-dom";
 import {useNavbarContext} from "../../hooks/navbar/useNavbarContext";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import {useAuthContext} from "../../hooks/auth/useAuthContext";
+import {useDownload} from "../../hooks/wallpaper/useDownload";
+import {useAddShopping} from "../../hooks/Purchase/useAddShopping";
+
 
 
 //css
@@ -13,10 +16,14 @@ import "../../css/DetailsPurchase.css"
 
 
 
+
+
 const DetailsPurchase = () => {
 
     const [wallpaper, setWallpaper] = useState(null)
     const [products, setProducts] = useState(null)
+    const { download } = useDownload();
+    const { toggleAddProduct } = useAddShopping();
     const {user} = useAuthContext();
     const params = useParams();
     const {dispatch} = useNavbarContext();
@@ -28,8 +35,10 @@ const DetailsPurchase = () => {
     const [displayW, setDisplayP] = useState("none");
     const [isPending, setIsPending] = useState(false);
     const [product, setProduct] = useState("");
+    const [AddProduct, setAddProduct] = useState("");
     const [emptyFields, setEmptyFields] = useState([]);
     const [price, setPrice] = useState();
+    const [quantity, setQuantity] = useState(0);
 
 
     const handleClick = () => {
@@ -50,7 +59,6 @@ const DetailsPurchase = () => {
     const ChangeType = (event) => {
 
         setProduct(event.target.value);
-        {console.log(event.target.value)}
 
         if (event.target.value === "wallpaper") {
             setDisplayP("inherit")
@@ -65,7 +73,7 @@ const DetailsPurchase = () => {
                 setPrice(products[i].price)
             }
         }
-        
+
 
     }
 
@@ -78,51 +86,45 @@ const DetailsPurchase = () => {
         }
         fecthImg(params.id)
 
-        const fetchProduct = async (id) => {
+        const fetchProduct = async () => {
             const response = await fetch(process.env.REACT_APP_PROXY + '/api/market/product',
             {headers: {
                 'Authorization': `Baerer ${user.token}`
             }}
             )
-
             const ContenerProduct = await response.json()
 
             if (response.ok) {
-
                 setProducts(ContenerProduct);
             }else{
                 console.log("erreur")
             }
         }
         fetchProduct()
+
+        const fetchUserAddProducts = async() => {
+            const response = await fetch(process.env.REACT_APP_PROXY + '/api/market/', {
+                method: 'POST',
+                body: JSON.stringify({}),
+                headers: {
+                    'Authorization': `Baerer ${user.token}`
+                }
+            })
+            const ContenerAddProducts = await response.json()
+
+            if (response.ok) {
+                setAddProduct(ContenerAddProducts);
+                console.log(ContenerAddProducts)
+            }else{
+                console.log("erreur")
+            }
+        }
+        fetchUserAddProducts()
+
+
     }, [params.id])
 
-    const download = async () => {
-        if (!isPending) {
-            setIsPending(true)
-            const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/download', {
-                method: "POST",
-                body: JSON.stringify({
-                    url: wallpaper.imageLink
-                }),
-                headers: {
-                    'Content-type': 'application/json'
-                }
-            });
 
-            const imageBlog = await response.blob()
-            const imageURL = URL.createObjectURL(imageBlog)
-
-            const link = document.createElement('a')
-            link.href = imageURL;
-            link.download = wallpaper.title + ".jpg";
-
-            document.body.appendChild(link)
-            link.click()
-            document.body.removeChild(link)
-            setIsPending(false)
-        }
-    }
 
 
     const removeClassError = (err) => {
@@ -165,7 +167,7 @@ const DetailsPurchase = () => {
                         </select>
                         <div style={{display: displayW}}>
                             <button className=""
-                                    type="button" onClick={download}>
+                                    type="button" onClick={() => download(wallpaper, isPending, setIsPending)}>
                                 Download
                             </button>
                         </div>
@@ -174,7 +176,7 @@ const DetailsPurchase = () => {
 
                             <p> {price} </p>
                             <button className=""
-                                    type="button">
+                                    type="button" onClick={() => toggleAddProduct(wallpaper, isPending, setIsPending, user, quantity, product)}>
                                 Ajouter aux panier
                             </button>
 
@@ -188,10 +190,6 @@ const DetailsPurchase = () => {
                         </div>
 
                     </div>
-
-                    {products.map(({product, price}) => (
-                        <option key={product} value={product}>{product} et {price}</option>
-                    ))}
 
                 </div>}
 

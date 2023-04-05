@@ -12,6 +12,7 @@
     border: solid ;
     border-radius: 10px;
     padding : 10px;
+    color: var(--primary);  
 }
 
 .ContainerDetailsPurchase, .ContainerDetailsPurchase .DetailsPurchase{

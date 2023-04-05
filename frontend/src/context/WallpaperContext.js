@@ -31,10 +31,11 @@ export const wallpaperReducer = (state, action) => {
                 wallpapers: newWallpapers
             }
         case 'SET_NO_MORE_LOAD':
-            return {
+                return {
                 ...state,
                 noMoreLoad: action.payload
             }
+
         default:
             return state
     }

@@ -22,8 +22,8 @@ import ThemeLOL from './pages/collections/ThemeLOL';
 //debug
 import DebugDb from './pages/debug/DebugDb';
 //purchase
-import DetailsPurchase from "./components/DetailsPurchase";
-import ShoppingCart from "./components/ShoppingCart";
+import DetailsPurchase from "./pages/market/DetailsPurchase";
+import ShoppingCart from "./pages/market/ShoppingCart";
 
 // component
 import Footer from './components/Footer';

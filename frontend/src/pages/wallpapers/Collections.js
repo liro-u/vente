@@ -10,6 +10,7 @@ const Collections = () => {
         <div>
             <NavbarOffset />
             <Link to="/wallpaper/collections/lol" className="cancelLinkCss" ><h1>League of Legends</h1></Link>
+            <img src="frontend/public/wallpaper/Collection/LogoThemeLol.jpg" alt="toto"/>
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "./Navbar";
-import NavbarOffset from "./NavbarOffset";
+import Navbar from "../../components/Navbar";
+import NavbarOffset from "../../components/NavbarOffset";
 
 //Components
 

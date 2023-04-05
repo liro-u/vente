@@ -23,7 +23,7 @@ const DetailsPurchase = () => {
     const [wallpaper, setWallpaper] = useState(null)
     const [products, setProducts] = useState(null)
     const { download } = useDownload();
-    const { toggleAddProduct } = useAddShopping();
+    const { toggleAddShopping } = useAddShopping();
     const {user} = useAuthContext();
     const params = useParams();
     const {dispatch} = useNavbarContext();
@@ -35,10 +35,10 @@ const DetailsPurchase = () => {
     const [displayW, setDisplayP] = useState("none");
     const [isPending, setIsPending] = useState(false);
     const [product, setProduct] = useState("");
-    const [AddProduct, setAddProduct] = useState("");
+    const [productData, setProductData] = useState(null);
     const [emptyFields, setEmptyFields] = useState([]);
     const [price, setPrice] = useState();
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(1);
 
 
     const handleClick = () => {
@@ -57,8 +57,13 @@ const DetailsPurchase = () => {
     };
 
     const ChangeType = (event) => {
-
-        setProduct(event.target.value);
+        for (let i = 0; i < products.length; i++) {
+            if (products[i].product === event.target.value ) {
+                setProductData(products[i])
+                setProduct(event.target.value);
+                setPrice(products[i].price)
+            }
+        }
 
         if (event.target.value === "wallpaper") {
             setDisplayP("inherit")
@@ -66,12 +71,6 @@ const DetailsPurchase = () => {
         } else {
             setDisplayP("none")
             setDisplayW("inherit")
-        }
-
-        for (let i = 0; i < products.length; i++) {
-            if (products[i].product === event.target.value ) {
-                setPrice(products[i].price)
-            }
         }
 
 
@@ -102,24 +101,6 @@ const DetailsPurchase = () => {
         }
         fetchProduct()
 
-        const fetchUserAddProducts = async() => {
-            const response = await fetch(process.env.REACT_APP_PROXY + '/api/market/', {
-                method: 'POST',
-                body: JSON.stringify({}),
-                headers: {
-                    'Authorization': `Baerer ${user.token}`
-                }
-            })
-            const ContenerAddProducts = await response.json()
-
-            if (response.ok) {
-                setAddProduct(ContenerAddProducts);
-                console.log(ContenerAddProducts)
-            }else{
-                console.log("erreur")
-            }
-        }
-        fetchUserAddProducts()
 
 
     }, [params.id])
@@ -176,7 +157,7 @@ const DetailsPurchase = () => {
 
                             <p> {price} </p>
                             <button className=""
-                                    type="button" onClick={() => toggleAddProduct(wallpaper, isPending, setIsPending, user, quantity, product)}>
+                                    type="button" onClick={() => toggleAddShopping(wallpaper, quantity, productData,isPending ,setIsPending)}>
                                 Ajouter aux panier
                             </button>
 

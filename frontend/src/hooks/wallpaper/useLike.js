@@ -1,5 +1,5 @@
 import { useAuthContext } from '../auth/useAuthContext';
-import { useWallpaperContext } from '../wallpaper/useWallpaperContext';
+import { useWallpaperContext } from './useWallpaperContext';
 import { useVerifyAuth } from '../auth/useVerifyAuth';
 
 
@@ -31,7 +31,7 @@ export const useLike = () => {
                     newWallpaper: newWallpaper
                 }});
             }else{
-                verifyAuth()
+                verifyAuth(json)
                 console.log("error")
             }
             setIsPending(false)

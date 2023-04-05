@@ -51,6 +51,9 @@ const createProductRelation = async (req, res) => {
         emptyFields.push('quantity')
     }
     if (emptyFields.length > 0) {
+        console.log(emptyFields)
+        console.log(productId)
+        console.log(quantity)
         return res.status(400).json({ error: 'Need more data to add to basket', emptyFields })
     }
 

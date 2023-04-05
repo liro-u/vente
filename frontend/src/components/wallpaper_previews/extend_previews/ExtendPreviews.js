@@ -21,6 +21,9 @@ const ExtendPreviews = ({ x, title }) => {
         setIsLoading(true);
 
         let idArray = wallpapers.map(({ _id }) => _id)
+        if (likedFilter || newFilter || artistFilter.length > 0 || titleFilter.length > 0 || tagsFilter.length > 0 ){
+            idArray = []
+        }
         let headers = {
             'Content-type': 'application/json',
         }

@@ -5,7 +5,7 @@ export const useVerifyAuth = () => {
 
     const verifyAuth = (json) => {
 
-        if (json.error = "session expired") {
+        if (json.error === "session expired") {
             alert("session expired");
             logout();
         }

@@ -10,20 +10,16 @@ import {useDownload} from "../../hooks/wallpaper/useDownload";
 import {useAddShopping} from "../../hooks/Purchase/useAddShopping";
 
 
-
 //css
 import "../../css/DetailsPurchase.css"
-
-
-
 
 
 const DetailsPurchase = () => {
 
     const [wallpaper, setWallpaper] = useState(null)
     const [products, setProducts] = useState(null)
-    const { download } = useDownload();
-    const { toggleAddShopping } = useAddShopping();
+    const {download} = useDownload();
+    const {toggleAddShopping} = useAddShopping();
     const {user} = useAuthContext();
     const params = useParams();
     const {dispatch} = useNavbarContext();
@@ -58,14 +54,14 @@ const DetailsPurchase = () => {
 
     const ChangeType = (event) => {
         for (let i = 0; i < products.length; i++) {
-            if (products[i].product === event.target.value ) {
+            if (products[i].product === event.target.value) {
                 setProductData(products[i])
                 setProduct(event.target.value);
                 setPrice(products[i].price)
             }
         }
 
-        if (event.target.value === "wallpaper") {
+        if (event.target.value === "Wallpaper") {
             setDisplayP("inherit")
             setDisplayW("none")
         } else {
@@ -74,6 +70,10 @@ const DetailsPurchase = () => {
         }
 
 
+    }
+
+    const Quantity = (event) => {
+        setQuantity(event.target.value)
     }
 
 
@@ -87,33 +87,29 @@ const DetailsPurchase = () => {
 
         const fetchProduct = async () => {
             const response = await fetch(process.env.REACT_APP_PROXY + '/api/market/product',
-            {headers: {
-                'Authorization': `Baerer ${user.token}`
-            }}
+                {
+                    headers: {
+                        'Authorization': `Baerer ${user.token}`
+                    }
+                }
             )
             const ContenerProduct = await response.json()
 
             if (response.ok) {
                 setProducts(ContenerProduct);
-            }else{
+            } else {
                 console.log("erreur")
             }
         }
         fetchProduct()
 
 
-
     }, [params.id])
-
-
 
 
     const removeClassError = (err) => {
         setEmptyFields(emptyFields.filter((error) => error !== err))
     }
-
-
-
 
 
     return (
@@ -135,8 +131,8 @@ const DetailsPurchase = () => {
 
                         <select
                             onChange={ChangeType}
+                            className="selectStyle"
                             value={product}
-                            className={emptyFields.includes('object') ? 'error' : ''}
                             onClick={() => removeClassError("object")}
                         >
                             <option value='' hidden disabled>Choose a type of drawing</option>
@@ -147,7 +143,7 @@ const DetailsPurchase = () => {
 
                         </select>
                         <div style={{display: displayW}}>
-                            <button className=""
+                            <button className="butonDownload"
                                     type="button" onClick={() => download(wallpaper, isPending, setIsPending)}>
                                 Download
                             </button>
@@ -155,11 +151,28 @@ const DetailsPurchase = () => {
 
                         <div style={{display: displayP}}>
 
-                            <p> {price} </p>
-                            <button className=""
-                                    type="button" onClick={() => toggleAddShopping(wallpaper, quantity, productData,isPending ,setIsPending)}>
-                                Ajouter aux panier
-                            </button>
+                            <p className="price"> {price} €</p>
+
+                            <div className="achat">
+
+                                <button className="buttonAchat"
+                                        type="button"
+                                        onClick={() => toggleAddShopping(wallpaper, quantity, productData, isPending, setIsPending)}>
+                                    Ajouter aux panier
+                                </button>
+
+
+                                <select onChange={Quantity} className="quantityStyle">
+                                    <option value="1"> 1</option>
+                                    <option value="2"> 2</option>
+                                    <option value="3"> 3</option>
+                                    <option value="4"> 4</option>
+                                    <option value="5"> 5</option>
+
+                                </select>
+
+
+                            </div>
 
 
                         </div>
@@ -173,6 +186,7 @@ const DetailsPurchase = () => {
                     </div>
 
                 </div>}
+
 
         </div>
     )

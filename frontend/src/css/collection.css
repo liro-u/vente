@@ -1,0 +1,23 @@
+.collection {
+    height: 100%;
+}
+
+.collection  img {
+    width: 20%;
+}
+
+.ImageLol {
+    position:relative;
+}
+
+.Titre {
+    text-align: center;
+    color: var(--primary);
+    width: 20%;
+    top:296px;
+    position:absolute;
+    background: rgba(128, 128, 128, 0.8);
+}
+
+
+

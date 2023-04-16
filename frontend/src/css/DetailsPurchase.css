@@ -7,6 +7,7 @@
 }
 
 .ContainerDetailsPurchase .iconVisi{
+    cursor: pointer;
     position: absolute;
     right: 3%;
     top: 10%;
@@ -64,7 +65,7 @@
 }
 
 .ContainerDetailsPurchase .quantityStyle{
-    width: 60px;
+    width: 21%;
 }
 
 .ContainerDetailsPurchase .selectStyle{
@@ -76,6 +77,7 @@
 }
 
 .ContainerDetailsPurchase .selectStyle, .quantityStyle, .buttonAchat, .butonDownload{
+    cursor: pointer;
     background: transparent;
     border : 2.5px var(--primary) solid ;
     font-size: 1vw;

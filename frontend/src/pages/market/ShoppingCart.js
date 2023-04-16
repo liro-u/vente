@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Navbar from "../../components/Navbar";
 import NavbarOffset from "../../components/NavbarOffset";
 
@@ -7,6 +7,19 @@ import NavbarOffset from "../../components/NavbarOffset";
 //css
 
 const ShoppingCart = () => {
+
+    useEffect(() => {
+        const fecthImg = async () => {
+            const response = await fetch(process.env.REACT_APP_PROXY + '/api/market/');
+            const truc = await response.json()
+            console.log(truc)
+        }
+        fecthImg()
+
+
+
+    }, [])
+
 
 
     return(

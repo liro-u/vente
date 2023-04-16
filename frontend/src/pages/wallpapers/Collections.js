@@ -1,16 +1,31 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 // components
 import NavbarOffset from "../../components/NavbarOffset";
 
+//css
+import "../../css/collection.css";
+
+
 const Collections = () => {
 
     return (
-        <div>
-            <NavbarOffset />
-            <Link to="/wallpaper/collections/lol" className="cancelLinkCss" ><h1>League of Legends</h1></Link>
-            <img src="frontend/public/wallpaper/Collection/LogoThemeLol.jpg" alt="toto"/>
+        <div className="collection">
+            <NavbarOffset/>
+
+            <div className="ImageLol">
+            <Link to="/wallpaper/collections/lol" className="">
+                    <img className="lol" src="../wallpaper/Collection/LogoThemeLol.jpg" alt="toto"/>
+            </Link>
+                <div className="Titre">
+                League Of Legends
+                </div>
+            </div>
+
+
+
+
         </div>
     )
 }

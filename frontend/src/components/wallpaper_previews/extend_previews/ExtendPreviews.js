@@ -17,12 +17,12 @@ const ExtendPreviews = ({ x, title }) => {
     const { likedFilter, newFilter, artistFilter, titleFilter, tagsFilter } = useFilterContext();
 
     const { wallpapers, noMoreLoad, dispatch } = useWallpaperContext();
-    const fetchXWallpaper = async (x) => {
+    const fetchXWallpaper = async (x, resetIdArray = false) => {
         setIsLoading(true);
 
-        let idArray = wallpapers.map(({ _id }) => _id)
-        if (likedFilter || newFilter || artistFilter.length > 0 || titleFilter.length > 0 || tagsFilter.length > 0 ){
-            idArray = []
+        let idArray = []
+        if (!resetIdArray){
+            idArray = wallpapers.map(({ _id }) => _id)
         }
         let headers = {
             'Content-type': 'application/json',
@@ -69,7 +69,7 @@ const ExtendPreviews = ({ x, title }) => {
     useEffect(() => {
         dispatch({type: 'SET_NO_MORE_LOAD', payload: false});
         dispatch({type: 'SET_WALLPAPER', payload: []});
-        fetchXWallpaper(x)
+        fetchXWallpaper(x, true)
     }, [likedFilter, newFilter])
 
     return (

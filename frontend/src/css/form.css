@@ -18,6 +18,9 @@ form input, form select, form textarea {
     border-radius: 4px;
     font-family: "Fira Mono";
     box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 form button {

@@ -12,7 +12,7 @@ const WallpaperForm = ({ defaultWallpaper }) => {
     const {user} = useAuthContext();
     const { dispatch } = useWallpaperContext();
     const [isPending, setIsPending] = useState(false)
-    const {verifyAuth} = useVerifyAuth;
+    const {verifyAuth} = useVerifyAuth();
 
     const titleColors = ["default", "negative-default"];
     const defaultColor = titleColors[0];
@@ -37,7 +37,7 @@ const WallpaperForm = ({ defaultWallpaper }) => {
     }, [defaultWallpaper])
 
     const removeClassError = (err) => {
-        setEmptyFields(emptyFields.filter((error) => error !== err))
+        setEmptyFields(emptyFields ? emptyFields.filter((error) => error !== err) : [])
     }
 
     const handleSubmit = async (e) => {

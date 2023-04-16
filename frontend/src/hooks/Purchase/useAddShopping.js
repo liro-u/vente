@@ -12,7 +12,6 @@ export const useAddShopping = () => {
 
         if (!isPending) {
             setIsPending(true)
-            console.log(product)
             const Shopping = {wallpaperId : wallpaper._id, quantity, productId : product._id}
             const response = await fetch(process.env.REACT_APP_PROXY + '/api/market/', {
                 method: 'POST',
@@ -26,7 +25,7 @@ export const useAddShopping = () => {
 
 
         if (response.ok) {
-            console.log("cool")
+            alert("attend")
         }else{
             verifyAuth(json)
             console.log("error")

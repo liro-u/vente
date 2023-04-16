@@ -2,6 +2,7 @@
     position: relative;
     z-index: 101;
     color: var(--primary);
+    padding: 2%;
 
 }
 
@@ -37,12 +38,52 @@
 
 .ContainerDetailsPurchase .details{
     margin-left: 9%;
-    margin-top: 5%;
     width: 20%;
     height: 80%;
+    backdrop-filter: blur(15px) opacity(0.9);
+    border : 2.5px var(--primary) solid ;
+    border-radius: 10px;
 }
 
 .ContainerDetailsPurchase .reference{
     position: absolute;
     bottom: 0;
+    font-size: 1vw;
+}
+
+.ContainerDetailsPurchase .price{
+    font-size: 2vw;
+}
+
+.ContainerDetailsPurchase .achat{
+    display: flex;
+}
+
+.ContainerDetailsPurchase .buttonAchat{
+    margin-right: 5%;
+}
+
+.ContainerDetailsPurchase .quantityStyle{
+    width: 60px;
+}
+
+.ContainerDetailsPurchase .selectStyle{
+    margin-top: 25%;
+}
+
+.ContainerDetailsPurchase .butonDownload{
+    margin-top: 20%;
+}
+
+.ContainerDetailsPurchase .selectStyle, .quantityStyle, .buttonAchat, .butonDownload{
+    background: transparent;
+    border : 2.5px var(--primary) solid ;
+    font-size: 1vw;
+    color: var(--primary);
+    border-radius: 5px;
+    padding: 3%;
+}
+
+.ContainerDetailsPurchase option :hover{
+    background-color:  var(--primary);
 }

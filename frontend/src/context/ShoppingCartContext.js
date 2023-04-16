@@ -1,23 +1,23 @@
 import React, {createContext, useReducer} from "react";
-import {WallpaperContext} from "./WallpaperContext";
 
 export const ShoppingCartContext = createContext([]);
+
 export const ShoppingCartReducer = (state,action) => {
     switch (action.type){
         case 'SET_PRODUCT' :
             return {
                 ...state,
-                wallpapers : action.payload
+                products : action.payload
             }
         case 'ADD_PRODUCT' :
             return{
                 ...state,
-                wallpapers : [ ...state.wallpapers, ...action.payload]
+                products : [ ...state.products, ...action.payload]
             }
         case 'REMOVE_PRODUCT' :
             return {
                 ...state,
-                wallpapers: state.wallpapers.filter((w) => w._id !== action.payload._id)
+                products: state.products.filter((p) => p._id !== action.payload._id)
             }
         default:
             return state
@@ -26,7 +26,7 @@ export const ShoppingCartReducer = (state,action) => {
 
 export const ShoppingCartContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(ShoppingCartReducer, {
-        wallpapers: [],
+        products: [],
     })
 
     return (

@@ -28,7 +28,7 @@ const getProductRelations = async (req, res) => {
         } },
         { $addFields: { "product": { $arrayElemAt: ["$productList", 0] } } },
         { $project: { "productList": 0 } },
-
+        { $sort: { "createdAt": -1 } },
     ])
 
     res.status(200).json(userAddProducts);

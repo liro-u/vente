@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 import { useReload } from "../wallpaper/useReload";
+import { useWallpaperContext } from '../wallpaper/useWallpaperContext';
+
 
 export const useSignup = () => {
     const [emailError, setEmailError] = useState('');
@@ -8,7 +10,8 @@ export const useSignup = () => {
     const [globalError, setGlobalError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const { dispatch } = useAuthContext();
-    const { reloadWallpapers } = useReload();
+    const { wallpapers, wallpaperDispatch } = useWallpaperContext();
+    const { reloadWallpapers } = useReload(wallpapers, wallpaperDispatch);
 
     
 

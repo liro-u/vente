@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../../hooks/auth/useAuthContext";
+import { useVerifyAuth } from "../../hooks/auth/useVerifyAuth";
 
 //css
 import "../../css/form.css";
-import { useVerifyAuth } from "../../hooks/auth/useVerifyAuth";
 
 const ContactForm = () => {
     const defaultObjects = [

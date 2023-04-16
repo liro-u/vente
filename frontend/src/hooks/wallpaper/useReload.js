@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { useWallpaperContext } from './useWallpaperContext';
 import { useVerifyAuth } from '../auth/useVerifyAuth';
 
 
-export const useReload = () => {
-    const { wallpapers, dispatch } = useWallpaperContext();
+export const useReload = (wallpapers, dispatch) => {
     const [isLoading, setIsLoading] = useState(false);
     const {verifyAuth} = useVerifyAuth();
     

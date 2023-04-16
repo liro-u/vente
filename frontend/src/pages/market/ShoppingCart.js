@@ -1,32 +1,21 @@
 import React, {useEffect, useState} from "react";
-import Navbar from "../../components/Navbar";
-import NavbarOffset from "../../components/NavbarOffset";
 import {useAuthContext} from "../../hooks/auth/useAuthContext";
-import {useParams} from "react-router-dom";
+import { useShoppingCartContext } from "../../hooks/Purchase/useShoppingCartContext";
+import { useReload } from "../../hooks/wallpaper/useReload";
 
 
 //Components
+import Navbar from "../../components/Navbar";
+import NavbarOffset from "../../components/NavbarOffset";
 
 //css
+import "../../css/shopping.css";
 
 const ShoppingCart = () => {
-    const [shopping, setShopping] = useState([])
-    const [wallpaper, setWallpaper] = useState(null)
-    const [id, setId] = useState(null)
-    const [products, setProducts] = useState(null)
-
     const {user} = useAuthContext();
-
+    const { products, dispatch } = useShoppingCartContext();
+    
     useEffect(() => {
-
-        const fecthImg = async (id) => {
-            const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/' + id);
-            const img = await response.json()
-            setWallpaper(img);
-        }
-        fecthImg(id)
-
-
         const fecthShopping = async () => {
             const response = await fetch(process.env.REACT_APP_PROXY + '/api/market/',
                 {
@@ -34,44 +23,32 @@ const ShoppingCart = () => {
                         'Authorization': `Baerer ${user.token}`
                     }
                 });
-            const shoppingBasket = await response.json()
-            setShopping(shoppingBasket)
+            const shoppingBasket = await response.json();
+            dispatch({type: 'SET_PRODUCT', payload: shoppingBasket});
         }
         fecthShopping()
-
-        const fetchProduct = async () => {
-            const response = await fetch(process.env.REACT_APP_PROXY + '/api/market/product',
-                {
-                    headers: {
-                        'Authorization': `Baerer ${user.token}`
-                    }
-                }
-            )
-            const ContenerProduct = await response.json()
-
-            if (response.ok) {
-                setProducts(ContenerProduct);
-            } else {
-                console.log("erreur")
-            }
-        }
-        fetchProduct()
-
-
-    }, [id])
+    }, [])
 
 
     return (
         <div className="ShoppingCart">
 
+            <Navbar/>
             <NavbarOffset/>
-            {(shopping && wallpaper) &&
-            <div>
-                {shopping.map(({_id, quantity, productId}) => (
-                    <p key={_id}>{_id} Quantité : {quantity} Product : {productId}</p>
+            {(products) &&
+            <table><tbody>
+                {products.map(({_id, quantity, product, wallpaper}) => (
+                    <tr key={_id}>
+                        <td><img className="overview" src={wallpaper.imageLink} /></td>
+                        <td>
+                            <h1>{wallpaper.title} <small>x{quantity}</small></h1>
+                            <h2>{product.product} {product.price}€</h2>
+                        </td>
+                        <td><h2>Total : {product.price * quantity}</h2></td>
+                    </tr>
                 ))}
 
-            </div>}
+            </tbody></table>}
 
         </div>
     )

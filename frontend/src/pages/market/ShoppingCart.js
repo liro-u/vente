@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import Navbar from "../../components/Navbar";
 import NavbarOffset from "../../components/NavbarOffset";
+import {useAuthContext} from "../../hooks/auth/useAuthContext";
+
 
 //Components
 
@@ -8,9 +10,16 @@ import NavbarOffset from "../../components/NavbarOffset";
 
 const ShoppingCart = () => {
 
+    const {user} = useAuthContext();
+
     useEffect(() => {
         const fecthImg = async () => {
-            const response = await fetch(process.env.REACT_APP_PROXY + '/api/market/');
+            const response = await fetch(process.env.REACT_APP_PROXY + '/api/market/',
+            {
+                headers: {
+                    'Authorization': `Baerer ${user.token}`
+                }
+            });
             const truc = await response.json()
             console.log(truc)
         }

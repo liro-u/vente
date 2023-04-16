@@ -172,6 +172,7 @@ const DetailsPurchase = () => {
                                 </select>
 
 
+
                             </div>
 
 
@@ -184,6 +185,7 @@ const DetailsPurchase = () => {
                         </div>
 
                     </div>
+
 
                 </div>}
 

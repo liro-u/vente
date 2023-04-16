@@ -2,6 +2,10 @@
     position: relative;
 }
 
+.previewWallpaper {
+    overflow: hidden;
+}
+
 .extendPreviewsCTN .detail-box {
     background-size: cover;
     background-position: center center;

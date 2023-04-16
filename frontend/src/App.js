@@ -57,7 +57,7 @@ function App() {
             <Route exact path="/wallpaper/collections/lol" element={<ThemeLOL />} />
 
             {/* PURCHASE */}
-            <Route exact path="/wallpaper/detailspurchase/:id" element={user ? <DetailsPurchase /> : <Navigate to="/" />} />
+            <Route exact path="/wallpaper/detailspurchase/:id" element={user ? <DetailsPurchase /> : <Navigate to="/login" />} />
             <Route exact path="/wallpaper/shoppingcart" element={user ? <ShoppingCart /> : <Navigate to="/" />} />
 
             {/* DEBUG */}

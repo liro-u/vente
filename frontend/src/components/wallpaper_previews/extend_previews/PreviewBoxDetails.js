@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useWallpaperContext } from '../../../hooks/wallpaper/useWallpaperContext';
 import { useAuthContext } from '../../../hooks/auth/useAuthContext';
 import TextApparition from "../../animations/TextApparition";
@@ -14,6 +14,7 @@ const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
     const { handleDelete } = useDelete();
     const {toggleLike } = useLike();
     const [isPending, setIsPending] = useState(false)
+    const navigate  = useNavigate();
 
     const [titleColor, setTitleColor] = useState("");
     const [isSelect, setIsSelect] = useState(false);
@@ -24,9 +25,9 @@ const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
         setIsSelect(!isSelect);
     }
 
-    
-
-    
+    const redirect = () => {
+        navigate('/login');
+    }
 
     
 
@@ -62,10 +63,10 @@ const PreviewBoxDetails = ({wallpaper, disabled=false, isLast=false}) => {
                     paddingBottom: isLast && isSelect && !noMoreLoad ? "50px" : "0"
                 }}
             >
-                {user && <div className="flexIconBox">
+                <div className="flexIconBox">
                     <Link to={"/wallpaper/detailspurchase/" + wallpaper._id}><ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span className="material-symbols-outlined icon iconFilled">shopping_cart</span></ButtonUnderline></Link>
-                    <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span onClick={() => toggleLike(wallpaper, isPending, setIsPending)} className={"material-symbols-outlined icon iconFilled " + (wallpaper.liked ? "liked" : "")}>favorite</span></ButtonUnderline>
-                </div>}
+                    <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span onClick={() => user ? toggleLike(wallpaper, isPending, setIsPending) : redirect()} className={"material-symbols-outlined icon iconFilled " + (wallpaper.liked ? "liked" : "")}>favorite</span></ButtonUnderline>
+                </div>
                 <ButtonUnderline underlineClassName = "" textColorOut = "negativeDefaultFontColor" textColorOver = "primaryFont" time="0.2"><span onClick={() => download(wallpaper, isPending, setIsPending)} className="material-symbols-outlined icon iconFilled">download</span></ButtonUnderline>
                 {user && (user.role === 'admin' || (user.role === 'artist' && user._id === wallpaper.artistId)) && <div className="flexIconBox">
                     {isPending ?

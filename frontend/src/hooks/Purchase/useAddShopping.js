@@ -1,5 +1,4 @@
 import {useAuthContext} from "../auth/useAuthContext";
-import {useWallpaperContext} from "../wallpaper/useWallpaperContext";
 import {useVerifyAuth} from "../auth/useVerifyAuth";
 
 

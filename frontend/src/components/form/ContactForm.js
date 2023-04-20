@@ -36,7 +36,7 @@ const ContactForm = () => {
         }else{
             setObjects(defaultObjects)
         }
-    }, [user, objects])
+    }, [user])
 
     const removeClassError = (err) => {
         setEmptyFields(emptyFields.filter((error) => error !== err))

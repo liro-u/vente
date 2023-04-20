@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ContactForm from "./form/ContactForm";
 import NavbarOffset from "./NavbarOffset";
 

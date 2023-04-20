@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 
 //Components
 import NavbarOffset from "../../components/NavbarOffset";
@@ -101,10 +101,12 @@ const DetailsPurchase = () => {
                 console.log("erreur")
             }
         }
-        fetchProduct()
+        if (user) {
+            fetchProduct()
+        }
 
 
-    }, [params.id])
+    }, [params.id, user, user.tokken])
 
 
     const removeClassError = (err) => {

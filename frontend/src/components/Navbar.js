@@ -65,7 +65,7 @@ const Navbar = () => {
         HoverBackground();
         updatePos();
 
-    }, [height, isOver, visible])
+    }, [height, isOver, visible, dispatch])
 
 
     return (

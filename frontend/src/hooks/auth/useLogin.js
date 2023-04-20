@@ -9,7 +9,7 @@ export const useLogin = () => {
     const [globalError, setGlobalError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const { dispatch } = useAuthContext();
-    const { wallpapers, wallpaperDispatch } = useWallpaperContext();
+    const { wallpapers, dispatch: wallpaperDispatch } = useWallpaperContext();
     const { reloadWallpapers } = useReload(wallpapers, wallpaperDispatch);
 
     const login = async (email, password) => {

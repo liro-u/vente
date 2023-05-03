@@ -76,7 +76,7 @@
     margin-top: 20%;
 }
 
-.ContainerDetailsPurchase .selectStyle, .quantityStyle, .buttonAchat, .butonDownload{
+.ContainerDetailsPurchase .selectStyle, .ContainerDetailsPurchase .quantityStyle, .ContainerDetailsPurchase .buttonAchat, .ContainerDetailsPurchase .butonDownload{
     cursor: pointer;
     background: transparent;
     border : 2.5px var(--primary) solid ;

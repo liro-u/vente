@@ -1,3 +1,25 @@
 .overview{
     width: 200px;
 }
+
+
+.ShoppingCart .buttonAchat, .ShoppingCart .quantityStyle{
+    cursor: pointer;
+    background: transparent;
+    border : 2.5px var(--primary) solid ;
+    font-size: 1vw;
+    color: var(--primary);
+    border-radius: 5px;
+    padding: 3%;
+}
+
+.ShoppingCart  .quantityStyle{
+    width: fit-content;
+    height: fit-content;
+    padding: 7%;
+}
+
+.ShoppingCart table{
+    padding: 5%;
+    border-spacing: 100px 100px;
+}

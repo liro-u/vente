@@ -1,44 +1,42 @@
 import { useAuthContext } from '../auth/useAuthContext';
 import { useVerifyAuth } from '../auth/useVerifyAuth';
-import { useWallpaperContext } from './useWallpaperContext';
+import {useShoppingCartContext} from "./useShoppingCartContext";
 
 
-export const useDelete = () => {
+export const useDeleteProducts = () => {
     const {user} = useAuthContext();
-    const { dispatch } = useWallpaperContext();
+    const { dispatch } = useShoppingCartContext();
     const { verifyAuth } = useVerifyAuth();
 
 
-    const handleDelete = async (wallpaper, isPending, setIsPending) => {
+    const handleDeleteProducts = async (products, isPending, setIsPending) => {
         if (!user){
             alert('You must be logged in')
             return
         }
         if (!isPending) {
             setIsPending(true)
-            if (window.confirm("Do you really want to delete this wallpaper ?")) {
-                const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/' + wallpaper._id, {
+                const response = await fetch(process.env.REACT_APP_PROXY + '/api/market/' + products._id, {
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Baerer ${user.token}`
                     }
                 })
                 const json = await response.json();
-        
+
                 if (response.ok) {
-                    dispatch({type: 'DELETE_WALLPAPER', payload: json});
+                    dispatch({type: 'REMOVE_PRODUCT', payload: json});
                 }else{
                     verifyAuth(json);
                     console.log(json)
                     if (json.error !== "request is not authorized") {
-                        // if not found on db, delete anyway because maybe was delete by someone else
-                        dispatch({type: 'DELETE_WALLPAPER', payload: wallpaper});
+                        // if not found on db, delete anyway because maybe was deleted by someone else
+                        dispatch({type: 'REMOVE_PRODUCT', payload: products});
                     }
                 }
-            }
             setIsPending(false)
         }
     }
 
-    return {handleDelete};
+    return {handleDeleteProducts};
 }

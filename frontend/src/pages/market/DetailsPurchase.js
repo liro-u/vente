@@ -129,7 +129,7 @@ const DetailsPurchase = () => {
 
                     <div className="details" style={{visibility: visibility}}>
 
-                        <h1 className="Answer"> I see you, wretched creature ! </h1>
+                        <h1 className="Answer">Crafted with pride MadeInome</h1>
                         <h2 className="Title">{wallpaper.title}</h2>
 
                         <select

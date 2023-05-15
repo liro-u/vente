@@ -7,6 +7,7 @@ import Navbar from "../../components/Navbar";
 import NavbarOffset from "../../components/NavbarOffset";
 import ButtonUnderline from "../../components/buttons/ButtonUnderline";
 import {useDeleteProducts} from "../../hooks/Purchase/useDeleteProducts";
+import { useVerifyAuth } from "../../hooks/auth/useVerifyAuth";
 
 //css
 import "../../css/shopping.css";
@@ -17,16 +18,43 @@ const ShoppingCart = () => {
     const {user} = useAuthContext();
     const { handleDeleteProducts } = useDeleteProducts();
     const [isPending, setIsPending] = useState(false)
+    const [error, setError] = useState('');
     const { products, dispatch } = useShoppingCartContext();
+    const {verifyAuth} = useVerifyAuth();
+    
+    const changeQuantity = async (product, value) => {
+        if (!user){
+            setError('You must be logged in')
+            return
+        }
 
-    const changeQuantity = (product,value) => {
-         let defaultProduct = product
+        setIsPending(true)
+        let defaultProduct = product
         product.quantity = value
-        dispatch({type: 'REPLACE_PRODUCT', payload: {
+        
+
+        const response = await fetch(process.env.REACT_APP_PROXY + '/api/market/' + product._id, {
+            method: "PATCH",
+            body: JSON.stringify(product),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Baerer ${user.token}`
+            }
+        })
+        const json = await response.json();
+
+        if (!response.ok) {
+            verifyAuth(json);
+            setError(json.error);
+        }else{
+            dispatch({type: 'REPLACE_PRODUCT', payload: {
                 lastProduct: defaultProduct,
                 newProduct: product
             }});
+        }
+        setIsPending(false)
     }
+    
     
     useEffect(() => {
         const fecthShopping = async () => {

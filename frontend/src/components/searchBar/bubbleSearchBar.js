@@ -11,16 +11,21 @@ const BubbleSearchBar = ({content, color = "rgba(216, 112, 147, 0.716)", classNa
         }
     }
 
+    const handleChange = (new_value) => {
+        dispatch({type: dispatch_type, payload: new_value});
+    }
+
     return (
         <div 
             className={'bubbleSearchBar ' + className}
             onClick={handleClick}
             style={{
-                backgroundColor: (value && !searchBar ? color : "")
+                backgroundColor: (value && !searchBar ? color : ""),
+                cursor: "pointer"
             }}        
         >
             <p className='searchBarLabel' >{content + (searchBar ? " : " : "")}</p>
-            {searchBar && <input type='text' className={'searchBar ' + className}/>}
+            {searchBar && <input type='text' onChange={(e) => handleChange(e.target.value)} className={'searchBar ' + className} value={value}/>}
         </div>
     )
 }

@@ -10,11 +10,13 @@ import { useVerifyAuth } from "../../../hooks/auth/useVerifyAuth";
 import BubbleSearchBar from "../../searchBar/bubbleSearchBar";
 import { useFilterContext } from "../../../hooks/wallpaper/useFilterContext";
 
+let first_load = 0;
+
 const ExtendPreviews = ({ x, title }) => {
     const {user} = useAuthContext();
     const [isLoading, setIsLoading] = useState(false);
     const {verifyAuth} = useVerifyAuth();
-    const { likedFilter, newFilter, artistFilter, titleFilter, tagsFilter } = useFilterContext();
+    const { likedFilter, newFilter, searchFilter } = useFilterContext();
 
     const { wallpapers, noMoreLoad, dispatch } = useWallpaperContext();
     const fetchXWallpaper = async (x, resetIdArray = false) => {
@@ -38,9 +40,7 @@ const ExtendPreviews = ({ x, title }) => {
                 filters: {
                     liked: likedFilter,
                     new: newFilter,
-                    artist: artistFilter,
-                    title: titleFilter,
-                    tags: tagsFilter,
+                    search: searchFilter,
                 }
             }),
             headers
@@ -48,10 +48,20 @@ const ExtendPreviews = ({ x, title }) => {
         const json = await response.json();
 
         if (response.ok) {
-            if (json.length < x) {
-                dispatch({type: 'SET_NO_MORE_LOAD', payload: true});
+            if (JSON.stringify(json.filters) === JSON.stringify({
+                liked: likedFilter,
+                new: newFilter,
+                search: searchFilter,
+            })){
+                if (resetIdArray){
+                    dispatch({type: 'SET_NO_MORE_LOAD', payload: false});
+                    dispatch({type: 'SET_WALLPAPER', payload: []});
+                }
+                if (json.wallpapers.length < x) {
+                    dispatch({type: 'SET_NO_MORE_LOAD', payload: true});
+                }
+                dispatch({type: 'MERGE_WALLPAPER', payload: json.wallpapers});
             }
-            dispatch({type: 'MERGE_WALLPAPER', payload: json});
         }else{
             if (user){
                 verifyAuth(json);
@@ -60,17 +70,31 @@ const ExtendPreviews = ({ x, title }) => {
         setIsLoading(false);
     }
 
+    // init
     useEffect(() => {
+        first_load = 0;
         if (wallpapers.length === 0){
-            fetchXWallpaper(x)
+            fetchXWallpaper(x, true)
         }
-    }, [x, user])
+    }, [x])
 
+    // reset on filter change
     useEffect(() => {
-        dispatch({type: 'SET_NO_MORE_LOAD', payload: false});
-        dispatch({type: 'SET_WALLPAPER', payload: []});
-        fetchXWallpaper(x, true)
-    }, [likedFilter, newFilter])
+        if (first_load === 2){
+            fetchXWallpaper(x, true)
+        }else{
+            first_load+=1;
+        }
+    }, [likedFilter, newFilter, searchFilter])
+
+    // reset on deco
+    useEffect(() => {
+        if (first_load === 2){
+            fetchXWallpaper(x, true)
+        }else{
+            first_load+=1;
+        }
+    }, [user])
 
     return (
         <div className="extendPreviews extendPreviewsCTN">
@@ -79,9 +103,7 @@ const ExtendPreviews = ({ x, title }) => {
                     <h1 className="pageTitle negativeDefaultFontColor">{title}</h1>
                     <div className="searchContainer" >
                         <div className="filterContainer">
-                            <BubbleSearchBar className="negativeDefaultFontColor" content="Artist" dispatch_type="" value={artistFilter}/>
-                            <BubbleSearchBar className="negativeDefaultFontColor" content="Tags" dispatch_type="" value={tagsFilter}/>
-                            <BubbleSearchBar className="negativeDefaultFontColor" content="Title" dispatch_type="" value={titleFilter}/>
+                            <BubbleSearchBar className="negativeDefaultFontColor" content="Search" dispatch_type="SET_SEARCH" value={searchFilter}/>
                         </div>
                         <div className="sortContainer">
                             <BubbleSearchBar className="negativeDefaultFontColor" color="#FD8A8A99" content="Like" searchBar={false} dispatch_type="SET_LIKED" value={likedFilter}/>

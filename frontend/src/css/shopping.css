@@ -2,6 +2,9 @@
     width: 200px;
 }
 
+.ShoppingCart{
+ text-align: center;
+}
 
 .ShoppingCart .buttonAchat, .ShoppingCart .quantityStyle{
     cursor: pointer;

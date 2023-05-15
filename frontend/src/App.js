@@ -19,8 +19,6 @@ import PublishWallpaper from './pages/wallpapers/PublishWallpaper';
 import EditWallpaper from './pages/wallpapers/EditWallpaper';
 //collections
 import ThemeLOL from './pages/collections/ThemeLOL';
-//debug
-import DebugDb from './pages/debug/DebugDb';
 //purchase
 import DetailsPurchase from "./pages/market/DetailsPurchase";
 import ShoppingCart from "./pages/market/ShoppingCart";
@@ -28,6 +26,8 @@ import ShoppingCart from "./pages/market/ShoppingCart";
 // component
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+import Artist from './pages/artist/Artist';
+import EditProfile from './pages/profil/Edit';
 
 
 
@@ -50,18 +50,21 @@ function App() {
             {/* WALLPAPERS */}
             <Route exact path="/wallpaper/discovery" element={<Discovery />} />
             <Route exact path="/wallpaper/collections" element={<Collections />} />
-            <Route exact path="/wallpaper/publish" element={(user && (user.role === 'admin' || user.role === 'artist')) ? <PublishWallpaper /> : <Navigate to="/" />} />
-            <Route exact path="/wallpaper/edit/:id" element={(user && (user.role === 'admin' || user.role === 'artist')) ? <EditWallpaper /> : <Navigate to="/" />} />
+            <Route exact path="/wallpaper/publish" element={(user && (user.role === 'admin' || user.role === 'artist')) ? <PublishWallpaper /> : <Navigate to="/login" />} />
+            <Route exact path="/wallpaper/edit/:id" element={(user && (user.role === 'admin' || user.role === 'artist')) ? <EditWallpaper /> : <Navigate to="/login" />} />
 
             {/* COLLECTIONS */}
             <Route exact path="/wallpaper/collections/lol" element={<ThemeLOL />} />
 
+            {/* ARTIST */}
+            <Route exact path="/wallpaper/artist" element={<Artist />} />
+
             {/* PURCHASE */}
             <Route exact path="/wallpaper/detailspurchase/:id" element={user ? <DetailsPurchase /> : <Navigate to="/login" />} />
-            <Route exact path="/wallpaper/shoppingcart" element={user ? <ShoppingCart /> : <Navigate to="/" />} />
+            <Route exact path="/wallpaper/shoppingcart" element={user ? <ShoppingCart /> : <Navigate to="/login" />} />
 
-            {/* DEBUG */}
-            <Route exact path="/debug/db" element={(user && user.role === 'admin') ? <DebugDb /> : <Navigate to="/" />} />
+            {/* PROFILE */}
+            <Route exact path="/profil/edit" element={user ? <EditProfile /> : <Navigate to="/login" />} />
           </Routes>
         </div>
         <Footer />

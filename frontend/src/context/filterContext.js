@@ -14,20 +14,11 @@ export const filterReducer = (state, action) => {
                 ...state,
                 newFilter: action.payload,
             }
-        case 'SET_TAGS':
+        case 'SET_SEARCH':
+            console.log("update : " + state.searchFilter);
             return {
                 ...state,
-                tagsFilter: action.payload,
-            }
-        case 'SET_ARTIST':
-            return {
-                ...state,
-                artistFilter: action.payload,
-            }
-        case 'SET_TITLE':
-            return {
-                ...state,
-                titleFilter: action.payload,
+                searchFilter: action.payload,
             }
         default:
             return state
@@ -38,9 +29,7 @@ export const FilterContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(filterReducer, {
         likedFilter: false,
         newFilter: false,
-        tagsFilter: [],
-        titleFilter: [],
-        artistFilter: [],
+        searchFilter: "",
     })
         
     return (

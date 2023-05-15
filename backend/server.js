@@ -8,7 +8,6 @@ import cors from 'cors';
 // routes
 import wallpaperRoutes from './routes/wallpaperRoutes.js'
 import userRoutes from './routes/userRoutes.js'
-import debugRoutes from './routes/debugRoutes.js'
 import contactRoutes from './routes/contactRoutes.js'
 import marketRoutes from './routes/marketRoutes.js'
 
@@ -29,7 +28,6 @@ app.use((req, res, next) => {
 app.use('/api/wallpapers', wallpaperRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/contact', contactRoutes)
-app.use('/api/debug', debugRoutes);
 app.use('/api/market/', marketRoutes);
 
 // connect to db

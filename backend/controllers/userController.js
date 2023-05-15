@@ -75,7 +75,31 @@ const signupUser = async (req, res) => {
     }
 }
 
+const editUser = async (req, res) => {
+    const user = req.user;
+
+    let errors = { pseudo: '', global: '' };
+
+    const userExist = await User.findOne({ pseudo: req.body.pseudo });
+
+    if (!userExist){
+        const new_user = await User.findOneAndUpdate({ _id: user._id }, {
+            pseudo: req.body.pseudo
+        }, { returnOriginal: false });
+        console
+        res.status(200).json({
+            pseudo: new_user.pseudo,
+            role: new_user.role
+        });
+    }else{
+        errors.pseudo = "pseudo is already taken"
+        res.status(401).json({ errors });
+    }
+    
+}
+
 export default {
     loginUser,
-    signupUser
+    signupUser,
+    editUser
 };

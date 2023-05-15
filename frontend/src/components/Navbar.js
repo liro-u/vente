@@ -87,7 +87,7 @@ const Navbar = () => {
                         className="">Discovery</ButtonBorderAnimated> </Link></li>
                     <li><Link to="/wallpaper/collections" className="bouton cancelLinkCss"> <ButtonBorderAnimated
                         className="">Collections</ButtonBorderAnimated> </Link></li>
-                    <li><Link to="" className="bouton cancelLinkCss"> <ButtonBorderAnimated
+                    <li><Link to="/wallpaper/artist" className="bouton cancelLinkCss"> <ButtonBorderAnimated
                         className="">Artists</ButtonBorderAnimated> </Link></li>
                 </ul>
             </div>
@@ -98,7 +98,8 @@ const Navbar = () => {
                         <Link to="/wallpaper/publish"><ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span className="material-symbols-outlined icon">add</span></ButtonUnderline></Link>
                     }
                     <Link to="/wallpaper/shoppingcart"> <ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span className="material-symbols-outlined icon">shopping_bag</span></ButtonUnderline></Link>
-                    <ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span onClick={logout} className="material-symbols-outlined icon">person</span></ButtonUnderline>
+                    <Link to="/profil/edit"><ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span className="material-symbols-outlined icon">settings</span></ButtonUnderline></Link>
+                    <ButtonUnderline underlineClassName="" textColorOver="primaryFont" time="0.2"><span onClick={logout} className="material-symbols-outlined icon">logout</span></ButtonUnderline>
                 </div>
                 :
                 <div className="auth">

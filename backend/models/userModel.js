@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
     },
     pseudo: {
         type: String,
-        required: [true, 'Please enter a pseudo'],
+        unique: true,
     },
     role: {
         type: String,
@@ -36,6 +36,7 @@ const userSchema = new mongoose.Schema({
 userSchema.pre('save', async function (next) {
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(this.password, salt);
+    this.pseudo = "user_" + this._id;
     next();
 });
 

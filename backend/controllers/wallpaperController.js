@@ -108,18 +108,6 @@ const getXWallpapers = async (req, res) => {
 
     let aggregateOptions = [{ $match: { _id: { $nin : idArray } } }]
 
-    if (filters.new) {
-        if (!filters.liked) {
-            let newAggregate = [
-                { $sort : { createdAt : -1 } },
-                { $limit : x }
-            ]
-            aggregateOptions = [...aggregateOptions, ...newAggregate]
-        }
-    }else{
-        aggregateOptions = [...aggregateOptions, ...[{ $sample: { size: x } }]]
-    }
-
     aggregateOptions = [...aggregateOptions, ...[
         { $lookup : {
             from: 'users',
@@ -133,6 +121,32 @@ const getXWallpapers = async (req, res) => {
         { $project: { "user": 0 } },
         
     ]]
+
+    if (filters.search){
+        console.log(filters.search)
+        let newAggregate = [
+            { $match: {
+                $or: [
+                    { title: { $regex: "\\b" + filters.search, $options: "i"} },
+                    { pseudo: { $regex: "\\b" + filters.search, $options: "i"} }
+                ]
+            } }
+        ]
+        aggregateOptions = [...aggregateOptions, ...newAggregate]
+    }
+    if (filters.new) {
+        if (!filters.liked) {
+            let newAggregate = [
+                { $sort : { createdAt : -1 } },
+                { $limit : x }
+            ]
+            aggregateOptions = [...aggregateOptions, ...newAggregate]
+        }
+    }else{
+        aggregateOptions = [...aggregateOptions, ...[{ $sample: { size: x } }]]
+    }
+
+    
         
     if (user){
         let userAggregate = [
@@ -170,7 +184,7 @@ const getXWallpapers = async (req, res) => {
 
     const wallpapers = await Wallpaper.aggregate(aggregateOptions)
 
-    res.status(200).json(wallpapers);
+    res.status(200).json({wallpapers, filters: filters});
 };
 
 const reloadWallpapers = async (req, res) => {

@@ -24,7 +24,7 @@ export const useAddShopping = () => {
 
 
         if (response.ok) {
-            alert("attend")
+            alert("Ajouté au panier !")
         }else{
             verifyAuth(json)
             console.log("error")

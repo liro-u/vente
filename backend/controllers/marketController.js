@@ -2,6 +2,7 @@ import UserAddProduct from '../models/userAddProductModel.js';
 import Product from '../models/productModel.js'
 
 import mongoose from 'mongoose';
+import Wallpaper from "../models/wallpaperModel.js";
 
 // Get all products relations
 const getProductRelations = async (req, res) => {
@@ -74,17 +75,17 @@ const deleteProductRelation = async (req, res) => {
     const user = req.user;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: "No such wallpaper" });
+        return res.status(404).json({ error: "No such product" });
     }
 
-    const wallpaper = await Wallpaper.findOne({ _id: id });
+    const product = await UserAddProduct.findOne({ _id: id });
 
-    if (!wallpaper) {
-        return res.status(400).json({ error: "No such wallpaper" });
+    if (!product) {
+        return res.status(400).json({ error: "No such product" });
     }else {
-        if (user._id.toString() === wallpaper.artistId.toString() || user.role === 'admin') {
-            await Wallpaper.findOneAndDelete({ _id: id });
-            res.status(200).json(wallpaper);
+        if (user._id.toString() === product.userId.toString() || user.role === 'admin') {
+            await UserAddProduct.findOneAndDelete({ _id: id });
+            res.status(200).json(product);
         } else {
             res.status(401).json({ error: "request is not authorized" });
         }
@@ -99,19 +100,19 @@ const updateProductRelation = async (req, res) => {
     let emptyFields = [];
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: "No such wallpaper", emptyFields });
+        return res.status(404).json({ error: "No such productRelation", emptyFields });
     }
 
-    const wallpaper = await Wallpaper.findOne({ _id: id });
+    const productRelation = await UserAddProduct.findOne({ _id: id });
 
-    if (!wallpaper) {
-        return res.status(400).json({ error: "No such wallpaper", emptyFields });
+    if (!productRelation) {
+        return res.status(400).json({ error: "No such productRelation", emptyFields });
     }else{
-        if (user._id.toString() === wallpaper.artistId.toString() || user.role === 'admin') {
-            await Wallpaper.findOneAndUpdate({ _id: id }, {
+        if (user._id.toString() === productRelation.userId.toString() || user.role === 'admin') {
+            await UserAddProduct.findOneAndUpdate({ _id: id }, {
                 ...req.body
             })
-            res.status(200).json(wallpaper);
+            res.status(200).json(productRelation);
         }else{
             res.status(401).json({ error: "request is not authorized" });
         }

@@ -128,7 +128,8 @@ const getXWallpapers = async (req, res) => {
             { $match: {
                 $or: [
                     { title: { $regex: "\\b" + filters.search, $options: "i"} },
-                    { pseudo: { $regex: "\\b" + filters.search, $options: "i"} }
+                    { pseudo: { $regex: "\\b" + filters.search, $options: "i"} },
+                    { tags: { $regex: "\\b" + filters.search, $options: "i"} }
                 ]
             } }
         ]
@@ -243,7 +244,7 @@ const reloadWallpapers = async (req, res) => {
 // POST a new Wallpaper
 const createWallpaper = async (req, res) => {
     const user = req.user;
-    const {imageLink, title, titleColor } = req.body;
+    const {imageLink, title, titleColor, tags } = req.body;
 
     let emptyFields = [];
 
@@ -263,7 +264,7 @@ const createWallpaper = async (req, res) => {
     // add doc to db
     try {
         console.log(user._id)
-        const wallpaper = await Wallpaper.create({ imageLink, artistId: user._id, title, titleColor });
+        const wallpaper = await Wallpaper.create({ imageLink, artistId: user._id, title, titleColor, tags });
         res.status(200).json(wallpaper);
     }
     catch (err) {

@@ -4,7 +4,7 @@ import ExtendPreviews from "../../components/wallpaper_previews/extend_previews/
 const Discovery = () => {
     return (
         <div>
-            <ExtendPreviews x="5" title="Discovery" />
+            <ExtendPreviews x="10" title="Discovery" />
         </div>
     )
 }

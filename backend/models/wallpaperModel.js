@@ -17,6 +17,9 @@ const wallpaperSchema = new mongoose.Schema({
     titleColor: {
         type: String,
         required: true
+    },
+    tags: {
+        type: String,
     }
 }, { timestamps: true });
 

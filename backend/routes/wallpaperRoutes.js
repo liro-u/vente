@@ -10,9 +10,9 @@ const router = express.Router();
 
 router.get('/download/:id', wallpaperController.downloadWallpaper);
 router.get('/', wallpaperController.getWallpapers);
-router.get('/:id', wallpaperController.getWallpaper);
 
 router.use(tryAddAuth) // add data of user if data is passed
+router.get('/:id', wallpaperController.getWallpaper);
 router.post('/getX', wallpaperController.getXWallpapers);
 router.post("/reloadList", wallpaperController.reloadWallpapers);
 

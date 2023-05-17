@@ -49,7 +49,11 @@ const FlipCard = ({id}) => {
 
     useEffect(() => {
         const fecthImg = async (id) => {
-            const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/' + id);
+            const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/' + id, {
+                headers: {
+                    'Authorization': `Baerer ${user.token}`,
+                },
+            });
             const img = await response.json()
             setWallpaper(img);
         }

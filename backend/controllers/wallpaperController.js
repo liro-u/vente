@@ -49,6 +49,7 @@ const getWallpaperById = async (id, user) => {
     ]
 
     if (user){
+        console.log("user is passed")
         aggregateOptions = [...aggregateOptions, ...[
             //liked
             { $lookup: {
@@ -81,11 +82,11 @@ const getWallpaper = async (req, res) => {
 
     try {
         const wallpapers = await getWallpaperById(id, user)
-    
+        
         if (wallpapers.length === 0){
             return res.status(404).json({ error: 'No such wallpaper'});
         }
-        
+        console.log(wallpapers[0])
         res.status(200).json(wallpapers[0]);
     }catch (err){
         console.log(err)

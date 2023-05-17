@@ -15,13 +15,10 @@ const Collections = () => {
         <div className="collection">
 
             <NavbarOffset/>
-
+            <div className="pageTitleContainer ">
+                <h1 className="pageTitle">Collections</h1>
+            </div>
             <table>
-                <thead>
-                <tr>
-                    <th colSpan="3">Collections</th>
-                </tr>
-                </thead>
             <tbody>
                 <tr>
                     <td>

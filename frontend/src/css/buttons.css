@@ -143,3 +143,14 @@
 .bubbleSearchBar .searchBar:focus{
     outline: none;
 }
+
+.refreshButton{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.refreshButton .icon{
+    font-size: x-large;
+}

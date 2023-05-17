@@ -123,13 +123,14 @@ const getXWallpapers = async (req, res) => {
     ]]
 
     if (filters.search){
+        let searchFilter = filters.search.split(" ");
         console.log(filters.search)
         let newAggregate = [
             { $match: {
                 $or: [
-                    { title: { $regex: "\\b" + filters.search, $options: "i"} },
-                    { pseudo: { $regex: "\\b" + filters.search, $options: "i"} },
-                    { tags: { $regex: "\\b" + filters.search, $options: "i"} }
+                    { title: { $all: searchFilter.map(word => new RegExp(word, "i")) } },
+                    { pseudo: { $all: searchFilter.map(word => new RegExp(word, "i")) } },
+                    { tags: { $all: searchFilter.map(word => new RegExp(word, "i")) } }
                 ]
             } }
         ]

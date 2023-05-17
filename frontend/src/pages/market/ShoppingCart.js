@@ -88,9 +88,6 @@ const ShoppingCart = () => {
 
     return (
         <div className="ShoppingCart">
-
-            <Navbar/>
-            <NavbarOffset/>
             {(products) &&
             <table><tbody>
                 {products.map((product) => (

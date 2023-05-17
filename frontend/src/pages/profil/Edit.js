@@ -17,6 +17,7 @@ const EditProfile = () => {
         e.preventDefault();
 
         await saveChange(pseudo)
+        alert('Your profile is fresh new !')
     }
 
     return (

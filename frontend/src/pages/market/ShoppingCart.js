@@ -87,7 +87,7 @@ const ShoppingCart = () => {
 
 
     return (
-        <div className="ShoppingCart">
+        <div className="ShoppingCart darkSecondaryColor">
             {(products) &&
             <table><tbody>
                 {products.map((product) => (

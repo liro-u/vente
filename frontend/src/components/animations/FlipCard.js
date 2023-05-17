@@ -49,10 +49,13 @@ const FlipCard = ({id}) => {
 
     useEffect(() => {
         const fecthImg = async (id) => {
+            let headers = {}
+            if (user){
+                headers = {'Authorization': `Baerer ${user.token}`}
+            }
             const response = await fetch(process.env.REACT_APP_PROXY + '/api/wallpapers/' + id, {
-                headers: {
-                    'Authorization': `Baerer ${user.token}`,
-                },
+
+                headers
             });
             const img = await response.json()
             setWallpaper(img);
@@ -73,7 +76,7 @@ const FlipCard = ({id}) => {
 
                     <div className="flipContenu" >
                         <div className="TitleCard">
-                            <h3>{wallpaper.title}</h3>
+                            <h3 className="title">{wallpaper.title}</h3>
                         </div>
 
                         <div className="iconBox">

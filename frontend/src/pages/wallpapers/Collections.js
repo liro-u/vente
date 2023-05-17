@@ -29,7 +29,7 @@ const Collections = () => {
                             <div className="Titre">
                                 Avengers
                             </div>
-                            <Link to="/wallpaper/collections/lol" className="">
+                            <Link to="/wallpaper/collections/avengers" className="">
                                 <img className="lol" src="../wallpaper/Collection/LogoThemeAvengers.jpg" alt="toto"/>
                             </Link>
                         </div>
@@ -38,7 +38,7 @@ const Collections = () => {
                     <td>
                         <div className="theme">
                             <div className="Titre">
-                                League of Legends
+                                Convenant Broken
                             </div>
                             <Link to="/wallpaper/collections/lol" className="">
                                 <img className="lol" src="../wallpaper/Collection/LogoThemeLol.jpg" alt="toto"/>

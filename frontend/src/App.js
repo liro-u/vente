@@ -28,6 +28,7 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Artist from './pages/artist/Artist';
 import EditProfile from './pages/profil/Edit';
+import ThemeAvengers from "./pages/collections/ThemeAvengers";
 
 
 
@@ -55,6 +56,7 @@ function App() {
 
             {/* COLLECTIONS */}
             <Route exact path="/wallpaper/collections/lol" element={<ThemeLOL />} />
+            <Route exact path="/wallpaper/collections/avengers" element={<ThemeAvengers />} />
 
             {/* ARTIST */}
             <Route exact path="/wallpaper/artist" element={<Artist />} />

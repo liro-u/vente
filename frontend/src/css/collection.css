@@ -1,22 +1,80 @@
 .collection {
     height: 100%;
+    display: flex;
+    justify-content: center;
 }
 
-.collection  img {
-    width: 20%;
+
+
+.collection table {
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 0;
 }
 
-.ImageLol {
-    position:relative;
+
+.collection th{
+    padding-top: 5%;
+    padding-bottom: 2%;
+    background-color: var(--dark-secondary);
+    color: var(--negative-text-color);
+    font-size: 1.5vw;
+
+
 }
 
-.Titre {
+.collection td {
+    position: relative;
+
+}
+
+.collection img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.collection td:hover {
+    border: 3px solid var(--dark-primary);
+}
+
+.collection .TComming {
     text-align: center;
     color: var(--primary);
-    width: 20%;
-    top:296px;
-    position:absolute;
-    background: rgba(128, 128, 128, 0.8);
+    position: relative;
+    font-size: 2.5vw;
+    z-index: 1;
+}
+.collection .Icomming {
+}
+
+.collection .Comming::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(211,211,211, 0.9);
+    filter: blur(10px);
+    z-index: 1;
+
+}
+
+
+.collection .Titre{
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    text-align: center;
+    width: 100%;
+    margin-top: 3%;
+    font-size: 2vw;
+    color: var(--negative-text-color);
+
 }
 
 

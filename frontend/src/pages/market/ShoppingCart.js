@@ -80,7 +80,7 @@ const ShoppingCart = () => {
             );
             setTotalPrice(TotalPriceAcc)
         }
-    },[products])
+    },[products,changeQuantity])
 
 
 

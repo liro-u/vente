@@ -46,6 +46,8 @@ export const useEditProfile = () => {
 
             // update the auth context
             dispatch({type: 'LOGIN', payload: new_user})
+
+            alert('Your profile is fresh new !')
         }
         setIsLoading(false);
     }

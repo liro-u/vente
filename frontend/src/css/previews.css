@@ -39,7 +39,7 @@
 .extendPreviews .noMoreContent {
     text-align: center;
     padding: 10px;
-    background-color: var(--dark-secondary);
+    background-color: var(--secondary);
     color: var(--negative-text-color);
 }
 

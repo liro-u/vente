@@ -36,7 +36,7 @@ function App() {
   const { user, ready } = useAuthContext();
 
   return (
-    <div className="app defaultFontColor">
+    <div className="app defaultFontColor darkSecondaryColor">
       {ready && <HashRouter>
         <Navbar />
         <div className='pages'>

@@ -122,7 +122,7 @@ const ExtendPreviews = ({ x, title }) => {
             ))}
             {
                 noMoreLoad ? 
-                    <h1 className="noMoreContent">There is no more content to pull</h1>
+                    <h1 className="noMoreContent">{wallpapers.length > 0 ? "There is no more content to pull" : "The search/filters yielded no results."}</h1>
                 :
                     !isLoading && <ButtonLoadMore loadMore={fetchXWallpaper} x={x} />
             }

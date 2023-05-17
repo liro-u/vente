@@ -123,7 +123,7 @@ const ShoppingCart = () => {
             </table>}
             <button className="buttonAchat"
                     type="button">
-                    Payer :  {totalPrice.toFixed(2)} €
+                    Purchase :  {totalPrice.toFixed(2)} €
             </button>
 
         </div>

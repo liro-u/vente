@@ -25,12 +25,14 @@ const WallpaperForm = ({ defaultWallpaper }) => {
     const [title, setTitle] = useState("");
     const [src, setSrc] = useState("");
     const [titleColor, setTitleColor] = useState("");
+    const [tags, setTags] = useState("");
 
     useEffect(() => {
         if (defaultWallpaper) {
             setTitle(defaultWallpaper.title);
             setSrc(defaultWallpaper.imageLink);
             setTitleColor(defaultWallpaper.titleColor);
+            setTags(defaultWallpaper.tags ? defaultWallpaper.tags : "");
             setMethod('PATCH');
             setUrl(process.env.REACT_APP_PROXY + '/api/wallpapers/' + defaultWallpaper._id);
         }
@@ -49,7 +51,7 @@ const WallpaperForm = ({ defaultWallpaper }) => {
         setIsPending(true)
         e.preventDefault();
 
-        const wallpaper = {title, titleColor, imageLink : src};
+        const wallpaper = {title, titleColor, imageLink : src, tags};
 
         const response = await fetch(url, {
             method,
@@ -72,6 +74,7 @@ const WallpaperForm = ({ defaultWallpaper }) => {
             setEmptyFields([]);
             setTitle('');
             setSrc('');
+            setTags('');
             setTitleColor(defaultColor);
             alert("Your wallpaper is online !")
         }else{
@@ -104,6 +107,15 @@ const WallpaperForm = ({ defaultWallpaper }) => {
                     className={emptyFields.includes('src') ? 'error' : ''}
                     onClick={() => removeClassError("src")}
                 />
+
+                <label>Tags :</label>
+                <input
+                    type="text"
+                    onChange={(e) => setTags(e.target.value)}
+                    value={tags}
+                    className={emptyFields.includes('tags') ? 'error' : ''}
+                    onClick={() => removeClassError("tags")}
+                />  
                 
                 <label>Title Color:</label>
                 <select

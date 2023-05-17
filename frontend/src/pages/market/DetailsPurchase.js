@@ -161,7 +161,7 @@ const DetailsPurchase = () => {
                                 <button className="buttonAchat"
                                         type="button"
                                         onClick={() => toggleAddShopping(wallpaper, quantity, productData, isPending, setIsPending)}>
-                                    Ajouter aux panier
+                                    Add to cart
                                 </button>
 
 

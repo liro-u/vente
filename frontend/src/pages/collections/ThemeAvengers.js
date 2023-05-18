@@ -11,7 +11,7 @@ const ThemeAvengers = () => {
             <table>
                 <tbody>
                 <tr>
-                    <td colspan="2">
+                    <td colSpan="2">
                         <img className="lol" src="../wallpaper/avengers.jpg" alt="toto"/>
                     </td>
 
@@ -19,7 +19,7 @@ const ThemeAvengers = () => {
                         <img className="lol" src="../wallpaper/avengers2.jpg" alt="toto"/>
                     </td>
 
-                    <td rowspan="2">
+                    <td rowSpan="2">
                         <img className="lol" src="../wallpaper/avengers3.jpg" alt="toto"/>
                     </td>
 
@@ -30,7 +30,7 @@ const ThemeAvengers = () => {
                         <img className="lol" src="../wallpaper/avengers5.jpg" alt="toto"/>
                     </td>
 
-                    <td rowspan="3">
+                    <td rowSpan="3">
                         <img className="lol" src="../wallpaper/avengers14.jpg" alt="toto"/>
                     </td>
 
@@ -42,11 +42,11 @@ const ThemeAvengers = () => {
 
 
                 <tr>
-                    <td rowspan="4">
+                    <td rowSpan="4">
                         <img className="lol" src="../wallpaper/avengers9.jpg" alt="toto"/>
                     </td>
 
-                    <td colspan="2">
+                    <td colSpan="2">
                         <img className="lol" src="../wallpaper/avengers12.jpg" alt="toto"/>
                     </td>
 

@@ -19,6 +19,10 @@ const ExtendPreviews = ({ x, title }) => {
     const { likedFilter, newFilter, searchFilter } = useFilterContext();
 
     const { wallpapers, noMoreLoad, dispatch } = useWallpaperContext();
+
+    const handleRefresh = async () => {
+        fetchXWallpaper(x, true);
+    }
     const fetchXWallpaper = async (x, resetIdArray = false) => {
         setIsLoading(true);
 
@@ -108,6 +112,7 @@ const ExtendPreviews = ({ x, title }) => {
                         <div className="sortContainer">
                             <BubbleSearchBar className="negativeDefaultFontColor" color="#FD8A8A99" content="Like" searchBar={false} dispatch_type="SET_LIKED" value={likedFilter}/>
                             <BubbleSearchBar className="negativeDefaultFontColor" color="#B5D5C599" content="New" searchBar={false} dispatch_type="SET_NEW" value={newFilter}/>
+                            <div className="refreshButton"><span onClick={() => handleRefresh()} className="material-symbols-outlined icon iconFilled">refresh</span></div>
                         </div>
                     </div>
                 </div>
@@ -117,7 +122,7 @@ const ExtendPreviews = ({ x, title }) => {
             ))}
             {
                 noMoreLoad ? 
-                    <h1 className="noMoreContent">There is no more content to pull</h1>
+                    <h1 className="noMoreContent">{wallpapers.length > 0 ? "There is no more content to pull" : "The search/filters yielded no results."}</h1>
                 :
                     !isLoading && <ButtonLoadMore loadMore={fetchXWallpaper} x={x} />
             }

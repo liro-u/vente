@@ -14,7 +14,7 @@ const WallpaperForm = ({ defaultWallpaper }) => {
     const [isPending, setIsPending] = useState(false)
     const {verifyAuth} = useVerifyAuth();
 
-    const titleColors = ["default", "negative-default"];
+    const titleColors = ["noir", "blanc"];
     const defaultColor = titleColors[0];
     const [method, setMethod] = useState('POST');
     const [url, setUrl] = useState(process.env.REACT_APP_PROXY + '/api/wallpapers');

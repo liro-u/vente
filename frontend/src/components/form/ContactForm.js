@@ -131,7 +131,7 @@ const ContactForm = () => {
                     onClick={() => removeClassError("content")}
                 />  
 
-                <button disabled={isPending}>Envoyer</button>
+                <button disabled={isPending}>Send</button>
                 {error && <div className="error">{error}</div>}
                 
             </form>

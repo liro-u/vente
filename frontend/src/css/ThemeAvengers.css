@@ -1,0 +1,57 @@
+.ThemeAvengers {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.ThemeAvengers table {
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 0;
+}
+
+
+.ThemeAvengers td {
+    position: relative;
+
+}
+
+.ThemeAvengers img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+
+.ThemeAvengers td, th {
+    border: 2px solid black;
+}
+
+
+.ThemeAvengers::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(211,211,211, 0.90);
+    filter: blur(10px);
+    z-index: 1;
+
+}
+
+
+.ThemeAvengers .titre{
+    top: 25%;
+    width: 50%;
+    position: absolute;
+    z-index: 9;
+    color : black;
+    font-size: 2.5vw;
+
+}

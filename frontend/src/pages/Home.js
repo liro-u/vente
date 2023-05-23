@@ -33,7 +33,7 @@ const Home = () => {
             >
                 <DelayAnimation className="content">
                     <TextApparition><h1 className="title secondaryFont">MadeInome</h1></TextApparition>
-                    <TextApparition hiddenClass="showByLeftBefore" visibleClass="showByLeft"><h2>Your favorite wallpaper on your wall</h2></TextApparition>
+                    <TextApparition hiddenClass="showByLeftBefore" visibleClass="showByLeft"><h2 className="defaultFontColor">Your favorite wallpaper on your wall</h2></TextApparition>
                     <TextApparition style={{display: "flex"}}>
 
                         <Link to="/wallpaper/discovery" className="cancelLinkCss"><ButtonUnderline className="secondaryColor" underlineClassName="lightPrimaryColor" textColorOver="lightPrimaryFont" time="0.2" borderHeight="2">View Gallery</ButtonUnderline></Link>

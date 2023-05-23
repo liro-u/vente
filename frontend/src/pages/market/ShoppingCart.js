@@ -87,7 +87,7 @@ const ShoppingCart = () => {
 
 
     return (
-        <div className="ShoppingCart">
+        <div className="ShoppingCart darkSecondaryColor">
             {(products) &&
             <table><tbody>
                 {products.map((product) => (
@@ -123,7 +123,7 @@ const ShoppingCart = () => {
             </table>}
             <button className="buttonAchat"
                     type="button">
-                    Payer :  {totalPrice.toFixed(2)} €
+                    Purchase :  {totalPrice.toFixed(2)} €
             </button>
 
         </div>

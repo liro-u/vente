@@ -45,7 +45,6 @@ const OrbsParticles = ({
   const drawParticles = (ctx, w, h) => {
     ctx.clearRect(0, 0, w, h);
     particles.forEach((particle) => {
-      console.log(orbRef.current);
       ctx.drawImage(
         orbRef.current,
         particle.x - particle.size.x / 2,
